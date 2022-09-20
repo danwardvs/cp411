@@ -1,6 +1,6 @@
-Name: ???
-ID: ???
-Email: ???
+Name: Daniel Van Stemp
+ID: 181459810
+Email: vans9810@mylaurier.ca
 WorkID: cp411-a1
 Statement: I claim that the enclosed submission is my individual work.
 
@@ -17,21 +17,21 @@ Question_ID [self-evaluation/total/marker-evaluation] Description
 A1
 
 Q1 Concepts of raster graphics
-Q1.1 [0/2/*] frame buffer                            
-Q1.2 [0/2/*] pixel                                   
-Q1.3 [0/2/*] color depth                             
-Q1.4 [0/2/*] resolution                              
+Q1.1 [2/2/*] frame buffer                            
+Q1.2 [2/2/*] pixel                                   
+Q1.3 [2/2/*] color depth                             
+Q1.4 [2/2/*] resolution                              
 Q2 Concepts of raster display
-Q2.1 [0/2/*] scan line                               
-Q2.2 [0/2/*] refreshment & refresh rate              
-Q2.3 [0/2/*] frame                                   
-Q3 Roles of CPU and GPU in CG
-Q3.1 [0/3/*] CPU roles                               
-Q3.2 [0/3/*] GPU roles                               
+Q2.1 [2/2/*] scan line                               
+Q2.2 [2/2/*] refreshment & refresh rate              
+Q2.3 [2/2/*] frame                                   
+Q3 Rols of CPU and GPU in CG
+Q3.1 [3/3/*] CPU roles                               
+Q3.2 [3/3/*] GPU roles                               
 Q4 C/C++ OpenGL programming environment
-Q4.1 [0/4/*] C/C++ OpenGL installation               
-Q4.2 [0/3/*] OpenGL C project                        
-Q4.3 [0/3/*] OpenGL C++ project                      
+Q4.1 [4/4/*] C/C++ OpenGL installation               
+Q4.2 [3/3/*] OpenGL C project                        
+Q4.3 [3/3/*] OpenGL C++ project                      
 
 Total: [0/30/*]
 
