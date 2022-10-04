@@ -106,6 +106,22 @@ void mouseActionFcn(GLint button, GLint action, GLint xMouse, GLint yMouse) {
 
 				// create a new shape object, copy the tempObj values to the new object,
 				// and the new object to the object list
+				SHAPE *shapeObj = (SHAPE*) malloc(sizeof(SHAPE));
+				shapeObj->type = tempObj.type;
+				shapeObj->fr = tempObj.fr;
+				shapeObj->fg = tempObj.fg;
+				shapeObj->fb = tempObj.fb;
+				shapeObj->sr = tempObj.sr;
+				shapeObj->sg = tempObj.sg;
+				shapeObj->sb = tempObj.sb;
+				shapeObj->swidth = tempObj.swidth;
+				shapeObj->x1 = tempObj.x1;
+				shapeObj->y1 = tempObj.y1;
+				shapeObj->x2 = tempObj.x2;
+				shapeObj->y2 = tempObj.y2;
+
+				insert(&objlist, shapeObj);
+				shapeObj = NULL;
 
 			}
 		}

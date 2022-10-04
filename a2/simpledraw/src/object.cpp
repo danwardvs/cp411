@@ -39,8 +39,27 @@ void clearList(LIST *list) {
 
 void drawShape(SHAPE *object) {
 	if (object->type == RECTANGLE) {  // rectangle
-		// draw filled rectangle
-		// draw outline
+		printf(" a rectangle");
+	  // draw filled rectangle
+		glColor3f(object->fr, object->fg, object->fb);
+		glBegin(GL_QUADS);
+		glVertex2i(object->x1, object->y1);
+		glVertex2i(object->x1, object->y2);
+		glVertex2i(object->x2, object->y2);
+		glVertex2i(object->x2, object->y1);
+		glEnd();
+		
+		// stroke outline of rectangle
+		glColor3f(object->sr, object->sg, object->sb);
+		glLineWidth(object->swidth);
+		glBegin(GL_LINE_LOOP);
+		glVertex2i(object->x1, object->y1);
+		glVertex2i(object->x1, object->y2);
+		glVertex2i(object->x2, object->y2);
+		glVertex2i(object->x2, object->y1);
+		glEnd();
+		
+	
 
 	} else if (object->type == CIRCLE) {  // circle
 		// draw filled circle
@@ -56,6 +75,7 @@ void drawList(LIST *list) {
 	NODE *p = list->start;
 	while (p) {
 		drawShape(p->object);
+		printf("Printing");
 		p = p->next;
 	}
 }

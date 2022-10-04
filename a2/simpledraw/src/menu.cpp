@@ -94,8 +94,9 @@ void mainMenuFcn(GLint menuOption) {
 void drawMenuFcn(GLint typeOption) {
 	oprMode = 0;
 	isInMove = 0;
-std::cout<<typeOption<<"akdlfjslkf \n";
-//
+
+
+
 }
 
 void fileMenuFcn(GLint fileOption) {
@@ -108,6 +109,8 @@ void editMenuFcn(GLint editOption) {
 	// ...
 	glutPostRedisplay();
 }
+
+
 
 void styleSubMenu(GLint styleOption) {
 }
