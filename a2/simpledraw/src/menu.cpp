@@ -94,6 +94,17 @@ void mainMenuFcn(GLint menuOption) {
 void drawMenuFcn(GLint typeOption) {
 	oprMode = 0;
 	isInMove = 0;
+	switch (typeOption) {
+	case 1:
+		objType = RECTANGLE;
+		break;
+	case 2:
+		objType = CIRCLE;
+		break;
+
+	default:
+		objType = RECTANGLE;
+	}
 
 
 
@@ -106,7 +117,32 @@ void fileMenuFcn(GLint fileOption) {
 void editMenuFcn(GLint editOption) {
 	oprMode = 1;
 	isInMove = 0;
-	// ...
+	
+switch (editOption) {
+	case 1:
+		oprMode = 1;
+		break;
+	case 2:
+		if (selectNode != NULL)
+			Delete(&selectNode);
+		break;
+
+	case 3:
+		if (selectNode != NULL)
+		   moveBack(selectNode);
+		break;
+
+	case 4:
+		if (selectNode != NULL)
+		   moveFront(selectNode);
+		break;
+
+	case 5:
+		selectNode = NULL;
+		isInMove = 1;
+		break;
+	}
+
 	glutPostRedisplay();
 }
 
@@ -116,14 +152,67 @@ void styleSubMenu(GLint styleOption) {
 }
 
 void fillColorMenuFcn(GLint colorOption) {
-// ...
+	switch (colorOption) {
+	case 1:
+		fillred = 1.0;
+		fillgreen = 0.0;
+		fillblue = 0.0;
+		break;
+	case 2:
+		fillred = 0.0;
+		fillgreen = 1.0;
+		fillblue = 0.0;
+		break;
+	case 3:
+		fillred = 0.0;
+		fillgreen = 0.0;
+		fillblue = 1.0;
+		break;
+	case 4:
+		fillred = 1.0;
+		fillgreen = 1.0;
+		fillblue = 1.0;
+		break;
+	case 5:
+		fillred = 0.0;
+		fillgreen = 0.0;
+		fillblue = 0.0;
+		break;
+	}
 }
 
 void strokeColorMenuFcn(GLint colorOption) {
-// ...
+switch (colorOption) {
+	case 1:
+		sred = 1.0;
+		sgreen = 0.0;
+		sblue = 0.0;
+		break;
+	case 2:
+		sred = 0.0;
+		sgreen = 1.0;
+		sblue = 0.0;
+		break;
+	case 3:
+		sred = 0.0;
+		sgreen = 0.0;
+		sblue = 1.0;
+		break;
+	case 4:
+		sred = 1.0;
+		sgreen = 1.0;
+		sblue = 1.0;
+		break;
+	case 5:
+		sred = 0.0;
+		sgreen = 0.0;
+		sblue = 0.0;
+		break;
+	}
 }
 
 void strokeWidthMenuFcn(GLint width) {
-// ....
+
+	strokeWidth = width;
 }
 

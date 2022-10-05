@@ -39,7 +39,6 @@ void clearList(LIST *list) {
 
 void drawShape(SHAPE *object) {
 	if (object->type == RECTANGLE) {  // rectangle
-		printf(" a rectangle");
 	  // draw filled rectangle
 		glColor3f(object->fr, object->fg, object->fb);
 		glBegin(GL_QUADS);
@@ -62,7 +61,20 @@ void drawShape(SHAPE *object) {
 	
 
 	} else if (object->type == CIRCLE) {  // circle
-		// draw filled circle
+	int x1= object->x1;
+	int y1 = object->y1;
+	int x2 = object->x2;
+	int y2 = object-> y2;
+	//printf("%d",x1);
+		glColor3f(object->fr, object->fg, object->fb);
+
+		circleMidpoint(x1,y1,x2,y2);
+		
+		glColor3f(object->sr, object->sg, object->sb);
+
+
+				circleMidpointFill(x1,y1,x2,y2);
+
 		// draw outline
 	}
 }
@@ -75,7 +87,6 @@ void drawList(LIST *list) {
 	NODE *p = list->start;
 	while (p) {
 		drawShape(p->object);
-		printf("Printing");
 		p = p->next;
 	}
 }
@@ -90,18 +101,53 @@ void setPixel(GLint x, GLint y) {
 // draw points on line of circle
 void circlePlotPoints(const GLint& xc, const GLint& yc, const GLint& x,
 		const GLint& y) {
-// ...
+	setPixel(xc + x, yc + y); setPixel(xc - x, yc + y);
+	setPixel(xc + x, yc - y); setPixel(xc - x, yc - y);
+	setPixel(xc + y, yc + x); setPixel(xc - y, yc + x);
+	setPixel(xc + y, yc - x); setPixel(xc - y, yc - x);
 }
 
 // draw circle main function
 void circleMidpoint(GLint x1, GLint y1, GLint x2, GLint y2) {
-	// ...
+	int r = abs(x2-x1);
+	int yc = y2;
+	int xc = x2;
+	GLint p = 1 - r; // Initial value of midpoint parameter.
+	GLint x = 0, y = r; // Set coordinates for top point of circle.
+	/* Plot the initial point in each circle quadrant. */
+	circlePlotPoints(xc, yc, x, y);
+	while (x < y) {
+		x++;
+	if (p < 0) p += 2 * x + 1;
+		else { y--; p += 2 * (x - y) + 1; }
+		circlePlotPoints(xc, yc, x, y);
+	}
 }
 
 void circlePlotPointsFill(GLint x1, GLint y1, GLint x, GLint y) {
-	// ...
+	int xc = x1;
+	int yc = y1;
+	glLineWidth(2.0);
+glBegin(GL_LINES);
+glVertex2i(xc - x, yc + y); glVertex2i(xc + x, yc + y);
+glVertex2i(xc - x, yc - y); glVertex2i(xc + x, yc - y);
+glVertex2i(xc - y, yc + x); glVertex2i(xc + y, yc + x);
+glVertex2i(xc - y, yc - x); glVertex2i(xc + y, yc - x);
+glEnd();
 }
 
 void circleMidpointFill(GLint x1, GLint y1, GLint x2, GLint y2) {
-	// ...
+	int r = abs(x2-x1);
+	int yc = y2;
+	int xc = x2;
+GLint p = 1 - r; // Initial value of midpoint parameter.
+GLint x = 0, y = r; // Set coordinates for top point of circle.
+/* Plot the initial point in each circle quadrant. */
+circlePlotPointsFill(xc, yc, x, y);
+while (x < y) {
+x++;
+if (p < 0) p += 2 * x + 1;
+else { y--; p += 2 * (x - y) + 1; }
+circlePlotPointsFill(xc, yc, x, y);
+}
 }

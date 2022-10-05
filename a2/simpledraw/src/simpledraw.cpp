@@ -65,6 +65,9 @@ void drawObjectList() {
 
 void mouseActionFcn(GLint button, GLint action, GLint xMouse, GLint yMouse) {
 
+
+
+
 	if (oprMode == 0 && isInMenu == 0) {
 		if (button == GLUT_LEFT_BUTTON) {
 
@@ -89,7 +92,8 @@ void mouseActionFcn(GLint button, GLint action, GLint xMouse, GLint yMouse) {
 				   tempObj.y2 = yMouse;
 				}
 				else if (objType == CIRCLE) {
-					// ... initialize the property of circle
+					tempObj.x2 = xMouse;
+				   tempObj.y2 = yMouse;
 				}
 
 			} else if (action == GLUT_UP && isInDraw == 1) {
@@ -100,7 +104,8 @@ void mouseActionFcn(GLint button, GLint action, GLint xMouse, GLint yMouse) {
 				   tempObj.y2 = yMouse;
 				}
 				else if (objType == CIRCLE) {
-					// ... finalize the property of circle
+					tempObj.x2 = xMouse;
+				   tempObj.y2 = yMouse;
 				}
 
 
@@ -154,7 +159,16 @@ void mouseActionFcn(GLint button, GLint action, GLint xMouse, GLint yMouse) {
 
 				// get the vector from (xbegin, ybegin) to the new mouse position
 				// use the vector to update the properties of moving object.
+				GLint vx = xMouse - xbegin;
+				GLint vy = yMouse - ybegin;
 
+				if (selectNode != NULL) {
+					selectNode->object->x1 = tempObj.x1 + vx;
+					selectNode->object->y1 = tempObj.y1 + vy;
+					selectNode->object->x2 = tempObj.x2 + vx;
+					selectNode->object->y2 = tempObj.y2 + vy;
+					selectNode = NULL;
+				}
 			}
 		}
 	}
