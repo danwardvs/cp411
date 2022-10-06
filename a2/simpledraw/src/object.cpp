@@ -118,7 +118,17 @@ void drawShape(SHAPE *object) {
 }
 
 void drawShapeHighLight(SHAPE *object) {
-  // draw outline with high light color
+  if (object->type == RECTANGLE) {
+    // stroke outline of rectangle
+    glColor3f(1, 1, 0);
+    glLineWidth(object->swidth);
+    glBegin(GL_LINE_LOOP);
+    glVertex2i(object->x1, object->y1);
+    glVertex2i(object->x1, object->y2);
+    glVertex2i(object->x2, object->y2);
+    glVertex2i(object->x2, object->y1);
+    glEnd();
+  }
 }
 
 void drawList(LIST *list) {
