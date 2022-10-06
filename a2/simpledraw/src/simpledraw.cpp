@@ -29,9 +29,9 @@ GLint oprMode = 0,  // 0 for drawing, 1 for editing
     xbegin, ybegin; // used as beginning point of translate vector for moving
 
 // object
-TYPE objType = RECTANGLE;
+TYPE objType = CIRCLE;
 GLfloat fillred = 1.0, fillgreen = 0.0, fillblue = 0.0, // fill color
-    sred = 1.0, sgreen = 0.0, sblue = 0.0;              // stroke color
+    sred = 0.0, sgreen = 0.0, sblue = 1.0;              // stroke color
 GLint strokeWidth = 1;
 LIST objlist = {0}; // object list and initialization
 NODE *selectNode;   // pointing to selected node

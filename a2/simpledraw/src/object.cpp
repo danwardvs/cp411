@@ -105,12 +105,13 @@ void drawShape(SHAPE *object) {
     int x2 = object->x2;
     int y2 = object->y2;
     // printf("%d",x1);
-    glColor3f(object->sr, object->sg, object->sb);
-
-    circleMidpoint(x1, y1, x2, y2);
 
     glColor3f(object->fr, object->fg, object->fb);
     circleMidpointFill(x1, y1, x2, y2);
+
+    glColor3f(object->sr, object->sg, object->sb);
+
+    circleMidpoint(x1, y1, x2, y2);
 
     // draw outline
   }
@@ -129,7 +130,7 @@ void drawList(LIST *list) {
 }
 
 void setPixel(GLint x, GLint y) {
-  glPointSize(5.0);
+  glPointSize(2.0);
   glBegin(GL_POINTS);
   glVertex2i(x, y);
   glEnd();
@@ -150,13 +151,15 @@ void circlePlotPoints(const GLint &xc, const GLint &yc, const GLint &x,
 
 // draw circle main function
 void circleMidpoint(GLint x1, GLint y1, GLint x2, GLint y2) {
-  int r = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+  int r = ceil(sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)));
+
   int yc = y1;
   int xc = x1;
   GLint p = 1 - r;    // Initial value of midpoint parameter.
   GLint x = 0, y = r; // Set coordinates for top point of circle.
   /* Plot the initial point in each circle quadrant. */
   circlePlotPoints(xc, yc, x, y);
+
   while (x < y) {
     x++;
     if (p < 0)
