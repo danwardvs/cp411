@@ -29,12 +29,41 @@ void insert(LIST *list, SHAPE *object) {
 }
 
 void deleteNode(LIST *list, NODE **selectp) {
-  // ...
+
+  NODE *ptr = list->start;
+  NODE *previousNode;
+
+  // Iterate through linked list
+  while (ptr != NULL) {
+    // Check if the given name matches the node's name
+
+    if (ptr == *selectp) {
+      printf("match\n");
+
+      // Set the previous node's next to the current next node to delete node
+      if (previousNode == NULL && ptr->next == NULL)
+        ptr->next->prev = NULL;
+      else if (previousNode == NULL && ptr->next == NULL)
+        ptr->next->prev = NULL;
+      else
+        previousNode->next = ptr->next;
+
+      // Free the deleted node's memory and end function, reporting success
+      // free(ptr);
+      return;
+    }
+    // Store previous node incase of deletion
+    previousNode = ptr;
+    // Move to next node
+    ptr = ptr->next;
+  }
+
+  // If not found, end
+  printf("not found\n");
+  return;
 }
 
-void clearList(LIST *list) {
-  // ...
-}
+void clearList(LIST *list) { deleteNode(list, &list->start); }
 
 void printObj(SHAPE obj) {
   printf("Type: %d\n", obj.type);
@@ -76,12 +105,11 @@ void drawShape(SHAPE *object) {
     int x2 = object->x2;
     int y2 = object->y2;
     // printf("%d",x1);
-    glColor3f(object->fr, object->fg, object->fb);
+    glColor3f(object->sr, object->sg, object->sb);
 
     circleMidpoint(x1, y1, x2, y2);
 
-    glColor3f(object->sr, object->sg, object->sb);
-
+    glColor3f(object->fr, object->fg, object->fb);
     circleMidpointFill(x1, y1, x2, y2);
 
     // draw outline
@@ -122,9 +150,9 @@ void circlePlotPoints(const GLint &xc, const GLint &yc, const GLint &x,
 
 // draw circle main function
 void circleMidpoint(GLint x1, GLint y1, GLint x2, GLint y2) {
-  int r = abs(x2 - x1);
-  int yc = y2;
-  int xc = x2;
+  int r = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+  int yc = y1;
+  int xc = x1;
   GLint p = 1 - r;    // Initial value of midpoint parameter.
   GLint x = 0, y = r; // Set coordinates for top point of circle.
   /* Plot the initial point in each circle quadrant. */
@@ -158,9 +186,9 @@ void circlePlotPointsFill(GLint x1, GLint y1, GLint x, GLint y) {
 }
 
 void circleMidpointFill(GLint x1, GLint y1, GLint x2, GLint y2) {
-  int r = abs(x2 - x1);
-  int yc = y2;
-  int xc = x2;
+  int r = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+  int yc = y1;
+  int xc = x1;
   GLint p = 1 - r;    // Initial value of midpoint parameter.
   GLint x = 0, y = r; // Set coordinates for top point of circle.
   /* Plot the initial point in each circle quadrant. */

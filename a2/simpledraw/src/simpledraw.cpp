@@ -41,7 +41,7 @@ void init(void) {
   glutInitDisplayMode(GLUT_DOUBLE); // GLUT_DOUBLE for double frame buffer
   glutInitWindowPosition(100, 100);
   glutInitWindowSize(winWidth, winHeight);
-  glutCreateWindow("SimpleDraw (your name)");
+  glutCreateWindow("SimpleDraw (Danny Van Stemp)");
   glClearColor(1.0, 1.0, 1.0, 0.0); // Set display-window color to white
   glMatrixMode(GL_PROJECTION);
   gluOrtho2D(0.0, winWidth, winHeight, 0.0); // set top left as origin
