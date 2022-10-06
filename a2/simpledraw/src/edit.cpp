@@ -37,7 +37,7 @@ NODE *select(GLint x, GLint y) {
       int y2 =
           ptr->object->y1 > ptr->object->y2 ? ptr->object->y1 : ptr->object->y2;
 
-      if (x1 < x && x2 > x && y1 < y && y2 > y)
+      if (x1 <= x && x2 >= x && y1 <= y && y2 >= y)
         return ptr;
     }
 

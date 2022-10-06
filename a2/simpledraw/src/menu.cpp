@@ -163,14 +163,14 @@ void fillColorMenuFcn(GLint colorOption) {
     fillblue = 1.0;
     break;
   case 4:
-    fillred = 1.0;
-    fillgreen = 1.0;
-    fillblue = 1.0;
-    break;
-  case 5:
     fillred = 0.0;
     fillgreen = 0.0;
     fillblue = 0.0;
+    break;
+  case 5:
+    fillred = 1.0;
+    fillgreen = 1.0;
+    fillblue = 1.0;
     break;
   }
 }
@@ -193,14 +193,14 @@ void strokeColorMenuFcn(GLint colorOption) {
     sblue = 1.0;
     break;
   case 4:
-    sred = 1.0;
-    sgreen = 1.0;
-    sblue = 1.0;
-    break;
-  case 5:
     sred = 0.0;
     sgreen = 0.0;
     sblue = 0.0;
+    break;
+  case 5:
+    sred = 1.0;
+    sgreen = 1.0;
+    sblue = 1.0;
     break;
   }
 }
