@@ -10,6 +10,8 @@
 #include <stdio.h>
 
 extern LIST objlist;
+extern NODE *selectNode;
+extern void deleteNode(LIST *list, NODE **selectp);
 
 GLint min(GLint x, GLint y) { return x < y ? x : y; }
 
@@ -58,11 +60,27 @@ NODE *select(GLint x, GLint y) {
 }
 
 void Delete(NODE **pp) {
-  // your implementation
+  deleteNode(&objlist, pp);
+  selectNode = NULL;
 }
 
 void moveFront(NODE *p) {
-  // your implementation
+
+  if (objlist.end == objlist.start || objlist.end == p)
+    return;
+
+  if (objlist.start == p) {
+    objlist.start = objlist.start->next;
+    objlist.start->prev = NULL;
+
+  } else {
+    p->prev->next = p->next;
+    p->next->prev = p->prev;
+  }
+  objlist.end->next = p;
+  p->next = NULL;
+  p->prev = objlist.end;
+  objlist.end = p;
 }
 
 void moveBack(NODE *p) {

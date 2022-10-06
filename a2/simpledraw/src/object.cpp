@@ -5,9 +5,21 @@
  */
 
 #include "object.hpp"
+#include <GL/glut.h>
+
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+extern TYPE objType;
+extern NODE *selectNode;
+extern GLint strokeWidth;
+extern GLfloat fillred;
+extern GLfloat fillgreen;
+extern GLfloat fillblue;
+extern GLfloat sred;
+extern GLfloat sgreen;
+extern GLfloat sblue;
 
 void insert(LIST *list, SHAPE *object) {
   if (object == NULL)
@@ -30,40 +42,42 @@ void insert(LIST *list, SHAPE *object) {
 
 void deleteNode(LIST *list, NODE **selectp) {
 
-  NODE *ptr = list->start;
-  NODE *previousNode;
+  NODE *node = *selectp;
 
-  // Iterate through linked list
-  while (ptr != NULL) {
-    // Check if the given name matches the node's name
+  if (selectp == NULL)
+    return;
+  if (list == NULL)
+    return;
 
-    if (ptr == *selectp) {
-      printf("match\n");
-
-      // Set the previous node's next to the current next node to delete node
-      if (previousNode == NULL && ptr->next == NULL)
-        ptr->next->prev = NULL;
-      else if (previousNode == NULL && ptr->next == NULL)
-        ptr->next->prev = NULL;
-      else
-        previousNode->next = ptr->next;
-
-      // Free the deleted node's memory and end function, reporting success
-      // free(ptr);
-      return;
-    }
-    // Store previous node incase of deletion
-    previousNode = ptr;
-    // Move to next node
-    ptr = ptr->next;
+  if (list->start == node) {
+    list->start = node->next;
   }
 
-  // If not found, end
-  printf("not found\n");
+  if (node->next != NULL) {
+    node->next->prev = node->prev;
+  }
+  if (node->prev != NULL) {
+    node->prev->next = node->next;
+  }
+  // free(node);
   return;
 }
 
-void clearList(LIST *list) { deleteNode(list, &list->start); }
+void clearList(LIST *list) {
+  list->end = NULL;
+  list->start = NULL;
+
+  objType = RECTANGLE;
+  fillred = 1.0;
+  fillgreen = 0.0;
+  fillblue = 0.0;
+  sred = 1.0;
+  sgreen = 0.0;
+  sblue = 0.0;
+  strokeWidth = 1;
+
+  selectNode = NULL;
+}
 
 void printObj(SHAPE obj) {
   printf("Type: %d\n", obj.type);
