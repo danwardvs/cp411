@@ -25,15 +25,32 @@ NODE *select(GLint x, GLint y) {
   NODE *ptr = objlist.end;
   while (ptr != NULL) {
     if (ptr->object->type == RECTANGLE) {
-      int x1 = ptr->object->x1;
-      int x2 = ptr->object->x2;
+      int x1 =
+          ptr->object->x1 > ptr->object->x2 ? ptr->object->x2 : ptr->object->x1;
+      int x2 =
+          ptr->object->x1 > ptr->object->x2 ? ptr->object->x1 : ptr->object->x2;
 
-      int y1 = ptr->object->y1;
-      int y2 = ptr->object->y2;
+      int y1 =
+          ptr->object->y1 > ptr->object->y2 ? ptr->object->y2 : ptr->object->y1;
+      int y2 =
+          ptr->object->y1 > ptr->object->y2 ? ptr->object->y1 : ptr->object->y2;
 
       if (x1 < x && x2 > x && y1 < y && y2 > y)
         return ptr;
     }
+
+    if (ptr->object->type == CIRCLE) {
+      int x1 = ptr->object->x1;
+      int y1 = ptr->object->y1;
+      int y2 = ptr->object->y2;
+      int x2 = ptr->object->x2;
+
+      int circle_r = ceil(sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)));
+      int mouse_r = ceil(sqrt(pow(x - x1, 2) + pow(y - y1, 2)));
+      if (circle_r >= mouse_r)
+        return ptr;
+    }
+
     ptr = ptr->prev;
   }
 

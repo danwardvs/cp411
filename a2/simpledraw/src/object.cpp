@@ -118,16 +118,25 @@ void drawShape(SHAPE *object) {
 }
 
 void drawShapeHighLight(SHAPE *object) {
+  glColor3f(1, 1, 0);
+
+  int x1 = object->x1;
+  int y1 = object->y1;
+  int x2 = object->x2;
+  int y2 = object->y2;
   if (object->type == RECTANGLE) {
     // stroke outline of rectangle
-    glColor3f(1, 1, 0);
+
     glLineWidth(object->swidth);
     glBegin(GL_LINE_LOOP);
-    glVertex2i(object->x1, object->y1);
-    glVertex2i(object->x1, object->y2);
-    glVertex2i(object->x2, object->y2);
-    glVertex2i(object->x2, object->y1);
+    glVertex2i(x1, y1);
+    glVertex2i(x1, y2);
+    glVertex2i(x2, y2);
+    glVertex2i(x2, y1);
     glEnd();
+  }
+  if (object->type == CIRCLE) {
+    circleMidpoint(x1, y1, x2, y2);
   }
 }
 
