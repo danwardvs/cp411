@@ -129,7 +129,7 @@ void drawList(LIST *list) {
 }
 
 void setPixel(GLint x, GLint y) {
-  glPointSize(2.0);
+  glPointSize(5.0);
   glBegin(GL_POINTS);
   glVertex2i(x, y);
   glEnd();
