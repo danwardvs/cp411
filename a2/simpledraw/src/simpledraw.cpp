@@ -192,6 +192,16 @@ void mouseMotionFcn(GLint xMouse, GLint yMouse) {
     tempObj.y2 = yMouse;
   }
 
+  if (oprMode == 1 && selectNode != NULL) {
+    GLint vx = xMouse - xbegin;
+    GLint vy = yMouse - ybegin;
+
+    selectNode->object->x1 = tempObj.x1 + vx;
+    selectNode->object->y1 = tempObj.y1 + vy;
+    selectNode->object->x2 = tempObj.x2 + vx;
+    selectNode->object->y2 = tempObj.y2 + vy;
+  }
+
   glutPostRedisplay();
   glFlush();
 }
