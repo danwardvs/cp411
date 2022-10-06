@@ -64,7 +64,7 @@ void Delete(NODE **pp) {
   selectNode = NULL;
 }
 
-void moveFront(NODE *p) {
+void moveBack(NODE *p) {
 
   if (objlist.end == objlist.start || objlist.end == p)
     return;
@@ -83,6 +83,20 @@ void moveFront(NODE *p) {
   objlist.end = p;
 }
 
-void moveBack(NODE *p) {
-  // your implementation
+void moveFront(NODE *p) {
+  if (objlist.start == objlist.end || objlist.start == p)
+    return;
+
+  if (objlist.end == p) {
+    objlist.end = objlist.end->prev;
+    objlist.end->next = NULL;
+
+  } else {
+    p->next->prev = p->prev;
+    p->prev->next = p->next;
+  }
+  objlist.start->prev = p;
+  p->prev = NULL;
+  p->next = objlist.start;
+  objlist.start = p;
 }
