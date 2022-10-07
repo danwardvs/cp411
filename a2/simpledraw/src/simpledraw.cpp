@@ -68,6 +68,7 @@ void drawObjectList() {
 }
 
 void mouseActionFcn(GLint button, GLint action, GLint xMouse, GLint yMouse) {
+	printf("%d\n",isInMove);
   if (oprMode == 0 && isInMenu == 0) {
     if (button == GLUT_LEFT_BUTTON) {
 
@@ -86,16 +87,20 @@ void mouseActionFcn(GLint button, GLint action, GLint xMouse, GLint yMouse) {
         tempObj.y1 = yMouse;
 
         isInDraw = 1; // start dragging
+
+
         if (objType == RECTANGLE) {
+        	 printf("kill me 2");
           tempObj.x2 = xMouse;
           tempObj.y2 = yMouse;
         } else if (objType == CIRCLE) {
           tempObj.x2 = xMouse;
           tempObj.y2 = yMouse;
+          printf("kill me 2");
         }
 
       } else if (action == GLUT_UP && isInDraw == 1) {
-
+    	  printf("kill me 1");
         isInDraw = 0; // end of dragging
         if (objType == RECTANGLE) {
           tempObj.x2 = xMouse;
@@ -142,6 +147,7 @@ void mouseActionFcn(GLint button, GLint action, GLint xMouse, GLint yMouse) {
       if (action == GLUT_DOWN) {
         // select node and copy the select node data to temp node for drawing
         // set mouse postion to xbegin, and ybegin
+
         selectNode = select(xMouse, yMouse);
         if (selectNode != NULL) {
           tempObj = *(selectNode->object);
@@ -180,7 +186,7 @@ void mouseMotionFcn(GLint xMouse, GLint yMouse) {
     tempObj.y2 = yMouse;
   }
 
-  if (oprMode == 1 && selectNode != NULL) {
+  if (oprMode == 1 && selectNode != NULL && isInMove==1) {
     GLint vx = xMouse - xbegin;
     GLint vy = yMouse - ybegin;
 
