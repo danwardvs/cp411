@@ -47,18 +47,6 @@ void init(void) {
   gluOrtho2D(0.0, winWidth, winHeight, 0.0); // set top left as origin
 }
 
-// void printObj(SHAPE obj) {
-//   printf("Type: %d\n", obj.type);
-//   printf("x1:   %d\n", obj.x1);
-//   printf("x2:   %d\n", obj.x2);
-//   printf("y1:   %d\n", obj.y1);
-//   printf("y2:   %d\n", obj.y2);
-
-//   printf("fr:   %.2f\n", obj.fr);
-//   printf("fg:   %.2f\n", obj.fg);
-//   printf("fb:   %.2f\n", obj.fb);
-// }
-
 void drawObjectList() {
   glClear(GL_COLOR_BUFFER_BIT); // Clear display window.
 

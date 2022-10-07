@@ -60,7 +60,7 @@ Complete? (Yes/No)
 
 If Yes, insert a screen shot image to show the completion.
 
-[image caption](images/demo.png){width=90%}
+[image caption](images/sd1.PNG){width=90%}
 
 If No, add a short description to describe the issues encountered.
 
@@ -70,7 +70,7 @@ Complete? (Yes/No)
 
 If Yes, insert a screen shot image to show the completion.
 
-[image caption](images/demo.png){width=90%}
+[image caption](images/sd2.PNG){width=90%}
 
 If No, add a short description to describe the issues encountered.
 

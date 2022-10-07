@@ -10,9 +10,13 @@
 #include "object.hpp"
 #include <GL/glut.h>
 #include <iostream>
+#include <stdio.h>
 
 #include "edit.hpp"
 
+extern int saveSVG(const char *filename, int winWidth, int  winHeight);
+extern int openSVG(const char *filename);
+extern int saveBitmap(const char *ptrcFileName, int nX, int nY, int nWidth, int nHeight);
 extern LIST objlist;
 extern GLsizei winHeight, winWidth;
 extern GLint oprMode, isInMenu, objType, isInMove;
@@ -108,7 +112,20 @@ void drawMenuFcn(GLint typeOption) {
 }
 
 void fileMenuFcn(GLint fileOption) {
-  // ..
+  switch(fileOption){
+  case 1:
+	  saveSVG("myDrawing.svg",winWidth,winHeight);
+	  break;
+  case 2:
+	  openSVG("myDrawing.svg");
+
+	 break;
+  case 3:
+	saveBitmap("myDrawing.bmp",0,0,winWidth,winHeight);
+	break;
+
+
+  }
 }
 
 void editMenuFcn(GLint editOption) {
