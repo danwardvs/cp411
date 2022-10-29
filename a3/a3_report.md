@@ -17,8 +17,11 @@ Homogeneous coordinate system are more simplistic to use and increases the relia
 ### Q1.2 Hand on 2D transformations
 
 1.  rotate pi rads - scale x by 1/2, scale y by 2 - translate y by 3, x by -1
-    Homogenous equations | cos(pi) -sin(pi) 0|
-    rotation | sin(pi) cos(pi) 0|
+    Homogenous equations
+    rotation
+
+    | cos(pi) -sin(pi) 0|
+    | sin(pi) cos(pi) 0|
     | 0 0 1|
 
         scaling          | 1/2   0  0|
@@ -29,109 +32,76 @@ Homogeneous coordinate system are more simplistic to use and increases the relia
                          | 0  1   3 |
                          | 0  0   1 |
 
+2.  Composite matrix =
+    | -1/2 0 -1|
+    | 0 -2 3|
+    | 0 0 1|
+
+3.  ![image caption](images/a3q2.jpg){width=90%}
+
 ## Q2 Graphics transformation programming (lab practice)
 
 ### Q2.1 Warm up C++
 
-Complete? (Yes/No)
-
-If Yes, insert a screen shot image to show the completion.
+Complete? (Yes)
 
 ![image caption](images/demo1.png){width=90%}
 
-If No, Add a short description to describe the issues encountered.
-
 ### Q2.2 2D transformations
 
-Complete? (Yes/No)
-
-If Yes, insert a screen shot image to show the completion.
+Complete? (Yes)
 
 ![image caption](images/demo2.png){width=90%}
 
-If No, Add a short description to describe the issues encountered.
-
 ### Q2.3 3D object and transformations
 
-Complete? (Yes/No)
-
-If Yes, insert a screen shot image to show the completion.
+Complete? (Yes)
 
 ![image caption](images/demo3.png){width=90%}
 
-If No, Add a short description to describe the issues encountered.
-
 ### Q2.4 Mesh object model
 
-Complete? (Yes/No)
-
-If Yes, insert a screen shot image to show the completion.
+Complete? (Yes)
 
 ![image caption](images/demo4.png){width=90%}
-
-If No, Add a short description to describe the issues encountered.
 
 ## Q3 SimpleView1 - transformations (programming)
 
 ### Q3.1 Create and render cube objects
 
-Complete? (Yes/No)
+Complete? (Yes)
 
-If Yes, insert a screen shot image to show the completion.
-
-[image caption](images/demo.png){width=90%}
-
-If No, add a short description to describe the issues encountered.
+[image caption](images/demo5.png){width=90%}
 
 ### Q3.2 Create and render the pyramid object
 
-Complete? (Yes/No)
+Complete? (Yes)
 
-If Yes, insert a screen shot image to show the completion.
-
-[image caption](images/demo.png){width=90%}
-
-If No, add a short description to describe the issues encountered.
+[image caption](images/demo5.png){width=90%}
 
 ### Q3.3 Create and render the house object
 
-Complete? (Yes/No)
+Complete? (Yes)
 
-If Yes, insert a screen shot image to show the completion.
-
-[image caption](images/demo.png){width=90%}
-
-If No, add a short description to describe the issues encountered.
+[image caption](images/demo5.png){width=90%}
 
 ### Q3.4 MCS transforms
 
-Complete? (Yes/No)
+Complete? (Yes)
 
-If Yes, insert a screen shot image to show the completion.
-
-[image caption](images/demo.png){width=90%}
-
-If No, add a short description to describe the issues encountered.
+[image caption](images/demo6.png){width=90%}
 
 ### Q3.5 WCS transforms
 
-Complete? (Yes/No)
+Complete? (Yes)
 
-If Yes, insert a screen shot image to show the completion.
-
-[image caption](images/demo.png){width=90%}
-
-If No, add a short description to describe the issues encountered.
+[image caption](images/demo7.png){width=90%}
 
 ### Q3.6 VCS transforms
 
-Complete? (Yes/No)
+Complete? (Yes)
 
-If Yes, insert a screen shot image to show the completion.
-
-[image caption](images/demo.png){width=90%}
-
-If No, add a short description to describe the issues encountered.
+[image caption](images/demo8.png){width=90%}
 
 **References**
 
