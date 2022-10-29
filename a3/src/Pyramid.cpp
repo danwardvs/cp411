@@ -14,7 +14,7 @@ Pyramid::Pyramid()
     g = 1.0;
     b = 0;
 
-    translate(3.5, 0, 0);
+    translate(4, 0, 0);
 
 }
 

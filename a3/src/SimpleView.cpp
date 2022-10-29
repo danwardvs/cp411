@@ -75,7 +75,7 @@ int main(int argc, char** argv) {
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowPosition(100, 100);
 	glutInitWindowSize(winWidth, winHeight);
-	glutCreateWindow("SimpleView1 (Your name)");
+	glutCreateWindow("SimpleView1 (Danny Van Stemp)");
 	init();
 	menu();
 	glutDisplayFunc(display);

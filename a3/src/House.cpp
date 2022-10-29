@@ -7,15 +7,15 @@ House::House()
 
 
 {
-    vertex[0][0] = 0; vertex[0][1] = 0; vertex[0][2] = 0;
-    vertex[1][0] = 0; vertex[1][1] = 1; vertex[1][2] = 0;
-    vertex[2][0] = 1; vertex[2][1] = 1; vertex[2][2] = 0;
-    vertex[3][0] = 1; vertex[3][1] = 0; vertex[3][2] = 0;
-    vertex[4][0] = 0; vertex[4][1] = 0; vertex[4][2] = 1;
-    vertex[5][0] = 0; vertex[5][1] = 1; vertex[5][2] = 1;
-    vertex[6][0] = 1; vertex[6][1] = 1; vertex[6][2] = 1;
-    vertex[7][0] = 1; vertex[7][1] = 0; vertex[7][2] = 1;
-    vertex[8][0] = 0.5; vertex[8][1] = 0.5; vertex[8][2] = 1.5f;
+    vertex[0][0] = -0.5; vertex[0][1] = -0.5; vertex[0][2] = -0.5;
+    vertex[1][0] = -0.5; vertex[1][1] = 0.5; vertex[1][2] = -0.5;
+    vertex[2][0] = 0.5; vertex[2][1] = 0.5; vertex[2][2] = -0.5;
+    vertex[3][0] = 0.5; vertex[3][1] = -0.5; vertex[3][2] = -0.5;
+    vertex[4][0] = -0.5; vertex[4][1] = -0.5; vertex[4][2] = 0.5;
+    vertex[5][0] = -0.5; vertex[5][1] = 0.5; vertex[5][2] = 0.5;
+    vertex[6][0] = 0.5; vertex[6][1] = 0.5; vertex[6][2] = 0.5;
+    vertex[7][0] = 0.5; vertex[7][1] = -0.5; vertex[7][2] = 0.5;
+    vertex[8][0] = 0; vertex[8][1] = 0; vertex[8][2] = 1.5;
 
 
 

@@ -61,7 +61,7 @@ void World::reset(){
 
 	  (*it)->reset();
 		if(i==1)
-		    (*it)->translate(3.5, 0, 0);
+		    (*it)->translate(2.5, 0, 0);
 		if(i==0)
 		  (*it)->translate(1.5, 0, 0);
 		i++;
