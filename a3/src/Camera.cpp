@@ -46,7 +46,11 @@ void Camera::rotate(GLfloat rx, GLfloat ry, GLfloat rz, GLfloat angle){
 }
 
 void Camera::translate(GLfloat tx, GLfloat ty, GLfloat tz) {
-// translate eye position in WCS
+	eye.x -= tx;
+		eye.y -= ty;
+	eye.z -= tz;
+
+
 }
 
 void Camera::setProjectionMatrix() {
