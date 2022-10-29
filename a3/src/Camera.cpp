@@ -1,3 +1,4 @@
+#include <GL/gl.h>
 #include <stdio.h>
 #include "Camera.hpp"
 #include "Matrix.hpp"
@@ -42,12 +43,26 @@ void Camera::setViewNorm() {
 }
 
 void Camera::rotate(GLfloat rx, GLfloat ry, GLfloat rz, GLfloat angle){
-// rotate eye position in WCS
+	 Matrix m;
+	 m.rotateMatrix(rx, ry, rz, angle);
+	 GLfloat v[4];
+	 v[0] = eye.x;
+	 v[1] = eye.y;
+	 v[2] = eye.z;
+	 v[3] = 1;
+
+	 m.multiplyVector(v);
+	 eye.x = v[0];
+	 eye.y = v[1];
+	 eye.z = v[2];
+
+
+
 }
 
 void Camera::translate(GLfloat tx, GLfloat ty, GLfloat tz) {
 	eye.x -= tx;
-		eye.y -= ty;
+	eye.y -= ty;
 	eye.z -= tz;
 
 
