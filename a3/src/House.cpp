@@ -18,10 +18,6 @@ House::House()
     vertex[8][0] = 0.5; vertex[8][1] = 0.5; vertex[8][2] = 1.5f;
 
 
-    r = 1.0;
-    g = 1.0;
-    b = 1.0;
-
 
     face[0][0] = 0; face[0][1] = 1; face[0][2] = 2; face[0][3] = 3;
     face[1][0] = 7; face[1][1] = 6; face[1][2] = 5; face[1][3] = 4;
@@ -30,14 +26,12 @@ House::House()
     face[4][0] = 3; face[4][1] = 2; face[4][2] = 6; face[4][3] = 7;
     face[5][0] = 0; face[5][1] = 3; face[5][2] = 7; face[5][3] = 4;
 
-    r = 0;
-    g = 1.0;
-    b = 1.0;
+
 }
 
 void House::drawPyramid()
 {
-    glColor3f(r, g, b);
+    glColor3f(1, 1, 0);
 
 
 
@@ -81,7 +75,7 @@ void House::drawPyramid()
 }
 void House::drawFace(int i)
 {
-    glColor3f(r, g, b);
+    glColor3f(1, 1, 1);
 
     glBegin(GL_LINE_LOOP);
 
@@ -99,17 +93,15 @@ void House::draw()
     glPushMatrix();
     this->ctmMultiply();
     glScalef(s, s, s);
-	drawPyramid();
- 
-    glPopMatrix();
-    
-    glPushMatrix();
-    this->ctmMultiply();
-    glScalef(s, s, s);
+	
+
 	    for (int i = 0; i < 6; i++) {
 		    drawFace(i);
 	    }
+         drawPyramid();
  
     glPopMatrix();
+
+   
 }
 

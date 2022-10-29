@@ -9,14 +9,20 @@ World::World() {
 /* add Cube into the world object list */
 	Shape *obj = new Cube();
 	obj->setId(1);
+	obj->translate(1.5, 0, 0);
+
 	objlist.push_back(obj);
 
 	Shape *obj2 = new Pyramid();
 	obj2->setId(2);
+	obj2->translate(3.5, 0, 0);
+
+
 	objlist.push_back(obj2);
 
 	Shape *obj3 = new House();
 	obj3->setId(3);
+
 	objlist.push_back(obj3);
 
 
