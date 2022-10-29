@@ -34,7 +34,22 @@ void Shape::rotate(GLfloat rx, GLfloat ry, GLfloat rz, GLfloat angle) {
 
 
 void Shape::rotate(GLfloat x0, GLfloat  y0, GLfloat  z0, GLfloat  rx, GLfloat  ry, GLfloat rz,  GLfloat  angle) {
-	// your implementation
+
+	mc.mat[0][3] = 0;
+	mc.mat[1][3] = 0;
+	mc.mat[2][3] = 0;
+	mc.mat[3][3] = 1;
+
+
+	 Matrix m;
+	 m.rotateMatrix(rx, ry, rz, angle);
+	 mc.matrixPreMultiply(&m);
+
+	mc.mat[0][3] = x0;
+	mc.mat[1][3] = y0;
+	mc.mat[2][3] = z0;
+	mc.mat[3][3] = 1;
+
 }
 
 

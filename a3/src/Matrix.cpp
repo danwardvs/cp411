@@ -67,7 +67,30 @@ void Matrix::multiplyVector(GLfloat* v) {
 }
 
 void Matrix::rotateMatrix(GLfloat rx, GLfloat ry, GLfloat rz, GLfloat angle) {
-// add code here
+GLfloat radianAngle = angle * 3.1415926/180;
+GLfloat axisVectLength = sqrt (rx * rx + ry*ry + rz*rz);
+GLfloat cosA = cos (radianAngle); //
+GLfloat oneC = 1 - cosA;
+GLfloat sinA = sin (radianAngle); //
+GLfloat ux = (rx) / axisVectLength; // compute unit vector
+GLfloat uy = (ry) / axisVectLength;
+GLfloat uz = (rz) / axisVectLength;
+mat[0][0] = ux*ux*oneC + cosA; //
+mat[0][1] = ux*uy*oneC - uz*sinA;
+mat[0][2] = ux*uz*oneC + uy*sinA;
+mat[0][3] = 0;
+mat[1][0] = uy*ux*oneC + uz*sinA; //
+mat[1][1] = uy*uy*oneC + cosA;
+mat[1][2] = uy*uz*oneC - ux*sinA;
+mat[1][3] = 0;
+mat[2][0] = uz*ux*oneC - uy*sinA;
+mat[2][1] = uz*uy*oneC + ux*sinA;
+mat[2][2] = uz*uz*oneC + cosA;
+mat[2][3] = 0;
+mat[3][0] = 0;
+mat[3][1] = 0;
+mat[3][2] = 0;
+mat[3][3] = 1;
 }
 
 
