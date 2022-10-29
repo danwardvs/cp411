@@ -19,6 +19,7 @@ public:
 	Pyramid();
 	void draw();
 	void drawPyramid();
+	void reset();
 };
 
 #endif

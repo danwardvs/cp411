@@ -1,4 +1,5 @@
 #include "Pyramid.hpp"
+#include "Shape.hpp"
 #include <GL/gl.h>
 
 Pyramid::Pyramid()
@@ -12,7 +13,11 @@ Pyramid::Pyramid()
     r = 1.0;
     g = 1.0;
     b = 0;
+
+    translate(3.5, 0, 0);
+
 }
+
 
 void Pyramid::drawPyramid()
 {

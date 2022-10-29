@@ -9,15 +9,10 @@ World::World() {
 /* add Cube into the world object list */
 	Shape *obj = new Cube();
 	obj->setId(1);
-	obj->translate(1.5, 0, 0);
-
 	objlist.push_back(obj);
 
 	Shape *obj2 = new Pyramid();
 	obj2->setId(2);
-	obj2->translate(3.5, 0, 0);
-
-
 	objlist.push_back(obj2);
 
 	Shape *obj3 = new House();
@@ -61,9 +56,17 @@ void World::draw() {
 
 void World::reset(){
 	std::list<Shape*>::iterator it;
+	int i = 0;
 	for (it = objlist.begin(); it !=  objlist.end(); ++it) {
+
 	  (*it)->reset();
-    }
+		if(i==1)
+		    (*it)->translate(3.5, 0, 0);
+		if(i==0)
+		  (*it)->translate(1.5, 0, 0);
+		i++;
+		}
+
 }
 
 Shape* World::searchById(GLint i) {
