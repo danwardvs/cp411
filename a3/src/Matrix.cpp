@@ -24,14 +24,15 @@ void Matrix::loadIdentity() {
 
 // multiplication  mat <- m * mat
 void Matrix::matrixPreMultiply(Matrix* m) {
-	GLint row, col;
-	GLfloat matTemp[4][4];  
-	for (row = 0; row < 4; row++)
-		for (col = 0; col < 4; col++)
-			matTemp[row][col] = mat[row][0] * m->mat[0][col] + mat[row][1] * m->mat[1][col] + mat[row][2] * m->mat[2][col] + mat[row][3] * m->mat[3][col];
-	for (row = 0; row < 4; row++)
-		for (col = 0; col < 4; col++)
-			m->mat[row][col] = matTemp[row][col];
+GLint row, col;
+Matrix matTemp;
+for (row = 0; row < 4; row++)
+for (col = 0; col < 4; col++)
+matTemp.mat[row][col] = m->mat[row][0] * mat[0][col] + m->mat[row][1] * mat[1][col]
++ m->mat[row][2] * mat[2][col] + m->mat[row][3] * mat[3][col];
+for (row = 0; row < 4; row++)
+for (col = 0; col < 4; col++)
+mat[row][col] = matTemp.mat[row][col];
 }
 
 // transpose  mat <- mat'
