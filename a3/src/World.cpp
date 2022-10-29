@@ -1,6 +1,7 @@
 #include "World.hpp"
 #include "Cube.hpp"
 #include "Pyramid.hpp"
+#include "House.hpp"
 
 using namespace std;
 
@@ -13,6 +14,10 @@ World::World() {
 	Shape *obj2 = new Pyramid();
 	obj2->setId(2);
 	objlist.push_back(obj2);
+
+	Shape *obj3 = new House();
+	obj3->setId(3);
+	objlist.push_back(obj3);
 
 
 }

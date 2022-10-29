@@ -24,6 +24,8 @@ face[5][0] = 0; face[5][1] = 3; face[5][2] = 7; face[5][3] = 4;
 
 void Cube::drawFace(int i)
 {
+    glColor3f(r, g, b);
+
     glBegin(GL_LINE_LOOP);
 
     glVertex3fv( &(vertex[face[i][0]][0]) );
