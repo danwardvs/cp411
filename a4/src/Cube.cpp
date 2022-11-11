@@ -30,12 +30,31 @@ Cube::Cube() {
     face[5][0] = 0; face[5][1] = 3; face[5][2] = 7; face[5][3] = 4;
 
 	// faceColor
-	faceColor[0][0] = 1.0, faceColor[0][1] = 0.0; faceColor[0][2] = 0.0;
+		
+			faceColor[0][0] = 0.0, faceColor[0][1] = 1.0; faceColor[0][2] = 1.0;
+			faceColor[1][0] = 0.0, faceColor[1][1] = 0.0; faceColor[1][2] = 1.0;
+			faceColor[2][0] = 0.0, faceColor[2][1] = 1.0; faceColor[2][2] = 0.0;
+			faceColor[3][0] = 1.0, faceColor[3][1] = 0.0; faceColor[3][2] = 0.0;
+			faceColor[4][0] = 1.0, faceColor[4][1] = 1.0; faceColor[4][2] = 0.0;
+			faceColor[5][0] = 1.0, faceColor[5][1] = 0.0; faceColor[5][2] = 1.0;
+
+
+
+
+
+		
 	// more
 
-	// set or compute face normals
-	faceNormal[0][0] = 0.0, faceNormal[0][1] = 0.0, faceNormal[0][2] = -1.0,
-	// more
+
+	for (int i = 0 ; i<6; i++) {
+		Vector V1 = Vector(vertex[face[i][1]][0]-vertex[face[i][0]][0], vertex[face[i][1]][1]-vertex[face[i][0]][1], vertex[face[i][1]][2]-vertex[face[i][0]][2]);
+		Vector V2 = Vector(vertex[face[i][2]][0]-vertex[face[i][1]][0], vertex[face[i][2]][1]-vertex[face[i][1]][1], vertex[face[i][2]][2]-vertex[face[i][1]][2]);
+		Vector V3 =  V1.cross(V2);
+		V3.normalize();
+		faceNormal[i][0] = V3.x;
+		faceNormal[i][1] = V3.y;
+		faceNormal[i][2] = V3.z;
+	}
 	
 	
 	// vertex color
@@ -52,34 +71,57 @@ Cube::Cube() {
 	b = 0.0;
 }
 
-void Cube::drawFace(int i) {
-	GLfloat shade = 1;
+void Cube::drawFace(int i)
+	{
+		GLfloat shade = 1;
+
 	switch (renderMode) {
-	case WIRE:
+	case WIRE:   // this case from SimpleView1
 	   glColor3f(r, g, b);
 	   glBegin(GL_LINE_LOOP);
-	   for (int j=0; j<4; j++) {
-		   glVertex3fv(vertex[face[i][j]]);
-	   }
+	     glVertex3fv(vertex[face[i][0]]);
+       glVertex3fv(vertex[face[i][1]]);
+       glVertex3fv(vertex[face[i][2]]);
+       glVertex3fv(vertex[face[i][3]]);
        glEnd();
 	   break;
-	case CONSTANT:
-	  if (myLight.on == true) shade = getFaceShade(i, myLight);
+	case CONSTANT:  // this case from SimpleView2
+	   if (myLight.on == true) shade = getFaceShade(i, myLight);
 	   glColor3f(faceColor[i][0]*shade, faceColor[i][1]*shade, faceColor[i][2]*shade);
 	   glBegin(GL_POLYGON);
-	   for (int j=0; j<4; j++) {
-		   glVertex3fv(vertex[face[i][j]]);
-	   }
+	   glVertex3fv(vertex[face[i][0]]);
+	   glVertex3fv(vertex[face[i][1]]);
+	   glVertex3fv(vertex[face[i][2]]);
+	   glVertex3fv(vertex[face[i][3]]);
 	   glEnd();
 	  break;
+		
 	case FLAT:
-
+	   glShadeModel(GL_FLAT);
+       
+	   // add your code
+	   
+	   break;
+	
 	case SMOOTH:
+
+		glEnable(GL_NORMALIZE);
+		glShadeModel(GL_SMOOTH);
+
+
 
 	break;
 
+	case PHONG:
+
+	  break;
+	  
+	  case TEXTURE:
+	  
+	  break;
 	}
 }
+
 
 void Cube::draw() {
 	glPushMatrix();
