@@ -39,13 +39,6 @@ Cube::Cube() {
 			faceColor[5][0] = 1.0, faceColor[5][1] = 0.0; faceColor[5][2] = 1.0;
 
 
-
-
-
-		
-	// more
-
-
 	for (int i = 0 ; i<6; i++) {
 		Vector V1 = Vector(vertex[face[i][1]][0]-vertex[face[i][0]][0], vertex[face[i][1]][1]-vertex[face[i][0]][1], vertex[face[i][1]][2]-vertex[face[i][0]][2]);
 		Vector V2 = Vector(vertex[face[i][2]][0]-vertex[face[i][1]][0], vertex[face[i][2]][1]-vertex[face[i][1]][1], vertex[face[i][2]][2]-vertex[face[i][1]][2]);
@@ -144,8 +137,19 @@ void Cube::draw() {
 }
 
 bool Cube::isFrontface(int faceindex, Camera camera) {
-// your implementation
-}
+	GLfloat v[4];
+	v[0] = faceNormal[faceindex][0];  // get faceNormal in MCS
+	v[1] = faceNormal[faceindex][1];
+	v[2] = faceNormal[faceindex][2];
+	v[3] = 0.0;
+	mc.multiplyVector(v);   // compute faceNormal in WCS
+	   
+	if (pmc != NULL) {  // if parent MCS exists, use the parent's origin as reference point. 
+		pmc->multiplyVector(v);
+		return (pmc->mat[0][3] - camera.eye.x) * v[0] + (pmc->mat[1][3] - camera.eye.y) * v[1] + (pmc->mat[2][3] - camera.eye.z) * v[2] < 0;
+	} else {
+		return (mc.mat[0][3] - camera.eye.x) * v[0] + (mc.mat[1][3] - camera.eye.y) * v[1] + (mc.mat[2][3] - camera.eye.z) * v[2] < 0;
+	}}
 
 
 GLfloat Cube::getFaceShade(int faceindex, Light light) {
