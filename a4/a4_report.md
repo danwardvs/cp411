@@ -1,8 +1,8 @@
 # A4 Report
 
-Author: ???
+Author: Danny Van Stemp
 
-Date: ???
+Date: Nov 9 2023
 
 Check [readme.txt](readme.txt) for course work statement and self-evaluation.
 
@@ -79,81 +79,54 @@ What does a shading model determine? Give the names of three shading models.
 
 The shading model determines how the colour of a pixel is calculated based on the reflection model. Constant, Gouraud, Phong
 
-### Q1.4 Lighting computing
-
 ## Q2 OpenGL culling, lighting, shading (lab practice)
 
 ### Q2.1 Hidden surface removal
 
-Complete? (Yes/No)
+Complete? Yes
 
-If Yes, insert a screen shot image to show the completion.
-
-![image caption](images/demo.png){width=90%}
-
-If No, Add a short description to describe the issues encountered.
+![image caption](images/demo1.png){width=90%}
+![image caption](images/demo2.png){width=90%}
 
 ### Q2.2 Lighting and Shading
 
-Complete? (Yes/No)
-
-If Yes, insert a screen shot image to show the completion.
-
-![image caption](images/demo.png){width=90%}
-
-If No, Add a short description to describe the issues encountered.
+Complete? Yes
+![image caption](images/demo01.png){width=90%}
+![image caption](images/demo02.png){width=90%}
+![image caption](images/demo03.png){width=90%}
+![image caption](images/demo04.png){width=90%}
 
 ### Q2.3 Animation
 
-Complete? (Yes/No)
+Complete? Yes
 
-If Yes, insert a screen shot image to show the completion.
-
-![image caption](images/demo.png){width=90%}
-
-If No, Add a short description to describe the issues encountered.
+![image caption](images/anim.png){width=90%}
 
 ## Q3 SimpleView2 - culling, lighting, shading (programming)
 
 ### Q3.1 Culling
 
-Complete? (Yes/No)
+Complete? (Yes)
 
-If Yes, insert a screen shot image to show the completion.
-
-[image caption](images/demo.png){width=90%}
-
-If No, add a short description to describe the issues encountered.
+[image caption](images/sv1.png){width=90%}
 
 ### Q3.2 Lighting
 
-Complete? (Yes/No)
+Complete? (Yes)
 
-If Yes, insert a screen shot image to show the completion.
-
-[image caption](images/demo.png){width=90%}
-
-If No, add a short description to describe the issues encountered.
+[image caption](images/sv2.png){width=90%}
 
 ### Q3.3 Shading
 
-Complete? (Yes/No)
+Complete? (Yes)
 
-If Yes, insert a screen shot image to show the completion.
-
-[image caption](images/demo.png){width=90%}
-
-If No, add a short description to describe the issues encountered.
+[image caption](images/sv3.png){width=90%}
 
 ### Q3.4 Animations
 
-Complete? (Yes/No)
+Complete? (Yes)
 
-If Yes, insert a screen shot image to show the completion.
-
-[image caption](images/demo.png){width=90%}
-
-If No, add a short description to describe the issues encountered.
+[image caption](images/sv4.png){width=90%}
 
 **References**
 
