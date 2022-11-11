@@ -3,30 +3,41 @@
  *  Author: HBF
  *  Version: 2022-10-06
  */
-#ifndef PYRAMID_HPP_
-#define PYRAMID_HPP_
+#ifndef CPYRAMID_H
+#define CPYRAMID_H
 
 #include <GL/glut.h>
 #include "Shape.hpp"
 #include "Vector.hpp"
+
 #include "Camera.hpp"
 #include "Light.hpp"
 
 class Pyramid: public Shape {
+
 protected:
-	GLfloat vertex[5][3];
-	GLint face[4][4];
+
+	GLfloat vertex[8][3];
+	GLint face[6][4];
+
+	/* SimpleView2 properties */
+	GLfloat faceColor[6][3];
+	GLfloat faceNormal[6][3];
+	GLfloat vertexColor[8][3];
+	GLfloat vertexNormal[8][3];
+
 	GLfloat r, g, b;
 
 public:
 	Pyramid();
 	void draw();
-	void drawMC();
+	void drawFace(int);
 
-private:
-	void drawFace(GLint i);
+	/* SimpleView2 properties */
+	bool isFrontface(int faceindex, Camera camera);
+	GLfloat getFaceShade(int faceindex, Light light);
+	GLfloat getVertexShade(int vertexindex, Light light);
+
 };
 
-#endif  /* PYRAMID_HPP_ */
-
-
+#endif
