@@ -27,14 +27,17 @@ void Light::Reset(){
 }
 
 void Light::Increment(GLfloat p){
-// change light intensity
+		I += p;
+		if (I < 0.03) I = 0.01;
+		else if (I > 0.97 ) I = 1;
+	}
 
-}
 
 void Light::draw(){
 	if(on == true){
 		glPushMatrix();
 		this->ctmMultiply();
+		glColor3f(I, I, I);
 		glutSolidSphere(size, 10, 10);
 		glPopMatrix();
 	}

@@ -50,13 +50,24 @@ Cube::Cube() {
 	}
 	
 	
-	// vertex color
+
 	vertexColor[0][0] = 1.0, vertexColor[0][1] = 0.0; vertexColor[0][2] = 0.0;
-	// more
-	
-	// vertex normal 
-	vertexNormal[0][0] = -1; vertexNormal[0][1] = -1; vertexNormal[0][2] = -1;
-	// more
+	vertexColor[1][0] = 0.0, vertexColor[1][1] = 1.0; vertexColor[1][2] = 0.0;
+	vertexColor[2][0] = 0.0, vertexColor[2][1] = 0.0; vertexColor[2][2] = 1.0;
+	vertexColor[3][0] = 1.0, vertexColor[3][1] = 1.0; vertexColor[3][2] = 0.0;
+	vertexColor[4][0] = 1.0, vertexColor[4][1] = 0.0; vertexColor[4][2] = 1.0;
+	vertexColor[5][0] = 0.0, vertexColor[5][1] = 1.0; vertexColor[5][2] = 1.0;
+	vertexColor[6][0] = 0.5, vertexColor[6][1] = 0.5; vertexColor[6][2] = 0.5;
+	vertexColor[7][0] = 0.0, vertexColor[7][1] = 0.0; vertexColor[7][2] = 0.0;
+
+    vertexNormal[0][0] = -1; vertexNormal[0][1] = -1; vertexNormal[0][2] = -1;
+    vertexNormal[1][0] = -1; vertexNormal[1][1] = 1;  vertexNormal[1][2] = -1;
+    vertexNormal[2][0] = 1;  vertexNormal[2][1] = 1;  vertexNormal[2][2] = -1;
+    vertexNormal[3][0] = 1;  vertexNormal[3][1] = -1; vertexNormal[3][2] = -1;
+    vertexNormal[4][0] = -1; vertexNormal[4][1] = -1; vertexNormal[4][2] = 1;
+    vertexNormal[5][0] = -1; vertexNormal[5][1] = 1;  vertexNormal[5][2] = 1;
+    vertexNormal[6][0] = 1;  vertexNormal[6][1] = 1;  vertexNormal[6][2] = 1;
+    vertexNormal[7][0] = 1;  vertexNormal[7][1] = -1; vertexNormal[7][2] = 1;
 	
 
 	r = 1.0;
@@ -89,19 +100,30 @@ void Cube::drawFace(int i)
 	   glEnd();
 	  break;
 		
-	case FLAT:
+case FLAT:
+	   if (myLight.on == true) shade = getVertexShade(i, myLight);
 	   glShadeModel(GL_FLAT);
-       
-	   // add your code
-	   
+	   glBegin(GL_POLYGON);
+	   glColor3f(vertexColor[face[i][0]][0]*shade, vertexColor[face[i][0]][1]*shade, vertexColor[face[i][0]][2]*shade);
+	   for (int j=0; j<4; j++) {
+		   glVertex3fv(vertex[face[i][j]]);
+	   }
+	   glEnd();
 	   break;
-	
 	case SMOOTH:
-
-		glEnable(GL_NORMALIZE);
-		glShadeModel(GL_SMOOTH);
-
-
+	{
+	   glEnable(GL_NORMALIZE);
+	   glShadeModel(GL_SMOOTH);
+	   glBegin(GL_POLYGON);
+	   for (int j=0; j<4; j++) {
+		  if (myLight.on == true) shade = getVertexShade(face[i][j], myLight);
+		   glColor3f(vertexColor[face[i][j]][0]*shade, vertexColor[face[i][j]][1]*shade, vertexColor[face[i][j]][2]*shade);
+	       glNormal3f(vertexNormal[face[i][j]][0], vertexNormal[face[i][j]][1], vertexNormal[face[i][j]][2]);
+	       glVertex3fv(vertex[face[i][j]]);
+	   }
+	   glEnd();
+	}
+	break;
 
 	break;
 
@@ -156,13 +178,100 @@ GLfloat Cube::getFaceShade(int faceindex, Light light) {
 	GLfloat shade = 1, v[4], s[4], temp;
 
 	// your implementation
+
+	// assign v the first vertex of face[faceindex]
+	v[0] = vertex[face[faceindex][0]][0];
+	v[1] = vertex[face[faceindex][0]][1];
+	v[2] = vertex[face[faceindex][0]][2];
+	v[0] = 1;
+	mc.multiplyVector(v);  //compute the position of vertex  in WCS
+	if (pmc != NULL) pmc->multiplyVector(v); //furtber compute the position of vertex in WCS if the parent MC is not NULL, e.g. in house
+
+
+	// compute the light vector s[] = lightposition - face[faceindex][0]
+	s[0] = light.getMC().mat[0][3] - v[0];
+	s[1] = light.getMC().mat[1][3] - v[1];
+	s[2] = light.getMC().mat[2][3] - v[2];
+
+//	//normalize vector s
+	temp = sqrt(s[0]*s[0]+s[1]*s[1]+s[2]*s[2]);
+	s[0] = s[0]/temp;
+	s[1] = s[1]/temp;
+	s[2] = s[2]/temp;
+
+    // compute the normal of  face[faceindex] in WC
+ 	v[0] = faceNormal[faceindex][0];
+	v[1] = faceNormal[faceindex][1];
+	v[2] = faceNormal[faceindex][2];
+	v[3] = 0;
+	mc.multiplyVector(v);
+
+	if (pmc != NULL) pmc->multiplyVector(v);
+
+	//normalize face normal
+	temp = sqrt(v[0]*v[0]+v[1]*v[1]+v[2]*v[2]);
+	v[0] = v[0]/temp;
+	v[1] = v[1]/temp;
+	v[2] = v[2]/temp;
+
+	// compute v dot s
+	temp = v[0]*s[0]+v[1]*s[1]+v[2]*s[2];
+
+	// compute shade factor
+	shade = light.I*light.Rd*temp; // + light.Ia*light.Ra;
+
+	if (shade < 0.01) shade = 0.1;
+	if (shade > 0.99 ) shade = 0.9;
 	return shade;
 }
 
 
 GLfloat Cube::getVertexShade(int i, Light light) {
 	GLfloat shade = 1, v[4], s[4], temp;
-// your implementation
+
+	// assign v the first vertex of face[faceindex]
+	v[0] = vertex[i][0];
+	v[1] = vertex[i][1];
+	v[2] = vertex[i][2];
+	v[0] = 1;
+	mc.multiplyVector(v);  //compute the position of vertex face[faceindex][0] in WC
+
+	if (pmc != NULL) pmc->multiplyVector(v);
+
+	// compute the light vector s[] = lightposition - face[faceindex][0]
+	s[0] = light.getMC().mat[0][3] - v[0];
+	s[1] = light.getMC().mat[1][3] - v[1];
+	s[2] = light.getMC().mat[2][3] - v[2];
+
+//	//normalize vector s
+	temp = sqrt(s[0]*s[0]+s[1]*s[1]+s[2]*s[2]);
+	s[0] = s[0]/temp;
+	s[1] = s[1]/temp;
+	s[2] = s[2]/temp;
+
+    // compute the normal of  face[faceindex] in WC
+ 	v[0] = vertexNormal[i][0];
+	v[1] = vertexNormal[i][1];
+	v[2] = vertexNormal[i][2];
+	v[3] = 0;
+	mc.multiplyVector(v);
+
+	if (pmc != NULL) pmc->multiplyVector(v);
+
+	//normalize face normal
+	temp = sqrt(v[0]*v[0]+v[1]*v[1]+v[2]*v[2]);
+	v[0] = v[0]/temp;
+	v[1] = v[1]/temp;
+	v[2] = v[2]/temp;
+
+	// compute v dot s
+	temp = v[0]*s[0]+v[1]*s[1]+v[2]*s[2];
+
+	// compute shade factor
+	shade = light.I*light.Rd*temp; // + light.Ia*light.Ra;
+
+	if (shade < 0.01) shade = 0.1;
+	if (shade > 0.99 ) shade = 0.9;
+
 	return shade;
 }
-

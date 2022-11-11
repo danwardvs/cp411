@@ -83,7 +83,7 @@ int main(int argc, char** argv) {
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowPosition(100, 100);
 	glutInitWindowSize(winWidth, winHeight);
-	glutCreateWindow("SimpleView2 reference design (HBF)");
+	glutCreateWindow("SimpleView2 reference design (Danny Van Stemp)");
 	init();
 	menu();
 	glutDisplayFunc(display);

@@ -299,12 +299,40 @@ void shadeMenu(GLint option) {
 
 
 void move(void){
-//  your implementation
-	glutPostRedisplay();
-}
-
+		selectObj->rotate(selectObj->getMC().mat[0][3], selectObj->getMC().mat[1][3], selectObj->getMC().mat[2][3], 0, 0, 1, 0.1);
+		glutPostRedisplay();
+	}
 void solar(void){
-//  your implementation
+	GLfloat x1,y1,z1, x2,y2,z2, x3, y3, z3;
+	GLfloat sunSpeed = 0.1, earthSpeed = 0.2, earthSunSpeed = 0.1, moonSpeed = 0.2, moonEarthSpeed = 0.2;
+
+	Shape *sun = myWorld.searchById(3);
+	Shape *earth = myWorld.searchById(1);
+	Shape *moon = myWorld.searchById(2);
+
+	x1 = sun->getMC().mat[0][3];
+	y1 = sun->getMC().mat[1][3];
+	z1 = sun->getMC().mat[2][3];
+
+	x2 = earth->getMC().mat[0][3];
+	y2 = earth->getMC().mat[1][3];
+	z2 = earth->getMC().mat[2][3];
+
+	x3 = moon->getMC().mat[0][3];
+	y3 = moon->getMC().mat[1][3];
+	z3 = moon->getMC().mat[2][3];
+
+	// sun motion
+    sun->rotate(x1, y1, z1, 0, 0, 1, sunSpeed);
+
+    // earth motion
+    earth->rotate(x2, y2, z2, 0, 0, 1, earthSpeed);
+    earth->rotateOrigin(x1, y1, z1, 0, 0, 1, earthSunSpeed);
+
+    // moon motion
+    moon->rotate(x3, y3, z3,  0, 0, 1, moonSpeed);
+    moon->rotateOrigin(x1, y1, z1, 0, 0, 1, earthSunSpeed);
+    moon->rotateOrigin(x2, y2, z2,  0, 0, 1, moonEarthSpeed);
 
 	glutPostRedisplay();
 }
