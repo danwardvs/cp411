@@ -185,7 +185,7 @@ GLfloat Paddle::getFaceShade(int faceindex, Light light) {
 	v[2] = vertex[face[faceindex][0]][2];
 	v[0] = 1;
 	mc.multiplyVector(v);  //compute the position of vertex  in WCS
-	if (pmc != NULL) pmc->multiplyVector(v); //furtber compute the position of vertex in WCS if the parent MC is not NULL, e.g. in house
+	if (pmc != NULL) pmc->multiplyVector(v); //furtber compute the position of vertex in WCS if the parent MC is not NULL, e.g. in Ball
 
 
 	// compute the light vector s[] = lightposition - face[faceindex][0]

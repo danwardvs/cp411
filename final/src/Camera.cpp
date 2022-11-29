@@ -14,7 +14,7 @@ Camera::Camera(){
 	eye.set(0, -15.0, 0.0);
 	ref.set(0, 0, 0);
 	viewup.set(0, 0, 1);
-	aspect = 1.0, vangle = 40.0, dnear = 1.0, dfar = 15.0;
+	aspect = 1.0, vangle = 40.0, dnear = 1.0, dfar = 50.0;
 	setViewNorm();
 }
 

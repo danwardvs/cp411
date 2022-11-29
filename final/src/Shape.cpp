@@ -36,6 +36,12 @@ void Shape::translate(GLfloat tx, GLfloat ty, GLfloat tz) {
 	mc.mat[2][3] += tz;
 	mc.mat[3][3] = 1;
 }
+
+void Shape::translate2d(GLfloat tx, GLfloat tz) {
+	mc.mat[0][3] += tx;
+	mc.mat[2][3] += tz;
+	mc.mat[3][3] = 1;
+}
 void Shape::setX(GLfloat tx) {
 	mc.mat[0][3] = tx;
 
@@ -43,6 +49,7 @@ void Shape::setX(GLfloat tx) {
 
 	mc.mat[3][3] = 1;
 }
+
 
 void Shape::rotate(GLfloat rx, GLfloat ry, GLfloat rz, GLfloat angle) {
 	Matrix m;
@@ -106,4 +113,12 @@ void Shape::ctmMultiply() {
 	M[14] = mc.mat[2][3];
 	M[15] = 1;
 	glMultMatrixf(M);
+}
+
+void Shape::setDirection(GLfloat newDirection){
+    direction = newDirection;
+
+}
+GLfloat Shape::getDirection(){
+ return direction;
 }

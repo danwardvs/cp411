@@ -3,25 +3,25 @@
  *  Author: HBF
  *  Version: 2022-10-06
  */
-#ifndef HOUSE_HPP_
-#define HOUSE_HPP_
+#ifndef Ball_HPP_
+#define Ball_HPP_
 
+#include <GL/gl.h>
 #include <GL/glut.h>
 
 #include "Cube.hpp"
 #include "Pyramid.hpp"
 
 
-class House: public Shape{
+class Ball: public Shape{
 protected:
-	Pyramid* pyramid;
-	Cube* cube;
 
 public:
-	~House();
-	House();
+	~Ball();
+	Ball();
+
 	void draw();
 };
 
 
-#endif /* House_HPP_ */
+#endif /* Ball_HPP_ */

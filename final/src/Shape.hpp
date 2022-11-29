@@ -47,6 +47,8 @@ protected:
 	Matrix *pmc; /* parent mc pointer if any */
 	GLfloat s;   /* scale factor */
 	GLint id;    /* used to identify object */
+		GLfloat direction;
+
 
 public:
 	Shape();                 /* constructor */
@@ -59,12 +61,17 @@ public:
 	void setId(GLint id);
 	GLint getId();
 	void setX(GLfloat tx);
+
 	void translate(GLfloat tx, GLfloat ty, GLfloat tz); /* translate the MC origin by (tx, ty, tz) */
+	void translate2d(GLfloat tx, GLfloat ty);
 	void rotate(GLfloat rx, GLfloat ry, GLfloat rz, GLfloat angle);   /* rotate w.r.t. axis (0,0,0)+u(rx,ry,rz) WCS */
 	void rotate(GLfloat x0, GLfloat  y0, GLfloat  z0, GLfloat  rx, GLfloat  ry, GLfloat rz, GLfloat  angle); /* rotate w.r.t. axis (x0,y0,z0)+u(rx,ry,yz) in WCS */
 	void rotateOrigin(GLfloat x0, GLfloat  y0, GLfloat  z0, GLfloat  rx, GLfloat  ry, GLfloat rz, GLfloat  angle); /* rotate MCS origion w.r.t. axis (x0,y0,z0)+u(rx,ry,yz) in WCS */
 	void reset();             /* a function that resets the shape transformation matrix */
 	virtual void draw() = 0;  /* draw function must be overwritten */
+
+	GLfloat getDirection();
+	void setDirection(GLfloat newDirection);
 };
 
 #endif

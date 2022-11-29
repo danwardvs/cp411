@@ -22,7 +22,7 @@ void menu() {
 	GLint Object_Menu = glutCreateMenu(ObjSubMenu);
 	glutAddMenuEntry("Cube", 1);
 	glutAddMenuEntry("Pyramid", 2);
-	glutAddMenuEntry("House", 3);
+	glutAddMenuEntry("Ball", 3);
 
 	GLint MCTrans_Menu = glutCreateMenu(MCSTransMenu);
 	glutAddMenuEntry("Rotate x", 1);
@@ -318,7 +318,6 @@ void animateMenu(GLint option) {
 	  case 2:
 		myLight.on = false;
 		glDisable(GL_LIGHTING);
-		glutIdleFunc(solar);
 		break;
 	  case 3:
 		glutIdleFunc(NULL);

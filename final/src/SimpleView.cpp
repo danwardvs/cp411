@@ -12,6 +12,7 @@
 #include "World.hpp"
 #include "Camera.hpp"
 #include "Light.hpp"
+#include "Paddle.hpp"
 
 GLint winWidth = 800, winHeight = 800;
 GLint isInMove = 0,    /* flag for mouse motion */
@@ -54,9 +55,7 @@ void winReshapeFcn(GLint newWidth, GLint newHeight) {
 void mouseActionFcn( int xMouse, int yMouse) {
 		Shape *paddle = myWorld.searchById(0);
 
-			printf("%d\n",xMouse);
 			GLfloat x = xMouse;
-			printf("%.2f\n",x);
 			paddle->setX( (x/75) - 5);
 		glutPostRedisplay();
 
@@ -65,11 +64,32 @@ void mouseActionFcn( int xMouse, int yMouse) {
 }
 
 void mouseMotionFcn(GLint xMouse, GLint yMouse) {
-		Shape *paddle = myWorld.searchById(0);
-		paddle->setX(xMouse);
-
-		glutPostRedisplay();
+		printf("mouse down\n");
 	
+}
+void update(){
+			GLfloat speed = 0.05f;
+			Shape *ball = myWorld.searchById(1);
+			GLfloat direction = ball->getDirection();
+			ball->translate2d(sin(direction) * speed, cos(direction) * speed);
+			GLfloat x = ball->getMC().mat[0][3];
+			GLfloat z = ball->getMC().mat[2][3];
+			printf("x: %.10f\n",x);
+			printf("z: %.10f\n",z);
+
+			if(x>8){
+				ball->setDirection(-direction);
+			}
+			
+		
+			
+			glutPostRedisplay();
+
+
+			
+
+
+
 }
 
 int main(int argc, char** argv) {
@@ -83,7 +103,10 @@ int main(int argc, char** argv) {
 	glutDisplayFunc(display);
 	glutMotionFunc(mouseMotionFcn);
 	glutPassiveMotionFunc(mouseActionFcn);
+		glutIdleFunc(update);
+
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
+	
 	glutMainLoop();
 	return 0;
 }

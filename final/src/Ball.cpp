@@ -4,23 +4,25 @@
  *  Version: 2022-10-06
  */
 
-#include "House.hpp"
+#include "Ball.hpp"
+#include <GL/gl.h>
 #include <stdio.h>
 
-House::House()
+Ball::Ball()
 {
-
+ direction = 0.78f;
 }
 
-House::~House()
+Ball::~Ball()
 {
 }
 
-void House::draw()
+void Ball::draw()
 {
     glPushMatrix();
     this->ctmMultiply();
-   glutSolidSphere(1.0, 20, 16);
+   glutSolidSphere(0.3, 20, 16);
 
 	glPopMatrix();
 }
+

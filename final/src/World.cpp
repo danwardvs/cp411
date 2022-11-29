@@ -1,7 +1,7 @@
 #include "World.hpp"
 #include "Cube.hpp"
 #include "Pyramid.hpp"
-#include "House.hpp"
+#include "Ball.hpp"
 #include "Paddle.hpp"
 
 using namespace std;
@@ -10,10 +10,10 @@ World::World() {
 	Shape *obj = NULL;
 
 
-	obj = new House();
+	obj = new Ball();
 	obj->setId(1);
 	obj->scaleChange(-0.2);
-	obj->translate(2.5, 0, 0);
+	obj->translate(5, 5, -5);
 	objlist.push_back(obj);
 
 	obj = new Paddle();
