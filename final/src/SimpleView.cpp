@@ -68,29 +68,46 @@ void mouseMotionFcn(GLint xMouse, GLint yMouse) {
 	
 }
 void update(){
+			Shape *paddle = myWorld.searchById(0);
+			GLfloat paddle_x = paddle->getMC().mat[0][3];
+
 			GLfloat speed = 0.07f;
 			Shape *ball = myWorld.searchById(1);
 			GLfloat direction = ball->getDirection();
 			ball->translate2d(sin(direction) * speed, cos(direction) * speed);
 			GLfloat x = ball->getMC().mat[0][3];
 			GLfloat z = ball->getMC().mat[2][3];
-			printf("x: %.10f\n",x);
-			printf("z: %.10f\n",z);
+			// printf("x: %.10f\n",x);
+			// 			printf("y: %.10f\n",ball->getMC().mat[1][3]);
 
-			if(x>7){
+			// printf("z: %.10f\n",z);
+			GLfloat worldSize = 5.4;
+
+			if(x>worldSize){
 				ball->setDirection(-direction);
 			}
 			
-			if(x<-7){
+			if(x<-worldSize){
 				ball->setDirection(-direction);
 			}
 
-			if(z>7){
+			if(z>worldSize){
 				ball->setDirection(3.1415-direction);
 			}
+			GLfloat paddle_width = 1;
+			if(x>paddle_x-paddle_width && x<paddle_x+paddle_width)
+				printf("yes\n");
+			else
+				printf("no\n");
 
-			if(z<-7){
-				ball->setDirection(3.1415-direction);
+			if(z<-worldSize+0.7f){
+				if(x>paddle_x-paddle_width && x<paddle_x+paddle_width){
+					ball->setDirection(3.1415-direction);
+				}else{
+					ball->setTranslation(0, 0, 0);
+					printf("you lost\n");
+				}
+				
 			}
 			
 		

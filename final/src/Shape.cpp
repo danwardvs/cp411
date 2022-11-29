@@ -29,6 +29,12 @@ void Shape::setParentMC(Matrix *pm)
    pmc = pm;
 }
 
+void Shape::setTranslation(GLfloat tx, GLfloat ty, GLfloat tz) {
+	mc.mat[0][3] = tx;
+	mc.mat[1][3] = ty;
+	mc.mat[2][3] = tz;
+	mc.mat[3][3] = 1;
+}
 
 void Shape::translate(GLfloat tx, GLfloat ty, GLfloat tz) {
 	mc.mat[0][3] += tx;

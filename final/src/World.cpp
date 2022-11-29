@@ -12,8 +12,7 @@ World::World() {
 
 	obj = new Ball();
 	obj->setId(1);
-	obj->scaleChange(-0.2);
-	obj->translate(5, 5, -5);
+	obj->translate(0, 0, 0);
 	objlist.push_back(obj);
 
 	obj = new Paddle();

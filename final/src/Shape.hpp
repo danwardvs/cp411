@@ -61,6 +61,7 @@ public:
 	void setId(GLint id);
 	GLint getId();
 	void setX(GLfloat tx);
+	void setTranslation(GLfloat tx, GLfloat ty, GLfloat tz); /* translate the MC origin by (tx, ty, tz) */
 
 	void translate(GLfloat tx, GLfloat ty, GLfloat tz); /* translate the MC origin by (tx, ty, tz) */
 	void translate2d(GLfloat tx, GLfloat ty);
