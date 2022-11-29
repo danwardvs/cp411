@@ -1,6 +1,5 @@
 #include "World.hpp"
 #include "Cube.hpp"
-#include "Pyramid.hpp"
 #include "Ball.hpp"
 #include "Paddle.hpp"
 

@@ -10,7 +10,6 @@
 #include <GL/glut.h>
 
 #include "Cube.hpp"
-#include "Pyramid.hpp"
 
 
 class Ball: public Shape{

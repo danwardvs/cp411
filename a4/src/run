@@ -1,1 +1,0 @@
-g++ Camera.cpp Cube.cpp House.cpp Light.cpp Matrix.cpp Menu.cpp Point.cpp Pyramid.cpp Shape.cpp SimpleView.cpp Vector.cpp World.cpp -o app -lGL -lGLU -lglut -lGLEW

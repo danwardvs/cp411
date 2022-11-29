@@ -21,7 +21,7 @@ GLint isInMove = 0,    /* flag for mouse motion */
 	  transType = 4;  /* depends on csType  */
 
 CullMode cullMode = NONE;          /* culling option */
-RenderMode renderMode = CONSTANT;  /* shade option  */
+RenderMode renderMode = WIRE;  /* shade option  */
 
 World myWorld;
 Camera myCamera;
@@ -90,7 +90,7 @@ GLboolean checkCollision(Shape* block,Shape* ball){
 		block->setCondition(block->getCondition()-1);
 		
 
-		if(ballX < blockX - blockWidth*0.9 || ballX > blockX + blockWidth*0.9 )
+		if(ballX < blockX - blockWidth*0.95 || ballX > blockX + blockWidth*0.95 )
 		
 					ball->setDirection(-ball->getDirection());
 
