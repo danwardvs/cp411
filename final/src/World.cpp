@@ -11,9 +11,21 @@ World::World() {
 
 
 	obj = new Ball();
-	obj->setId(1);
+	obj->setId(1000);
 	obj->translate(0, 0, 0);
 	objlist.push_back(obj);
+
+		obj = new Ball();
+	obj->setId(1001);
+	obj->translate(2, 0, 2);
+	objlist.push_back(obj);
+
+		obj = new Ball();
+	obj->setId(1002);
+	obj->translate(-2, 0, 2);
+	objlist.push_back(obj);
+
+
 
 	obj = new Paddle();
 	obj->setId(0);

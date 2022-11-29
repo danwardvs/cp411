@@ -68,12 +68,17 @@ void mouseMotionFcn(GLint xMouse, GLint yMouse) {
 	
 }
 
-void update(){
-			Shape *paddle = myWorld.searchById(0);
+void handleDeath(){
+		printf("you lost\n");
+
+}
+
+void updateBall(Shape* ball){
+		Shape *paddle = myWorld.searchById(0);
 			GLfloat paddle_x = paddle->getMC().mat[0][3];
 
 			GLfloat speed = 0.07f;
-			Shape *ball = myWorld.searchById(1);
+
 			GLfloat direction = ball->getDirection();
 			ball->translate2d(sin(direction) * speed, cos(direction) * speed);
 			GLfloat x = ball->getMC().mat[0][3];
@@ -118,11 +123,19 @@ void update(){
 					ball->setDirection(newDirection);
 				}else{
 					ball->setTranslation(0, 0, 0);
-					printf("you lost\n");
+					handleDeath();
 				}
 				
 			}
+}
+
+void update(){
 			
+			std::list<Shape*>::iterator it;
+	for (it = myWorld.objlist.begin(); it !=  myWorld.objlist.end(); ++it) {
+	  if ((*it)->getId() >= 1000)
+			updateBall((*it));
+    }
 		
 			
 			glutPostRedisplay();
