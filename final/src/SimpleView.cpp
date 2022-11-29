@@ -67,6 +67,7 @@ void mouseMotionFcn(GLint xMouse, GLint yMouse) {
 		printf("mouse down\n");
 	
 }
+
 void update(){
 			Shape *paddle = myWorld.searchById(0);
 			GLfloat paddle_x = paddle->getMC().mat[0][3];
@@ -99,10 +100,22 @@ void update(){
 				printf("yes\n");
 			else
 				printf("no\n");
-
+			
 			if(z<-worldSize+0.7f){
 				if(x>paddle_x-paddle_width && x<paddle_x+paddle_width){
-					ball->setDirection(3.1415-direction);
+				
+					GLfloat newDirection = 0;
+					if(x>paddle_x){
+							
+								newDirection = ((abs(paddle_x-x)/paddle_width )*2) + 0.5 ;
+					
+
+					}else{
+								newDirection =  -((abs(paddle_x-x)/paddle_width)*2) + 0.5 ;
+
+					}
+					
+					ball->setDirection(newDirection);
 				}else{
 					ball->setTranslation(0, 0, 0);
 					printf("you lost\n");
