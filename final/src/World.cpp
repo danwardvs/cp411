@@ -12,30 +12,44 @@ World::World() {
 
 	obj = new Cube();
 	obj->setId(1);
-	obj->translate(0, 0, 3);
+	obj->translate(0, 0, 2);
 	objlist.push_back(obj);
 
 		obj = new Cube();
 	obj->setId(1);
-	obj->translate(0, 0, 4);
+	obj->translate(0, 0, 3);
 	objlist.push_back(obj);
 	obj = new Cube();
 	obj->setId(1);
-	obj->translate(0, 0, 5);
+	obj->translate(0, 0, 4);
+	objlist.push_back(obj);
+
+		obj = new Cube();
+	obj->setId(1);
+	obj->translate(1.5, 0, 2);
 	objlist.push_back(obj);
 
 		obj = new Cube();
 	obj->setId(1);
 	obj->translate(1.5, 0, 3);
 	objlist.push_back(obj);
-
-		obj = new Cube();
+	obj = new Cube();
 	obj->setId(1);
 	obj->translate(1.5, 0, 4);
 	objlist.push_back(obj);
+
+			obj = new Cube();
+	obj->setId(1);
+	obj->translate(-1.5, 0, 2);
+	objlist.push_back(obj);
+
+		obj = new Cube();
+	obj->setId(1);
+	obj->translate(-1.5, 0, 3);
+	objlist.push_back(obj);
 	obj = new Cube();
 	obj->setId(1);
-	obj->translate(1.5, 0, 5);
+	obj->translate(-1.5, 0, 4);
 	objlist.push_back(obj);
 
 	obj = new Ball();
@@ -45,12 +59,40 @@ World::World() {
 
 		obj = new Ball();
 	obj->setId(1001);
-	obj->translate(2, 0, 2);
+	obj->translate(2, 0, 1);
 	objlist.push_back(obj);
 
 		obj = new Ball();
 	obj->setId(1002);
-	obj->translate(-2, 0, 2);
+	obj->translate(-2, 0, 1);
+	objlist.push_back(obj);
+
+			obj = new Cube();
+	obj->setId(1);
+	obj->translate(3, 0, 2);
+	objlist.push_back(obj);
+
+		obj = new Cube();
+	obj->setId(1);
+	obj->translate(3, 0, 3);
+	objlist.push_back(obj);
+	obj = new Cube();
+	obj->setId(1);
+	obj->translate(3, 0, 4);
+	objlist.push_back(obj);
+
+				obj = new Cube();
+	obj->setId(1);
+	obj->translate(-3, 0, 2);
+	objlist.push_back(obj);
+
+		obj = new Cube();
+	obj->setId(1);
+	obj->translate(-3, 0, 3);
+	objlist.push_back(obj);
+	obj = new Cube();
+	obj->setId(1);
+	obj->translate(-3, 0, 4);
 	objlist.push_back(obj);
 
 
@@ -116,6 +158,17 @@ Shape* World::searchById(GLint i) {
 	for (it = objlist.begin(); it !=  objlist.end(); ++it) {
 	  if ((*it)->getId() == i) return *it;
     }
+	return NULL;
+}
+
+void* World::deleteById(GLint i) {
+	std::list<Shape*>::iterator it;
+	for (it = objlist.begin(); it !=  objlist.end(); ++it) {
+	  if ((*it)->getId() == i){
+			it = objlist.erase(it);
+			return NULL;
+		}
+  }
 	return NULL;
 }
 

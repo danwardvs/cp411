@@ -13,6 +13,8 @@ extern CullMode cullMode;
 extern RenderMode renderMode;
 
 Cube::Cube() {
+	condition = 1;
+
     vertex[0][0] = -0.7; vertex[0][1] = -0.2; vertex[0][2] = -0.2;
     vertex[1][0] = -0.7; vertex[1][1] = 0.2;  vertex[1][2] = -0.2;
     vertex[2][0] = 0.7;  vertex[2][1] = 0.2;  vertex[2][2] = -0.2;
@@ -81,7 +83,10 @@ void Cube::drawFace(int i)
 
 	switch (renderMode) {
 	case WIRE:   // this case from SimpleView1
-	   glColor3f(r, g, b);
+	if(condition==1)
+	   glColor3f(0, 1,0);
+	if(condition==0)
+	  glColor3f(1, 0,0);
 	   glBegin(GL_LINE_LOOP);
 	     glVertex3fv(vertex[face[i][0]]);
        glVertex3fv(vertex[face[i][1]]);

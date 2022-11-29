@@ -21,6 +21,8 @@ void Ball::draw()
 {
     glPushMatrix();
     this->ctmMultiply();
+    	   glColor3f(0.1, 0.2, 0.8);
+
    glutSolidSphere(0.2, 20, 16);
 
 	glPopMatrix();

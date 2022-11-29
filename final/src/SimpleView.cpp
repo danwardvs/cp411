@@ -72,7 +72,7 @@ void handleDeath(){
 		printf("you lost\n");
 
 }
-void checkCollision(Shape* block,Shape* ball){
+GLboolean checkCollision(Shape* block,Shape* ball){
 	GLfloat blockX = block->getMC().mat[0][3];
 	GLfloat blockZ = block->getMC().mat[2][3];
 	GLfloat ballX = ball->getMC().mat[0][3];
@@ -80,7 +80,15 @@ void checkCollision(Shape* block,Shape* ball){
 	
 	GLfloat blockWidth = 1;
 	GLfloat blockHeight = 0.4;
+	GLboolean destroy = false;
 	if(ballX > blockX - blockWidth && ballX < blockX + blockWidth && ballZ > blockZ - blockHeight && ballZ < blockZ + blockHeight){
+
+		if(block->getCondition()==0){
+			destroy=true;
+		}
+
+		block->setCondition(block->getCondition()-1);
+		
 
 		if(ballX < blockX - blockWidth*0.9 || ballX > blockX + blockWidth*0.9 )
 		
@@ -91,6 +99,7 @@ void checkCollision(Shape* block,Shape* ball){
 			ball->setDirection(3.1415-ball->getDirection());
 	
 		}
+		return destroy;
 	
 
 }
@@ -100,7 +109,9 @@ void updateBall(Shape* ball){
 
 	for (it = myWorld.objlist.begin(); it !=  myWorld.objlist.end(); ++it) {
 	  if ((*it)->getId() < 1000 && (*it)->getId() > 0)
-			checkCollision((*it),ball);
+			if(checkCollision((*it),ball))
+			it = myWorld.objlist.erase(it);
+
     }
 
 
