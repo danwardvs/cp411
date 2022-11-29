@@ -1,0 +1,1 @@
+g++ SimpleView.cpp Camera.cpp Cube.cpp Matrix.cpp Menu.cpp Point.cpp Shape.cpp Vector.cpp World.cpp -o app -lGL -lGLU -lglut -lGLEW
