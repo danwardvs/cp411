@@ -13,14 +13,14 @@ extern CullMode cullMode;
 extern RenderMode renderMode;
 
 Cube::Cube() {
-    vertex[0][0] = -1; vertex[0][1] = -1; vertex[0][2] = -1;
-    vertex[1][0] = -1; vertex[1][1] = 1;  vertex[1][2] = -1;
-    vertex[2][0] = 1;  vertex[2][1] = 1;  vertex[2][2] = -1;
-    vertex[3][0] = 1;  vertex[3][1] = -1; vertex[3][2] = -1;
-    vertex[4][0] = -1; vertex[4][1] = -1; vertex[4][2] = 1;
-    vertex[5][0] = -1; vertex[5][1] = 1;  vertex[5][2] = 1;
-    vertex[6][0] = 1;  vertex[6][1] = 1;  vertex[6][2] = 1;
-    vertex[7][0] = 1;  vertex[7][1] = -1; vertex[7][2] = 1;
+    vertex[0][0] = -0.7; vertex[0][1] = -0.2; vertex[0][2] = -0.2;
+    vertex[1][0] = -0.7; vertex[1][1] = 0.2;  vertex[1][2] = -0.2;
+    vertex[2][0] = 0.7;  vertex[2][1] = 0.2;  vertex[2][2] = -0.2;
+    vertex[3][0] = 0.7;  vertex[3][1] = -0.2; vertex[3][2] = -0.2;
+    vertex[4][0] = -0.7; vertex[4][1] = -0.2; vertex[4][2] = 0.2;
+    vertex[5][0] = -0.7; vertex[5][1] = 0.2;  vertex[5][2] = 0.2;
+    vertex[6][0] = 0.7;  vertex[6][1] = 0.2;  vertex[6][2] = 0.2;
+    vertex[7][0] = 0.7;  vertex[7][1] = -0.2; vertex[7][2] = 0.2;
 
     face[0][0] = 0; face[0][1] = 1; face[0][2] = 2; face[0][3] = 3;
     face[1][0] = 7; face[1][1] = 6; face[1][2] = 5; face[1][3] = 4;

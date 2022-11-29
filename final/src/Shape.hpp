@@ -48,7 +48,8 @@ protected:
 	GLfloat s;   /* scale factor */
 	GLint id;    /* used to identify object */
 		GLfloat direction;
-
+	GLint condition;
+ 
 
 public:
 	Shape();                 /* constructor */
@@ -73,6 +74,9 @@ public:
 
 	GLfloat getDirection();
 	void setDirection(GLfloat newDirection);
+
+	GLint getCondition();
+	void setCondition(GLint newCondition);
 };
 
 #endif

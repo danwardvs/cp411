@@ -128,3 +128,11 @@ void Shape::setDirection(GLfloat newDirection){
 GLfloat Shape::getDirection(){
  return direction;
 }
+
+void Shape::setCondition(GLint newCondition){
+    condition = newCondition;
+
+}
+GLint Shape::getCondition(){
+ return condition;
+}

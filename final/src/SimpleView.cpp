@@ -56,7 +56,7 @@ void mouseActionFcn( int xMouse, int yMouse) {
 		Shape *paddle = myWorld.searchById(0);
 
 			GLfloat x = xMouse;
-			paddle->setX( (x/75) - 5);
+			paddle->setX( (x/75) - 5.5);
 		glutPostRedisplay();
 
 
@@ -72,12 +72,42 @@ void handleDeath(){
 		printf("you lost\n");
 
 }
+void checkCollision(Shape* block,Shape* ball){
+	GLfloat blockX = block->getMC().mat[0][3];
+	GLfloat blockZ = block->getMC().mat[2][3];
+	GLfloat ballX = ball->getMC().mat[0][3];
+	GLfloat ballZ = ball->getMC().mat[2][3];
+	
+	GLfloat blockWidth = 1;
+	GLfloat blockHeight = 0.4;
+	if(ballX > blockX - blockWidth && ballX < blockX + blockWidth && ballZ > blockZ - blockHeight && ballZ < blockZ + blockHeight){
+
+		if(ballX < blockX - blockWidth*0.9 || ballX > blockX + blockWidth*0.9 )
+		
+					ball->setDirection(-ball->getDirection());
+
+		
+		else 		
+			ball->setDirection(3.1415-ball->getDirection());
+	
+		}
+	
+
+}
 
 void updateBall(Shape* ball){
-		Shape *paddle = myWorld.searchById(0);
-			GLfloat paddle_x = paddle->getMC().mat[0][3];
+			std::list<Shape*>::iterator it;
 
-			GLfloat speed = 0.07f;
+	for (it = myWorld.objlist.begin(); it !=  myWorld.objlist.end(); ++it) {
+	  if ((*it)->getId() < 1000 && (*it)->getId() > 0)
+			checkCollision((*it),ball);
+    }
+
+
+		Shape *paddle = myWorld.searchById(0);
+			GLfloat paddle_x = paddle->getMC().mat[0][3] + 0.3;
+
+			GLfloat speed = 0.06f;
 
 			GLfloat direction = ball->getDirection();
 			ball->translate2d(sin(direction) * speed, cos(direction) * speed);
@@ -87,7 +117,7 @@ void updateBall(Shape* ball){
 			// 			printf("y: %.10f\n",ball->getMC().mat[1][3]);
 
 			// printf("z: %.10f\n",z);
-			GLfloat worldSize = 5.4;
+			GLfloat worldSize = 5.45;
 
 			if(x>worldSize){
 				ball->setDirection(-direction);
@@ -100,11 +130,11 @@ void updateBall(Shape* ball){
 			if(z>worldSize){
 				ball->setDirection(3.1415-direction);
 			}
-			GLfloat paddle_width = 1;
-			if(x>paddle_x-paddle_width && x<paddle_x+paddle_width)
-				printf("yes\n");
-			else
-				printf("no\n");
+			GLfloat paddle_width = 2;
+			// if(x>paddle_x-paddle_width && x<paddle_x+paddle_width)
+			// 	printf("yes\n");
+			// else
+			// 	printf("no\n");
 			
 			if(z<-worldSize+0.7f){
 				if(x>paddle_x-paddle_width && x<paddle_x+paddle_width){

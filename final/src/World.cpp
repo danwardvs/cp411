@@ -10,9 +10,37 @@ World::World() {
 	Shape *obj = NULL;
 
 
+	obj = new Cube();
+	obj->setId(1);
+	obj->translate(0, 0, 3);
+	objlist.push_back(obj);
+
+		obj = new Cube();
+	obj->setId(1);
+	obj->translate(0, 0, 4);
+	objlist.push_back(obj);
+	obj = new Cube();
+	obj->setId(1);
+	obj->translate(0, 0, 5);
+	objlist.push_back(obj);
+
+		obj = new Cube();
+	obj->setId(1);
+	obj->translate(1.5, 0, 3);
+	objlist.push_back(obj);
+
+		obj = new Cube();
+	obj->setId(1);
+	obj->translate(1.5, 0, 4);
+	objlist.push_back(obj);
+	obj = new Cube();
+	obj->setId(1);
+	obj->translate(1.5, 0, 5);
+	objlist.push_back(obj);
+
 	obj = new Ball();
 	obj->setId(1000);
-	obj->translate(0, 0, 0);
+	obj->translate(0, 0,0);
 	objlist.push_back(obj);
 
 		obj = new Ball();
@@ -29,7 +57,7 @@ World::World() {
 
 	obj = new Paddle();
 	obj->setId(0);
-	obj->scaleChange(-0.2);
+
 	obj->translate(0, 0, -5);
 	objlist.push_back(obj);
 }
