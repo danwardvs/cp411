@@ -10,7 +10,7 @@
 
 Ball::Ball()
 {
- direction = 0.78f;
+ direction = 0.5f;
 }
 
 Ball::~Ball()

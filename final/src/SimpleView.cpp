@@ -68,7 +68,7 @@ void mouseMotionFcn(GLint xMouse, GLint yMouse) {
 	
 }
 void update(){
-			GLfloat speed = 0.05f;
+			GLfloat speed = 0.07f;
 			Shape *ball = myWorld.searchById(1);
 			GLfloat direction = ball->getDirection();
 			ball->translate2d(sin(direction) * speed, cos(direction) * speed);
@@ -77,8 +77,20 @@ void update(){
 			printf("x: %.10f\n",x);
 			printf("z: %.10f\n",z);
 
-			if(x>8){
+			if(x>7){
 				ball->setDirection(-direction);
+			}
+			
+			if(x<-7){
+				ball->setDirection(-direction);
+			}
+
+			if(z>7){
+				ball->setDirection(3.1415-direction);
+			}
+
+			if(z<-7){
+				ball->setDirection(3.1415-direction);
 			}
 			
 		
