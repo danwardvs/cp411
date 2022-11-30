@@ -109,8 +109,10 @@ void updateBall(Shape* ball){
 
 	for (it = myWorld.objlist.begin(); it !=  myWorld.objlist.end(); ++it) {
 	  if ((*it)->getId() < 1000 && (*it)->getId() > 0)
-			if(checkCollision((*it),ball))
-			it = myWorld.objlist.erase(it);
+			if(checkCollision((*it),ball)){
+				it = myWorld.objlist.erase(it); 
+
+			}
 
     }
 
@@ -128,7 +130,7 @@ void updateBall(Shape* ball){
 			// 			printf("y: %.10f\n",ball->getMC().mat[1][3]);
 
 			// printf("z: %.10f\n",z);
-			GLfloat worldSize = 5.45;
+			GLfloat worldSize = 5.3;
 
 			if(x>worldSize){
 				ball->setDirection(-direction);
