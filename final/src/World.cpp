@@ -2,11 +2,10 @@
 #include "Cube.hpp"
 #include "Ball.hpp"
 #include "Paddle.hpp"
-#include "level/Level.hpp"
-
-// extern Level level;
 
 using namespace std;
+
+extern GLint winWidth , winHeight ;
 
 World::World() {
 	Shape *obj = NULL;
@@ -102,11 +101,21 @@ World::World() {
 	objlist.push_back(obj);
 
 	obj = new Ball();
-	obj->setId(1);
+	obj->setId(1000);
 	obj->translate(0, 0,0);
 	objlist.push_back(obj);
 
-	// level.levelLayout(1, 2);
+	obj = new Ball();
+	obj->setId(1001);
+	obj->translate(2, 0, 1);
+	objlist.push_back(obj);
+
+	obj = new Ball();
+	obj->setId(1002);
+	obj->translate(-2, 0, 1);
+	objlist.push_back(obj);
+
+	blockGeneration(1, 2);
 }
 
 World::~World(){
@@ -177,3 +186,36 @@ void* World::deleteById(GLint i) {
 	return NULL;
 }
 
+//determines the positions of the blocks based on the number required
+void World::layoutGeneration() {
+	//generate based on certain patterns (need to determine said patterns)
+	Shape *obj = NULL;
+
+	//need to fix (spawn off the screen)
+	for (int i = 0; i < blockNumber; i++) {
+		for (int j = 0; j < 5; j++) {
+			obj = new Cube();
+			obj->setId(5 + i);
+			obj->setCondition(difficulty);
+			//i = column, j = row
+			obj->translate(-3 + (i * 1.5), 0, j);
+			objlist.push_back(obj);
+		}
+		
+	}
+}
+
+//determines the number of blocks used based on the level
+void World::blockGeneration(int level, int level_difficulty) {
+	switch(level) {
+	case 1:
+		blockNumber = 5;
+		break;
+	case 2:
+		blockNumber = 15;
+		break;
+	}
+
+	//generate the objlist for the blocks
+	layoutGeneration();
+}

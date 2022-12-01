@@ -13,7 +13,6 @@
 #include "Camera.hpp"
 #include "Light.hpp"
 #include "Paddle.hpp"
-#include "level/Level.hpp"
 
 GLint winWidth = 800, winHeight = 800;
 GLint isInMove = 0,    /* flag for mouse motion */
@@ -26,13 +25,12 @@ RenderMode renderMode = WIRE;  /* shade option  */
 
 World myWorld;
 Camera myCamera;
-Level level;
 Shape *selectObj = NULL;  /* pointer to selected object */
 
 void init(void) {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	selectObj = myWorld.searchById(1);
-	level.levelLayout(1, 2);
+
 }
 
 
@@ -173,11 +171,10 @@ void updateBall(Shape* ball){
 }
 
 void update(){
-			
-			std::list<Shape*>::iterator it;
+	std::list<Shape*>::iterator it;
 	for (it = myWorld.objlist.begin(); it !=  myWorld.objlist.end(); ++it) {
-	  if ((*it)->getId() >= 1000)
-			updateBall((*it));
+	//   if ((*it)->getId() >= 1000)
+	// 		updateBall((*it));
     }
 		
 			

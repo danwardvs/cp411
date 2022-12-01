@@ -22,6 +22,11 @@ public:
 	Shape *searchById(GLint i);
 	void *deleteById(GLint i); 
 
+	// move to seperate class later
+	int blockNumber;
+	int difficulty;
+	void blockGeneration(int level, int difficulty);
+	void layoutGeneration();
 };
 
 #endif
