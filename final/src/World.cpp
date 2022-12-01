@@ -56,15 +56,15 @@ World::World() {
 	obj->translate(0, 0,0);
 	objlist.push_back(obj);
 
-		obj = new Ball();
-	obj->setId(1001);
-	obj->translate(2, 0, 1);
-	objlist.push_back(obj);
+	// 	obj = new Ball();
+	// obj->setId(1001);
+	// obj->translate(2, 0, 1);
+	// objlist.push_back(obj);
 
-		obj = new Ball();
-	obj->setId(1002);
-	obj->translate(-2, 0, 1);
-	objlist.push_back(obj);
+	// 	obj = new Ball();
+	// obj->setId(1002);
+	// obj->translate(-2, 0, 1);
+	// objlist.push_back(obj);
 
 			obj = new Cube();
 	obj->setId(1);

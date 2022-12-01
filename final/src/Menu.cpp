@@ -13,7 +13,6 @@ extern Shape* selectObj;
 extern GLint transType, xbegin;
 extern World myWorld;
 extern Camera myCamera;
-extern Light myLight;
 extern CullMode cullMode;
 extern RenderMode renderMode;
 
@@ -238,13 +237,11 @@ void lightMenu(GLint option) {
 
 	switch (option) {
 	   case 8:
-		myLight.on = true;
 		break;
 	  case 9:
 		glDisable(GL_LIGHTING);
 		glDisable(GL_LIGHT0);
 		glDisable(GL_DEPTH_TEST);
-		myLight.on = false;
 		break;
 	}
 
@@ -252,28 +249,6 @@ void lightMenu(GLint option) {
 }
 
 void lightTransform(GLint x){
-	GLfloat theta = (xbegin - x > 0) ? 1 : -1;
-	if (transType == 1) {   // rotate x
-		myLight.rotate(0, 0, 0, 1.0, 0.0, 0.0, theta*0.5);
-	}
-	else if (transType == 2) { // rotate y
-		myLight.rotate(0, 0, 0, 0.0, 1.0, 0.0, theta*0.5);
-	}
-	else if(transType == 3){ // rotate z
-		myLight.rotate(0, 0, 0, 0.0, 0.0, 1.0, theta*0.5);
-	}
-	else if (transType == 4) { // translate x
-		myLight.translate(theta*0.1, 0.0, 0.0);
-	}
-	else if(transType == 5){   // eye translate y
-		myLight.translate(0.0, theta*0.1, 0.0);
-	}
-	else if(transType == 6){ // eye translate z
-		myLight.translate(0.0, 0.0, theta*0.1);
-	}
-	else if(transType == 7){  // change intensity
-		myLight.I += theta *0.01;
-	}
 
 	glutPostRedisplay();
 }
@@ -316,7 +291,6 @@ void animateMenu(GLint option) {
 		glutIdleFunc(move);
 		break;
 	  case 2:
-		myLight.on = false;
 		glDisable(GL_LIGHTING);
 		break;
 	  case 3:

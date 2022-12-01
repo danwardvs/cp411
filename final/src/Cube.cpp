@@ -8,7 +8,6 @@
 #include <stdio.h>
 
 extern Camera myCamera;
-extern Light myLight;
 extern CullMode cullMode;
 extern RenderMode renderMode;
 
@@ -95,7 +94,6 @@ void Cube::drawFace(int i)
        glEnd();
 	   break;
 	case CONSTANT:  // this case from SimpleView2
-	   if (myLight.on == true) shade = getFaceShade(i, myLight);
 	   glColor3f(faceColor[i][0]*shade, faceColor[i][1]*shade, faceColor[i][2]*shade);
 	   glBegin(GL_POLYGON);
 	   glVertex3fv(vertex[face[i][0]]);
@@ -106,7 +104,6 @@ void Cube::drawFace(int i)
 	  break;
 		
 case FLAT:
-	   if (myLight.on == true) shade = getVertexShade(i, myLight);
 	   glShadeModel(GL_FLAT);
 	   glBegin(GL_POLYGON);
 	   glColor3f(vertexColor[face[i][0]][0]*shade, vertexColor[face[i][0]][1]*shade, vertexColor[face[i][0]][2]*shade);
@@ -121,7 +118,6 @@ case FLAT:
 	   glShadeModel(GL_SMOOTH);
 	   glBegin(GL_POLYGON);
 	   for (int j=0; j<4; j++) {
-		  if (myLight.on == true) shade = getVertexShade(face[i][j], myLight);
 		   glColor3f(vertexColor[face[i][j]][0]*shade, vertexColor[face[i][j]][1]*shade, vertexColor[face[i][j]][2]*shade);
 	       glNormal3f(vertexNormal[face[i][j]][0], vertexNormal[face[i][j]][1], vertexNormal[face[i][j]][2]);
 	       glVertex3fv(vertex[face[i][j]]);

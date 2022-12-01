@@ -25,13 +25,11 @@ RenderMode renderMode = WIRE;  /* shade option  */
 
 World myWorld;
 Camera myCamera;
-Light myLight;
 Shape *selectObj = NULL;  /* pointer to selected object */
 
 void init(void) {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	selectObj = myWorld.searchById(1);
-	myLight.on = false;
 }
 
 
@@ -39,7 +37,6 @@ void display(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	myCamera.setProjectionMatrix();
 	myWorld.draw();
-	myLight.draw();
 	glFlush();
 	glutSwapBuffers();
 }
