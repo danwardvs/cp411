@@ -2,105 +2,111 @@
 #include "Cube.hpp"
 #include "Ball.hpp"
 #include "Paddle.hpp"
+#include "level/Level.hpp"
+
+// extern Level level;
 
 using namespace std;
 
 World::World() {
 	Shape *obj = NULL;
 
-
-	obj = new Cube();
-	obj->setId(1);
-	obj->translate(0, 0, 2);
-	objlist.push_back(obj);
-
-		obj = new Cube();
-	obj->setId(1);
-	obj->translate(0, 0, 3);
-	objlist.push_back(obj);
-	obj = new Cube();
-	obj->setId(1);
-	obj->translate(0, 0, 4);
-	objlist.push_back(obj);
-
-		obj = new Cube();
-	obj->setId(1);
-	obj->translate(1.5, 0, 2);
-	objlist.push_back(obj);
-
-		obj = new Cube();
-	obj->setId(1);
-	obj->translate(1.5, 0, 3);
-	objlist.push_back(obj);
-	obj = new Cube();
-	obj->setId(1);
-	obj->translate(1.5, 0, 4);
-	objlist.push_back(obj);
-
-			obj = new Cube();
-	obj->setId(1);
-	obj->translate(-1.5, 0, 2);
-	objlist.push_back(obj);
-
-		obj = new Cube();
-	obj->setId(1);
-	obj->translate(-1.5, 0, 3);
-	objlist.push_back(obj);
-	obj = new Cube();
-	obj->setId(1);
-	obj->translate(-1.5, 0, 4);
-	objlist.push_back(obj);
-
-	obj = new Ball();
-	obj->setId(1000);
-	obj->translate(0, 0,0);
-	objlist.push_back(obj);
-
-	// 	obj = new Ball();
-	// obj->setId(1001);
-	// obj->translate(2, 0, 1);
-	// objlist.push_back(obj);
-
-	// 	obj = new Ball();
-	// obj->setId(1002);
-	// obj->translate(-2, 0, 1);
-	// objlist.push_back(obj);
-
-			obj = new Cube();
-	obj->setId(1);
-	obj->translate(3, 0, 2);
-	objlist.push_back(obj);
-
-		obj = new Cube();
-	obj->setId(1);
-	obj->translate(3, 0, 3);
-	objlist.push_back(obj);
-	obj = new Cube();
-	obj->setId(1);
-	obj->translate(3, 0, 4);
-	objlist.push_back(obj);
-
-				obj = new Cube();
-	obj->setId(1);
-	obj->translate(-3, 0, 2);
-	objlist.push_back(obj);
-
-		obj = new Cube();
-	obj->setId(1);
-	obj->translate(-3, 0, 3);
-	objlist.push_back(obj);
-	obj = new Cube();
-	obj->setId(1);
-	obj->translate(-3, 0, 4);
-	objlist.push_back(obj);
-
-
+//	obj = new Cube();
+//	obj->setId(1);
+//	obj->translate(0, 0, 2);
+//	objlist.push_back(obj);
+//
+//		obj = new Cube();
+//	obj->setId(1);
+//	obj->translate(0, 0, 3);
+//	objlist.push_back(obj);
+//	obj = new Cube();
+//	obj->setId(1);
+//	obj->translate(0, 0, 4);
+//	objlist.push_back(obj);
+//
+//		obj = new Cube();
+//	obj->setId(1);
+//	obj->translate(1.5, 0, 2);
+//	objlist.push_back(obj);
+//
+//		obj = new Cube();
+//	obj->setId(1);
+//	obj->translate(1.5, 0, 3);
+//	objlist.push_back(obj);
+//	obj = new Cube();
+//	obj->setId(1);
+//	obj->translate(1.5, 0, 4);
+//	objlist.push_back(obj);
+//
+//			obj = new Cube();
+//	obj->setId(1);
+//	obj->translate(-1.5, 0, 2);
+//	objlist.push_back(obj);
+//
+//		obj = new Cube();
+//	obj->setId(1);
+//	obj->translate(-1.5, 0, 3);
+//	objlist.push_back(obj);
+//	obj = new Cube();
+//	obj->setId(1);
+//	obj->translate(-1.5, 0, 4);
+//	objlist.push_back(obj);
+//
+//	obj = new Ball();
+//	obj->setId(1000);
+//	obj->translate(0, 0,0);
+//	objlist.push_back(obj);
+//
+//	// 	obj = new Ball();
+//	// obj->setId(1001);
+//	// obj->translate(2, 0, 1);
+//	// objlist.push_back(obj);
+//
+//	// 	obj = new Ball();
+//	// obj->setId(1002);
+//	// obj->translate(-2, 0, 1);
+//	// objlist.push_back(obj);
+//
+//			obj = new Cube();
+//	obj->setId(1);
+//	obj->translate(3, 0, 2);
+//	objlist.push_back(obj);
+//
+//		obj = new Cube();
+//	obj->setId(1);
+//	obj->translate(3, 0, 3);
+//	objlist.push_back(obj);
+//	obj = new Cube();
+//	obj->setId(1);
+//	obj->translate(3, 0, 4);
+//	objlist.push_back(obj);
+//
+//				obj = new Cube();
+//	obj->setId(1);
+//	obj->translate(-3, 0, 2);
+//	objlist.push_back(obj);
+//
+//		obj = new Cube();
+//	obj->setId(1);
+//	obj->translate(-3, 0, 3);
+//	objlist.push_back(obj);
+//	obj = new Cube();
+//	obj->setId(1);
+//	obj->translate(-3, 0, 4);
+//	objlist.push_back(obj);
 
 	obj = new Paddle();
 	obj->setId(0);
-
 	obj->translate(0, 0, -5);
 	objlist.push_back(obj);
+
+	obj = new Ball();
+	obj->setId(1);
+	obj->translate(0, 0,0);
+	objlist.push_back(obj);
+
+	// level.levelLayout(1, 2);
 }
 
 World::~World(){

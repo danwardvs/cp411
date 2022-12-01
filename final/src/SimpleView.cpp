@@ -13,6 +13,7 @@
 #include "Camera.hpp"
 #include "Light.hpp"
 #include "Paddle.hpp"
+#include "level/Level.hpp"
 
 GLint winWidth = 800, winHeight = 800;
 GLint isInMove = 0,    /* flag for mouse motion */
@@ -25,11 +26,13 @@ RenderMode renderMode = WIRE;  /* shade option  */
 
 World myWorld;
 Camera myCamera;
+Level level;
 Shape *selectObj = NULL;  /* pointer to selected object */
 
 void init(void) {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	selectObj = myWorld.searchById(1);
+	level.levelLayout(1, 2);
 }
 
 
@@ -192,7 +195,7 @@ int main(int argc, char** argv) {
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowPosition(100, 100);
 	glutInitWindowSize(winWidth, winHeight);
-	glutCreateWindow("SimpleView2 reference design (Danny Van Stemp)");
+	glutCreateWindow("3D Brick Breaker");
 	init();
 	menu();
 	glutDisplayFunc(display);
