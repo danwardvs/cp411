@@ -10,91 +10,6 @@ extern GLint winWidth , winHeight ;
 World::World() {
 	Shape *obj = NULL;
 
-//	obj = new Cube();
-//	obj->setId(1);
-//	obj->translate(0, 0, 2);
-//	objlist.push_back(obj);
-//
-//		obj = new Cube();
-//	obj->setId(1);
-//	obj->translate(0, 0, 3);
-//	objlist.push_back(obj);
-//	obj = new Cube();
-//	obj->setId(1);
-//	obj->translate(0, 0, 4);
-//	objlist.push_back(obj);
-//
-//		obj = new Cube();
-//	obj->setId(1);
-//	obj->translate(1.5, 0, 2);
-//	objlist.push_back(obj);
-//
-//		obj = new Cube();
-//	obj->setId(1);
-//	obj->translate(1.5, 0, 3);
-//	objlist.push_back(obj);
-//	obj = new Cube();
-//	obj->setId(1);
-//	obj->translate(1.5, 0, 4);
-//	objlist.push_back(obj);
-//
-//			obj = new Cube();
-//	obj->setId(1);
-//	obj->translate(-1.5, 0, 2);
-//	objlist.push_back(obj);
-//
-//		obj = new Cube();
-//	obj->setId(1);
-//	obj->translate(-1.5, 0, 3);
-//	objlist.push_back(obj);
-//	obj = new Cube();
-//	obj->setId(1);
-//	obj->translate(-1.5, 0, 4);
-//	objlist.push_back(obj);
-//
-//	obj = new Ball();
-//	obj->setId(1000);
-//	obj->translate(0, 0,0);
-//	objlist.push_back(obj);
-//
-//	// 	obj = new Ball();
-//	// obj->setId(1001);
-//	// obj->translate(2, 0, 1);
-//	// objlist.push_back(obj);
-//
-//	// 	obj = new Ball();
-//	// obj->setId(1002);
-//	// obj->translate(-2, 0, 1);
-//	// objlist.push_back(obj);
-//
-//			obj = new Cube();
-//	obj->setId(1);
-//	obj->translate(3, 0, 2);
-//	objlist.push_back(obj);
-//
-//		obj = new Cube();
-//	obj->setId(1);
-//	obj->translate(3, 0, 3);
-//	objlist.push_back(obj);
-//	obj = new Cube();
-//	obj->setId(1);
-//	obj->translate(3, 0, 4);
-//	objlist.push_back(obj);
-//
-//				obj = new Cube();
-//	obj->setId(1);
-//	obj->translate(-3, 0, 2);
-//	objlist.push_back(obj);
-//
-//		obj = new Cube();
-//	obj->setId(1);
-//	obj->translate(-3, 0, 3);
-//	objlist.push_back(obj);
-//	obj = new Cube();
-//	obj->setId(1);
-//	obj->translate(-3, 0, 4);
-//	objlist.push_back(obj);
-
 	obj = new Paddle();
 	obj->setId(0);
 	obj->translate(0, 0, -5);
@@ -115,6 +30,7 @@ World::World() {
 	obj->translate(-2, 0, 1);
 	objlist.push_back(obj);
 
+	//initial block generation for first level
 	blockGeneration(1, 2);
 }
 
@@ -186,33 +102,58 @@ void* World::deleteById(GLint i) {
 	return NULL;
 }
 
-//determines the positions of the blocks based on the number required
+//generates the blocks and moves them based on the number of blocksPerRow + pattern
 void World::layoutGeneration() {
 	//generate based on certain patterns (need to determine said patterns)
+	// ex normal, spaced (space between blocks in row), columns (space between columns of blocks), etc.
+	// likely need switch statement to generate based on the pattern
 	Shape *obj = NULL;
 
-	//need to fix (spawn off the screen)
-	for (int i = 0; i < blockNumber; i++) {
-		for (int j = 0; j < 5; j++) {
-			obj = new Cube();
-			obj->setId(5 + i);
-			obj->setCondition(difficulty);
-			//i = column, j = row
-			obj->translate(-3 + (i * 1.5), 0, j);
-			objlist.push_back(obj);
-		}
-		
+	//randomly pick pattern
+
+	switch(pattern) {
+		case normal:
+			for (int i = 0; i < blockPerRow; i++) {
+			for (int j = 0; j < 5; j++) {
+				obj = new Cube();
+				obj->setId(5 + i);
+				obj->setCondition(difficulty);
+				//i(x) = column, j(z) = row
+				//needs to scale to more blocks (scale the blocks smaller)
+				obj->translate(-3 + (i * 1.5), 0, j);
+				objlist.push_back(obj);
+				}
+			}
+			break;
+		case spaced:
+			//TODO
+			break;
+		case column:
+			//TODO
+			break;
+
 	}
+
+	
 }
 
 //determines the number of blocks used based on the level
 void World::blockGeneration(int level, int level_difficulty) {
 	switch(level) {
 	case 1:
-		blockNumber = 5;
+		blockPerRow = 5;
 		break;
 	case 2:
-		blockNumber = 15;
+		blockPerRow = 15;
+		break;
+	case 3:
+		blockPerRow = 25;
+		break;
+	case 4:
+		blockPerRow = 30;
+		break;
+	case 5:
+		blockPerRow = 50;
 		break;
 	}
 

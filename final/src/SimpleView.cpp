@@ -30,7 +30,6 @@ Shape *selectObj = NULL;  /* pointer to selected object */
 void init(void) {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	selectObj = myWorld.searchById(1);
-
 }
 
 
@@ -56,9 +55,6 @@ void mouseActionFcn( int xMouse, int yMouse) {
 			GLfloat x = xMouse;
 			paddle->setX( (x/75) - 5.5);
 		glutPostRedisplay();
-
-
-
 }
 
 void mouseMotionFcn(GLint xMouse, GLint yMouse) {
@@ -173,18 +169,11 @@ void updateBall(Shape* ball){
 void update(){
 	std::list<Shape*>::iterator it;
 	for (it = myWorld.objlist.begin(); it !=  myWorld.objlist.end(); ++it) {
-	//   if ((*it)->getId() >= 1000)
-	// 		updateBall((*it));
+		//TODO- uncomment before merging in
+	//   if ((*it)->getId() >= 1000) updateBall((*it));
     }
-		
 			
-			glutPostRedisplay();
-
-
-			
-
-
-
+	glutPostRedisplay();
 }
 
 int main(int argc, char** argv) {

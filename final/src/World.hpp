@@ -23,10 +23,17 @@ public:
 	void *deleteById(GLint i); 
 
 	// move to seperate class later
-	int blockNumber;
+	int blockPerRow;
 	int difficulty;
+	BlockPattern pattern;
 	void blockGeneration(int level, int difficulty);
 	void layoutGeneration();
+};
+
+enum BlockPattern {
+	normal,
+	spaced,
+	column,
 };
 
 #endif
