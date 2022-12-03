@@ -13,6 +13,7 @@
 #include "Camera.hpp"
 #include "Light.hpp"
 #include "Paddle.hpp"
+#include "level/Generation.hpp"
 
 GLint winWidth = 800, winHeight = 800;
 GLint isInMove = 0,    /* flag for mouse motion */
@@ -24,6 +25,7 @@ CullMode cullMode = NONE;          /* culling option */
 RenderMode renderMode = WIRE;  /* shade option  */
 
 World myWorld;
+Generation myGeneration;
 Camera myCamera;
 Shape *selectObj = NULL;  /* pointer to selected object */
 

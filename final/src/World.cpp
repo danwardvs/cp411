@@ -2,10 +2,12 @@
 #include "Cube.hpp"
 #include "Ball.hpp"
 #include "Paddle.hpp"
+#include "level/Generation.hpp"
 
 using namespace std;
 
-extern GLint winWidth , winHeight ;
+extern GLint winWidth , winHeight;
+extern Generation myGeneration;
 
 World::World() {
 	Shape *obj = NULL;
@@ -31,7 +33,7 @@ World::World() {
 	objlist.push_back(obj);
 
 	//initial block generation for first level
-	blockGeneration(1, 2);
+	myGeneration.blockGeneration(1, 1);
 }
 
 World::~World(){
@@ -100,63 +102,4 @@ void* World::deleteById(GLint i) {
 		}
   }
 	return NULL;
-}
-
-//generates the blocks and moves them based on the number of blocksPerRow + pattern
-void World::layoutGeneration() {
-	//generate based on certain patterns (need to determine said patterns)
-	// ex normal, spaced (space between blocks in row), columns (space between columns of blocks), etc.
-	// likely need switch statement to generate based on the pattern
-	Shape *obj = NULL;
-
-	//randomly pick pattern
-
-	switch(pattern) {
-		case normal:
-			for (int i = 0; i < blockPerRow; i++) {
-			for (int j = 0; j < 5; j++) {
-				obj = new Cube();
-				obj->setId(5 + i);
-				obj->setCondition(difficulty);
-				//i(x) = column, j(z) = row
-				//needs to scale to more blocks (scale the blocks smaller)
-				obj->translate(-3 + (i * 1.5), 0, j);
-				objlist.push_back(obj);
-				}
-			}
-			break;
-		case spaced:
-			//TODO
-			break;
-		case column:
-			//TODO
-			break;
-
-	}
-
-	
-}
-
-//determines the number of blocks used based on the level
-void World::blockGeneration(int level, int level_difficulty) {
-	switch(level) {
-	case 1:
-		blockPerRow = 5;
-		break;
-	case 2:
-		blockPerRow = 15;
-		break;
-	case 3:
-		blockPerRow = 25;
-		break;
-	case 4:
-		blockPerRow = 30;
-		break;
-	case 5:
-		blockPerRow = 50;
-		break;
-	}
-
-	//generate the objlist for the blocks
-	layoutGeneration();
 }
