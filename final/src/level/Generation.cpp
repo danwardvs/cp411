@@ -18,15 +18,10 @@ void Generation::layoutGeneration() {
 	int blocksToPlace = totalBlocks; //keeps track of how many blocks can still be placed
     int blockId = 5;	//id's of the blocks in the objlist
 
-	//need to re-design this to it reads but also works better (very messy currently)
-	// To place the blocks I need to determine how many can fit in a row (7 is the max for normal, ? is max for spaced, 4 columns are max for column).
-	// To determine how many rows are possible I need to device the totalBLocks by a number based on the pattern (7 for Normal, ? for spaced, this is column based instead of row).
-	// For column I can likley use same formula's but reverse for column instead of row.
-
-	int rowTranslate;
-	int columnTranslate;
-	int blocksPerRow;
-    int blocksPerColumn;
+	int rowTranslate;		// how much the block should translate on the horizontal level
+	int columnTranslate;	// how much the block should translate on the vertical level
+	int blocksPerRow;		// how many blocks to place in the row
+    int numColumns;	// how many blocks can be placed in
 
 	//place blocks based on pattern
 	switch(pattern) {
@@ -39,7 +34,7 @@ void Generation::layoutGeneration() {
 
 				//place all blocks for that row
 				while (blocksPerRow > 0) {
-					printf("perRow= %d\n", blocksPerRow);
+					// printf("perRow= %d\n", blocksPerRow);
 					obj = new Cube(); //create new block (aka cube)
 					obj->setId(blockId);
 					obj->setCondition(difficulty); //set the condition for the block (durability)
@@ -53,7 +48,7 @@ void Generation::layoutGeneration() {
 					blocksToPlace--;
 					blocksPerRow--;
 				}
-				printf("Done row %d \n", rowTranslate);
+				// printf("Done row %d \n", rowTranslate);
 				rowTranslate++; // next row
 			}
 			break;
@@ -64,7 +59,7 @@ void Generation::layoutGeneration() {
                 columnTranslate = 0;
 
                 while (blocksPerRow > 0) {
-                    printf("perRow= %d\n", blocksPerRow);
+                    // printf("perRow= %d\n", blocksPerRow);
                     obj = new Cube();
                     obj->setId(blockId);
                     obj->setCondition(difficulty);
@@ -78,41 +73,41 @@ void Generation::layoutGeneration() {
                     blocksToPlace--;
                     blocksPerRow--;
                 }
-                printf("Done row %d \n", rowTranslate);
+                // printf("Done row %d \n", rowTranslate);
                 rowTranslate++;
 			}
 			break;
 		case COLUMN:
-            //determine how many columns can be placed
+            //determine how many blocks can be in each column
             if (blocksToPlace / 8 == 5) {
 				blocksPerRow = 4;
-				blocksPerColumn = 4;
+				numColumns = 4;
 			}
             else if (blocksToPlace / 8 >= 2) {
 				blocksPerRow = 3;
-				blocksPerColumn = 3;
+				numColumns = 3;
 				}
             else {
 				blocksPerRow = 2;
-				blocksPerColumn = 2;
+				numColumns = 2;
 			}
 
-            printf("blocksPerColumn= %d \n", blocksPerColumn);
+            // printf("blocksPerColumn= %d \n", blocksPerColumn);
 
 			while (blocksToPlace > 0) {
-				if (blocksToPlace - blocksPerColumn >= 0) blocksPerRow = blocksPerColumn;
+				if (blocksToPlace - numColumns >= 0) blocksPerRow = numColumns;
 				else blocksPerRow = blocksToPlace;
 				columnTranslate = 0;
 
 				while (blocksPerRow > 0) {
-                    printf("perRow= %d\n", blocksPerRow);
+                    // printf("perRow= %d\n", blocksPerRow);
 					obj = new Cube();
 					obj->setId(blockId);
 					obj->setCondition(difficulty);
 					blockId++;
 
                     //x= column spacing, z= row spacing
-                    switch (blocksPerColumn) {
+                    switch (numColumns) {
                     case 4: //4 block columns
                         obj->translate(-3.5 + (columnTranslate * 2.5), 0, 5 - (rowTranslate * 0.8));
                         break;
@@ -129,7 +124,7 @@ void Generation::layoutGeneration() {
 					blocksToPlace--;
 					blocksPerRow--;
 				}
-				printf("Done row %d \n", rowTranslate);
+				// printf("Done row %d \n", rowTranslate);
 				rowTranslate++;
 			}
 			break;
@@ -176,6 +171,6 @@ void Generation::blockGenerator(int level, int levelDifficulty) {
 		break;
 	}
 
-	//fill the world's objlist with blocks
+	//fill the world with blocks
 	layoutGeneration();
 }
