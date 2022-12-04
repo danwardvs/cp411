@@ -18,20 +18,18 @@
 GLint winWidth = 800, winHeight = 800;
 GLint isInMove = 0,    /* flag for mouse motion */
 	  xbegin = 0,      /* hold mouse down xMouse */
-	  csType = 1,     /* coordinate system type: 1 for MCS, 2 for WCS, 3 for VCS */
 	  transType = 4;  /* depends on csType  */
 
 CullMode cullMode = NONE;          /* culling option */
 RenderMode renderMode = WIRE;  /* shade option  */
+bool ballCanMove = false;
 
 World myWorld;
 Generation myGeneration;
 Camera myCamera;
-Shape *selectObj = NULL;  /* pointer to selected object */
 
 void init(void) {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
-	selectObj = myWorld.searchById(1);
 }
 
 
@@ -169,12 +167,12 @@ void updateBall(Shape* ball){
 }
 
 void update(){
-	std::list<Shape*>::iterator it;
-	for (it = myWorld.objlist.begin(); it !=  myWorld.objlist.end(); ++it) {
-		//TODO- uncomment before merging in
-	//   if ((*it)->getId() >= 1000) updateBall((*it));
-    }
-			
+	//update ball if it's allowed to move
+	if (ballCanMove) updateBall(myWorld.searchById(1000));
+
+	//load the next level if all blocks are destroyed (and haven't reached the max level)
+	if (myGeneration.blocksRemaining == 0 && myGeneration.currentLevel < 6)  myGeneration.blockGenerator(myGeneration.currentLevel + 1, myGeneration.difficulty + 1);
+
 	glutPostRedisplay();
 }
 
@@ -189,7 +187,7 @@ int main(int argc, char** argv) {
 	glutDisplayFunc(display);
 	glutMotionFunc(mouseMotionFcn);
 	glutPassiveMotionFunc(mouseActionFcn);
-		glutIdleFunc(update);
+	glutIdleFunc(update);
 
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 	

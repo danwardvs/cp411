@@ -10,7 +10,7 @@ BlockPattern pattern = NORMAL;
 
 extern World myWorld;
 
-//generates the blocks and moves them based on the number of blocksPerRow + pattern
+//generates the blocks based on the pattern and number of blocks
 void Generation::layoutGeneration() {
 	Shape *obj = NULL;
 	blocksRemaining = totalBlocks; //update to indicate new level
@@ -173,4 +173,8 @@ void Generation::blockGenerator(int level, int levelDifficulty) {
 
 	//fill the world with blocks
 	layoutGeneration();
+}
+
+void Generation::cleanupLevel() {
+	myWorld.reset();
 }

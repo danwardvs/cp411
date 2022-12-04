@@ -4,10 +4,14 @@
 #include "Paddle.hpp"
 #include "level/Generation.hpp"
 
+#include <stdio.h>
+#include <stdlib.h>
+
 using namespace std;
 
 extern GLint winWidth , winHeight;
 extern Generation myGeneration;
+extern bool ballCanMove;
 
 World::World() {
 	Shape *obj = NULL;
@@ -22,18 +26,21 @@ World::World() {
 	obj->translate(0, 0,0);
 	objlist.push_back(obj);
 
-	obj = new Ball();
-	obj->setId(1001);
-	obj->translate(2, 0, 1);
-	objlist.push_back(obj);
+	// obj = new Ball();
+	// obj->setId(1001);
+	// obj->translate(2, 0, 1);
+	// objlist.push_back(obj);
 
-	obj = new Ball();
-	obj->setId(1002);
-	obj->translate(-2, 0, 1);
-	objlist.push_back(obj);
+	// obj = new Ball();
+	// obj->setId(1002);
+	// obj->translate(-2, 0, 1);
+	// objlist.push_back(obj);
 
-	//initial block generation for first level
+	// initial block generation for first level
 	myGeneration.blockGenerator(3, 1);
+
+	// allow ball to move once level is generated
+	ballCanMove = true;
 }
 
 World::~World(){
@@ -62,20 +69,27 @@ void World::draw() {
 void World::reset(){
 	Shape *obj = NULL;
 
-	obj = this->searchById(1);
-	obj->reset();
-	obj->setScale(0.5);
-	obj->translate(2.5, 0, 0);
+	//stop ball
+	ballCanMove = false;
 
-	obj = this->searchById(2);
-	obj->reset();
-	obj->setScale(0.5);
-	obj->translate(4, 0, 0);
+	//reset paddle
+	searchById(0)->translate(0, 0, -5);
 
-	obj = this->searchById(3);
-	obj->reset();
-	obj->setScale(0.5);
+	//reset ball position
+	searchById(1000)->translate(0, 0,0);
 
+	//delete all remaining blocks
+	for (int i = 5; i < 1000; i++) {
+		deleteById(i);
+	}
+
+	printf("objlist items reset= %d\n", objlist.size());
+
+	//re-generate the level
+	myGeneration.blockGenerator(myGeneration.currentLevel, myGeneration.difficulty);
+	
+	//allow ball to move
+	ballCanMove = true;
 }
 
 Shape* World::searchById(GLint i) {
