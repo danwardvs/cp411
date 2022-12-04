@@ -10,7 +10,7 @@ class Generation {
 public:
 	int blocksRemaining;	// how many blocks remain in the level (0 = level cleared)
 	int currentLevel;		// the current level (used to determine the next level)
-	int difficulty;			// the difficulty of the level (affects block health)
+	int currentDifficulty;			// the difficulty of the level (affects block health)
 	void blockGenerator(int level, int difficulty);
 
 protected:

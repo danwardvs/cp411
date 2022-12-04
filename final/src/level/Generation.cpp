@@ -37,7 +37,7 @@ void Generation::layoutGeneration() {
 					// printf("perRow= %d\n", blocksPerRow);
 					obj = new Cube(); //create new block (aka cube)
 					obj->setId(blockId);
-					obj->setCondition(difficulty); //set the condition for the block (durability)
+					obj->setCondition(currentDifficulty); //set the condition for the block (durability)
 					blockId++;
 
 					//move the block to the required position (x= column spacing, z= row spacing)
@@ -62,7 +62,7 @@ void Generation::layoutGeneration() {
                     // printf("perRow= %d\n", blocksPerRow);
                     obj = new Cube();
                     obj->setId(blockId);
-                    obj->setCondition(difficulty);
+                    obj->setCondition(currentDifficulty);
 					blockId++;
 
                     //x= column spacing, z= row spacing
@@ -103,7 +103,7 @@ void Generation::layoutGeneration() {
                     // printf("perRow= %d\n", blocksPerRow);
 					obj = new Cube();
 					obj->setId(blockId);
-					obj->setCondition(difficulty);
+					obj->setCondition(currentDifficulty);
 					blockId++;
 
                     //x= column spacing, z= row spacing
@@ -132,8 +132,9 @@ void Generation::layoutGeneration() {
 }
 
 //determines the number of blocks used based on the level
-void Generation::blockGenerator(int level, int levelDifficulty) {
-    difficulty = levelDifficulty;
+void Generation::blockGenerator(int level, int difficulty) {
+	currentLevel = level;
+    currentDifficulty = difficulty;
 
   	srand (time(NULL)); // initialize random seed
 	int patternSelect = rand() % 3; //pick random int between 0 and 2

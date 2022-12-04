@@ -37,9 +37,9 @@ World::World() {
 	// objlist.push_back(obj);
 
 	// initial block generation for first level
-	myGeneration.blockGenerator(3, 1);
+	myGeneration.blockGenerator(1, 1);
 
-	// allow ball to move once level is generated
+	// allow ball to move once level is initially generated
 	ballCanMove = true;
 }
 
@@ -69,27 +69,22 @@ void World::draw() {
 void World::reset(){
 	Shape *obj = NULL;
 
-	//stop ball
-	ballCanMove = false;
+	ballCanMove = false; //stop ball
 
-	//reset paddle
-	searchById(0)->translate(0, 0, -5);
+	searchById(0)->setTranslation(0, 0, -5); //reset paddle
+	searchById(1000)->setTranslation(0, 0, 0); //reset ball position (need to adjust)
 
-	//reset ball position
-	searchById(1000)->translate(0, 0,0);
-
-	//delete all remaining blocks
+	//delete all remaining blocks (not working)
 	for (int i = 5; i < 1000; i++) {
 		deleteById(i);
 	}
 
 	printf("objlist items reset= %d\n", objlist.size());
 
-	//re-generate the level
-	myGeneration.blockGenerator(myGeneration.currentLevel, myGeneration.difficulty);
+	//re-generate the current level (will generate new pattern with the way I set it up)
+	myGeneration.blockGenerator(myGeneration.currentLevel, myGeneration.currentDifficulty);
 	
-	//allow ball to move
-	ballCanMove = true;
+	ballCanMove = true; //allow ball to move
 }
 
 Shape* World::searchById(GLint i) {

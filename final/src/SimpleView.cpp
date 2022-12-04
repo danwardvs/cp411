@@ -105,7 +105,7 @@ void updateBall(Shape* ball){
 	  if ((*it)->getId() < 1000 && (*it)->getId() > 0)
 			if(checkCollision((*it),ball)){
 				it = myWorld.objlist.erase(it); 
-
+				myGeneration.blocksRemaining--; //update remaining block counter
 			}
 
     }
@@ -171,8 +171,8 @@ void update(){
 	if (ballCanMove) updateBall(myWorld.searchById(1000));
 
 	//load the next level if all blocks are destroyed (and haven't reached the max level)
-	if (myGeneration.blocksRemaining == 0 && myGeneration.currentLevel < 6)  myGeneration.blockGenerator(myGeneration.currentLevel + 1, myGeneration.difficulty + 1);
-
+	if (myGeneration.blocksRemaining == 0 && myGeneration.currentLevel < 5) myGeneration.blockGenerator(myGeneration.currentLevel + 1, myGeneration.currentLevel + 1);
+	
 	glutPostRedisplay();
 }
 
