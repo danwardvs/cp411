@@ -3,19 +3,20 @@
  *  Author: HBF
  *  Version: 2022-10-03
  */
-#ifndef GENERATION_HPP
-#define GENERATION_HPP
+#ifndef CGENERATION_HPP
+#define CGENERATION_HPP
 
 class Generation {
 public:
-	int totalBlocks;
-	int difficulty;
-	int blocksRemaining;
-	void blockGeneration(int level, int difficulty);
+	int blocksRemaining;	// how many blocks remain in the level (0 = level cleared)
+	void blockGenerator(int level, int difficulty);
+
+protected:
+	int totalBlocks;		// how many blocks will be placed in level
+	int difficulty;			// the difficulty of the level (affects block health)
 	void layoutGeneration();
 };
 
-//possible move to another header?
 enum BlockPattern {
 	NORMAL = 0,
 	SPACED,

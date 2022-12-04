@@ -33,7 +33,7 @@ World::World() {
 	objlist.push_back(obj);
 
 	//initial block generation for first level
-	myGeneration.blockGeneration(1, 1);
+	myGeneration.blockGenerator(3, 1);
 }
 
 World::~World(){
@@ -53,13 +53,6 @@ void lineSegment(float x1, float y1, float z1, float x2, float y2, float z2) {
 }
 
 void World::draw() {
-	// glColor3f(1.0, 0.0, 0.0);
-	// lineSegment(-2, 0, 0, 4, 0, 0); /* x-axis in red */
- 	// glColor3f(0.0, 1.0, 0.0);
-	// lineSegment(0, -2, 0, 0, 4, 0); /* y-axis in green */
-	// glColor3f(0.0, 0.0, 1.0);
-	// lineSegment(0, 0, -2, 0, 0, 4); /* z-axis in blue */
-
 	std::list<Shape*>::iterator it;
 	for (it = objlist.begin(); it !=  objlist.end(); ++it) {
 	  (*it)->draw();
