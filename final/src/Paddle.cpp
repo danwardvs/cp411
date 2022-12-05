@@ -80,6 +80,10 @@ void Paddle::drawFace(int i)
 
 	switch (renderMode) {
 	case WIRE:   // this case from SimpleView1
+		 glDisable(GL_LIGHTING);
+  	 glDisable(GL_LIGHT0);
+  	 glDisable(GL_DEPTH_TEST);
+	   glDisable(GL_NORMALIZE);
 	   glColor3f(r, g, b);
 	   glBegin(GL_LINE_LOOP);
 	     glVertex3fv(vertex[face[i][0]]);
@@ -111,10 +115,7 @@ case FLAT:
 	   glEnd();
 	   break;
 	case SMOOTH:
-	{ glEnable(GL_LIGHTING);
-   glEnable(GL_LIGHT0);
-   glEnable(GL_DEPTH_TEST);
-	   glEnable(GL_NORMALIZE);
+	{ 
 	   glShadeModel(GL_SMOOTH);
 	   glBegin(GL_POLYGON);
 	   for (int j=0; j<4; j++) {

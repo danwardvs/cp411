@@ -82,8 +82,19 @@ void Cube::drawFace(int i)
 
 	switch (renderMode) {
 	case WIRE:   // this case from SimpleView1
-	if(condition==1)
+	if(condition==5)
+	   glColor3f(0, 0,1);
+	if(condition==4)
+	   glColor3f(0, 0.5,1);
+	if(condition==3)
 	   glColor3f(0, 1,0);
+	if(condition==2)
+	   glColor3f(1, 1,0);
+	if(condition==2)
+	   glColor3f(1, 1,0);
+
+	if(condition==1)
+	   glColor3f(1, 0.5,0);
 	if(condition==0)
 	  glColor3f(1, 0,0);
 	   glBegin(GL_LINE_LOOP);
@@ -114,7 +125,6 @@ case FLAT:
 	   break;
 	case SMOOTH:
 	{
-	   glEnable(GL_NORMALIZE);
 	   glShadeModel(GL_SMOOTH);
 	   glBegin(GL_POLYGON);
 	   for (int j=0; j<4; j++) {

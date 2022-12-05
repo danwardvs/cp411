@@ -9,6 +9,8 @@
 BlockPattern pattern = NORMAL;
 
 extern World myWorld;
+extern CullMode cullMode;       /* culling option */
+extern RenderMode renderMode;  /* shade option  */
 
 //generates the blocks based on the pattern and number of blocks
 void Generation::layoutGeneration() {
@@ -133,6 +135,7 @@ void Generation::layoutGeneration() {
 
 //determines the number of blocks used based on the level
 void Generation::blockGenerator(int level, int difficulty) {
+
 	currentLevel = level;
     currentDifficulty = difficulty;
 
@@ -146,11 +149,32 @@ void Generation::blockGenerator(int level, int difficulty) {
     //assign the number of blocks based on level + pattern
 	switch(level) {
 	case 1:
+		renderMode=WIRE;
+
+		cullMode = NONE;
+		glDisable(GL_CULL_FACE);
+		glDisable(GL_DEPTH_TEST);
+		glDisable(GL_LIGHTING);
+   	glDisable(GL_LIGHT0);
+  	glDisable(GL_DEPTH_TEST);
+	  glDisable(GL_NORMALIZE);
+
 		if (pattern == NORMAL) totalBlocks = 21;
 		else if (pattern == SPACED) totalBlocks = 8;
          else totalBlocks = 8;
 		break;
 	case 2:
+		renderMode=SMOOTH;
+		glEnable(GL_LIGHTING);
+   	glEnable(GL_LIGHT0);
+  	glEnable(GL_DEPTH_TEST);
+	  glEnable(GL_NORMALIZE);
+		
+		cullMode = GLCULL;
+		glCullFace(GL_BACK);
+		glEnable(GL_CULL_FACE);
+		glEnable(GL_DEPTH_TEST);
+
 		if (pattern == NORMAL) totalBlocks = 28;
         else if (pattern == SPACED) totalBlocks = 12;
         else totalBlocks = 16;
