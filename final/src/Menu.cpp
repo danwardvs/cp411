@@ -49,7 +49,11 @@ void menu() {
 void mainMenu(GLint option) {
 	switch (option){
 		case 1:
+			//reset the world
 			myWorld.reset();
+			
+			//generate selected level
+			myGeneration.blockGenerator(myGeneration.currentLevel, myGeneration.currentDifficulty, false);
 			break;
 		case 2:
 			exit(0);
@@ -99,10 +103,10 @@ void shadeMenu(GLint option) {
 }
 
 void levelMenu(GLint option) {
-	//rese the world
+	//reset the world
 	myWorld.reset();
 	
 	//generate selected level
-	myGeneration.blockGenerator(option, option);
+	myGeneration.blockGenerator(option, option, true);
 	glutPostRedisplay();
 }

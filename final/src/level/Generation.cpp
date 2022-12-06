@@ -11,6 +11,7 @@ BlockPattern pattern = NORMAL;
 extern World myWorld;
 extern CullMode cullMode;       /* culling option */
 extern RenderMode renderMode;  /* shade option  */
+extern bool ballCanMove;
 
 //generates the blocks based on the pattern and number of blocks
 void Generation::layoutGeneration() {
@@ -131,70 +132,80 @@ void Generation::layoutGeneration() {
 			}
 			break;
 	}
+	ballCanMove = true; //allow the ball to move now that level is generated
 }
 
 //determines the number of blocks used based on the level
-void Generation::blockGenerator(int level, int difficulty) {
-
+void Generation::blockGenerator(int level, int difficulty, bool randomLevel) {
 	currentLevel = level;
     currentDifficulty = difficulty;
+	shouldRandomize = randomLevel;
 
-  	srand (time(NULL)); // initialize random seed
+	srand (time(NULL)); // initialize random seed
 	int patternSelect = rand() % 3; //pick random int between 0 and 2
 
-	//randomly pick pattern from the 3 options [NORMAL, SPACED, COLUMN]
-	// pattern = static_cast<BlockPattern>(patternSelect);
+	//only randomize block pattern if previous level was beat (if reset do not change)
+  	if (shouldRandomize == true) {
+		//randomly pick pattern from the 3 options [NORMAL, SPACED, COLUMN]
+		// pattern = static_cast<BlockPattern>(patternSelect);
+	}
     pattern = COLUMN; //for testing each shape ONLY- remove when eveything looks good.
-    
+
     //assign the number of blocks based on level + pattern
 	switch(level) {
-	case 1:
-		renderMode=WIRE;
+		case 1:
+			renderMode=WIRE;
 
-		cullMode = NONE;
-		glDisable(GL_CULL_FACE);
-		glDisable(GL_DEPTH_TEST);
-		glDisable(GL_LIGHTING);
-   	glDisable(GL_LIGHT0);
-  	glDisable(GL_DEPTH_TEST);
-	  glDisable(GL_NORMALIZE);
+			cullMode = NONE;
+			glDisable(GL_CULL_FACE);
+			glDisable(GL_DEPTH_TEST);
+			glDisable(GL_LIGHTING);
+			glDisable(GL_LIGHT0);
+			glDisable(GL_DEPTH_TEST);
+			glDisable(GL_NORMALIZE);
 
-		if (pattern == NORMAL) totalBlocks = 21;
-		else if (pattern == SPACED) totalBlocks = 8;
-         else totalBlocks = 8;
-		break;
-	case 2:
-		renderMode=SMOOTH;
-		glEnable(GL_LIGHTING);
-   	glEnable(GL_LIGHT0);
-  	glEnable(GL_DEPTH_TEST);
-	  glEnable(GL_NORMALIZE);
-		
-		cullMode = GLCULL;
-		glCullFace(GL_BACK);
-		glEnable(GL_CULL_FACE);
-		glEnable(GL_DEPTH_TEST);
+			//set the number of blocks based on the pattern
+			if (pattern == NORMAL) totalBlocks = 21;
+			else if (pattern == SPACED) totalBlocks = 8;
+			else totalBlocks = 8;
+			break;
+		case 2:
+			renderMode=SMOOTH;
+			glEnable(GL_LIGHTING);
+			glEnable(GL_LIGHT0);
+			glEnable(GL_DEPTH_TEST);
+			glEnable(GL_NORMALIZE);
+			
+			cullMode = GLCULL;
+			glCullFace(GL_BACK);
+			glEnable(GL_CULL_FACE);
+			glEnable(GL_DEPTH_TEST);
 
-		if (pattern == NORMAL) totalBlocks = 28;
-        else if (pattern == SPACED) totalBlocks = 12;
-        else totalBlocks = 16;
-		break;
-	case 3:
-		if (pattern == NORMAL) totalBlocks = 35;
-        else if (pattern == SPACED) totalBlocks = 16;
-        else totalBlocks = 24;
-		break;
-	case 4:
-		if (pattern == NORMAL) totalBlocks = 42;
-        else if (pattern == SPACED) totalBlocks = 20;
-        else totalBlocks = 32;
-		break;
-	case 5:
-		if (pattern == NORMAL) totalBlocks = 49;
-        else if (pattern == SPACED) totalBlocks = 24;
-        else totalBlocks = 40;
-		break;
-	}
+			//set the number of blocks based on the pattern
+			if (pattern == NORMAL) totalBlocks = 28;
+			else if (pattern == SPACED) totalBlocks = 12;
+			else totalBlocks = 16;
+			break;
+		case 3:
+
+			//set the number of blocks based on the pattern
+			if (pattern == NORMAL) totalBlocks = 35;
+			else if (pattern == SPACED) totalBlocks = 16;
+			else totalBlocks = 24;
+			break;
+		case 4:
+			//set the number of blocks based on the pattern
+			if (pattern == NORMAL) totalBlocks = 42;
+			else if (pattern == SPACED) totalBlocks = 20;
+			else totalBlocks = 32;
+			break;
+		case 5:
+			//set the number of blocks based on the pattern
+			if (pattern == NORMAL) totalBlocks = 49;
+			else if (pattern == SPACED) totalBlocks = 24;
+			else totalBlocks = 40;
+			break;
+		}
 
 	//fill the world with blocks
 	layoutGeneration();

@@ -63,8 +63,7 @@ void mouseMotionFcn(GLint xMouse, GLint yMouse) {
 }
 
 void handleDeath(){
-		printf("you lost\n");
-
+	// printf("you lost\n");
 }
 GLboolean checkCollision(Shape* block,Shape* ball){
 	GLfloat blockX = block->getMC().mat[0][3];
@@ -166,12 +165,15 @@ void updateBall(Shape* ball){
 			}
 }
 
-void update(){
+void update() {
 	//update ball if it's allowed to move
 	if (ballCanMove) updateBall(myWorld.searchById(1000));
 
 	//load the next level if all blocks are destroyed (and haven't reached the max level)
-	if (myGeneration.blocksRemaining == 0 && myGeneration.currentLevel < 5) myGeneration.blockGenerator(myGeneration.currentLevel + 1, myGeneration.currentLevel + 1);
+	if (myGeneration.blocksRemaining == 0 && myGeneration.currentLevel < 5) {
+		myWorld.reset();
+		myGeneration.blockGenerator(myGeneration.currentLevel + 1, myGeneration.currentLevel + 1, true);
+	}
 	
 	glutPostRedisplay();
 }
