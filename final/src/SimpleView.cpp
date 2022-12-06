@@ -14,6 +14,7 @@
 #include "Light.hpp"
 #include "Paddle.hpp"
 #include "level/Generation.hpp"
+#include "Hud.hpp"
 
 GLint winWidth = 800, winHeight = 800;
 GLint isInMove = 0,    /* flag for mouse motion */
@@ -23,9 +24,11 @@ GLint isInMove = 0,    /* flag for mouse motion */
 CullMode cullMode = NONE;          /* culling option */
 RenderMode renderMode = WIRE;  /* shade option  */
 bool ballCanMove = false;
+int ballLives = 3;
 
 World myWorld;
 Generation myGeneration;
+Hud myHud;
 Camera myCamera;
 
 void init(void) {
@@ -63,7 +66,8 @@ void mouseMotionFcn(GLint xMouse, GLint yMouse) {
 }
 
 void handleDeath(){
-	// printf("you lost\n");
+	printf("you lost\n");
+	
 }
 GLboolean checkCollision(Shape* block,Shape* ball){
 	GLfloat blockX = block->getMC().mat[0][3];
@@ -159,7 +163,12 @@ void updateBall(Shape* ball){
 					ball->setDirection(newDirection);
 				}else{
 					ball->setTranslation(0, 0, 0);
-					handleDeath();
+					
+					ballLives--;
+					if (ballLives <= 0) {
+						ballCanMove = false;
+						handleDeath();
+					}
 				}
 				
 			}

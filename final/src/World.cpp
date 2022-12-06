@@ -3,6 +3,7 @@
 #include "Ball.hpp"
 #include "Paddle.hpp"
 #include "level/Generation.hpp"
+#include "Hud.hpp"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -11,6 +12,7 @@ using namespace std;
 
 extern GLint winWidth , winHeight;
 extern Generation myGeneration;
+extern Hud myHud;
 extern bool ballCanMove;
 
 World::World() {
@@ -61,6 +63,8 @@ void World::draw() {
 	for (it = objlist.begin(); it !=  objlist.end(); ++it) {
 	  (*it)->draw();
     }
+
+	myHud.drawHud();
 }
 
 void World::reset(){
