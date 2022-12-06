@@ -70,8 +70,8 @@ void World::draw() {
 	stream << ballLives;
 	livesText.append(stream.str());
 
-	//print hub element
-	myHud.drawHud(livesText, 0);
+	//print hub element for lives
+	myHud.drawHudElement(livesText, 0);
 
 	//create string for hud (level)
 	string levelText = "Level:";
@@ -79,8 +79,8 @@ void World::draw() {
 	stream2 << myGeneration.currentLevel;
 	levelText.append(stream2.str());
 
-	//print hub element
-	myHud.drawHud(levelText, 1);
+	//print hub element for level
+	myHud.drawHudElement(levelText, 1);
 }
 
 void World::reset(){

@@ -8,9 +8,11 @@ using namespace std;
 
 class Hud {
 public:
-    void drawHud(string text, int corner); //draw the hud (corner == 0 means top left corner, 1 is top right)
-protected:
-    void drawString(string text, int corner); // draw the string for the hud (corner == 0 means top left corner, 1 is top right)
+    /*
+    * Draws the string for the hud
+    * corner == 0 means top left corner, 1 is top right)
+    */
+    void drawHudElement(string text, int corner); 
 };
 
 #endif

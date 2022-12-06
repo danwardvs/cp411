@@ -6,9 +6,7 @@ using namespace std;
 
 float x , y , z;
 
-void Hud::drawHud(string text, int corner) { drawString(text, corner); }
-
-void Hud::drawString(string text, int corner) {
+void Hud::drawHudElement(string text, int corner) {
     int stringLength = text.length();
 
     //top left corner
