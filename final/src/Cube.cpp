@@ -80,37 +80,44 @@ void Cube::drawFace(int i)
 	{
 		GLfloat shade = 1;
 
+	switch (condition) {
+		case 5:
+			glColor3f(0, 0,1);
+			break;
+		case 4:
+			glColor3f(0, 0.5,1);
+			break;
+		case 3:
+			glColor3f(0, 1,0);
+			break;
+		case 2:
+			glColor3f(1, 1,0);
+			break;
+		case 1:
+			glColor3f(1, 0.5,0);
+			break;
+		case 0:
+			glColor3f(1, 0,0);
+			break;
+	}
+
 	switch (renderMode) {
 	case WIRE:   // this case from SimpleView1
-	if(condition==5)
-	   glColor3f(0, 0,1);
-	if(condition==4)
-	   glColor3f(0, 0.5,1);
-	if(condition==3)
-	   glColor3f(0, 1,0);
-	if(condition==2)
-	   glColor3f(1, 1,0);
-	if(condition==2)
-	   glColor3f(1, 1,0);
-
-	if(condition==1)
-	   glColor3f(1, 0.5,0);
-	if(condition==0)
-	  glColor3f(1, 0,0);
-	   glBegin(GL_LINE_LOOP);
-	     glVertex3fv(vertex[face[i][0]]);
-       glVertex3fv(vertex[face[i][1]]);
-       glVertex3fv(vertex[face[i][2]]);
-       glVertex3fv(vertex[face[i][3]]);
-       glEnd();
-	   break;
+		
+		glBegin(GL_LINE_LOOP);
+			glVertex3fv(vertex[face[i][0]]);
+			glVertex3fv(vertex[face[i][1]]);
+			glVertex3fv(vertex[face[i][2]]);
+			glVertex3fv(vertex[face[i][3]]);
+		glEnd();
+		break;
 	case CONSTANT:  // this case from SimpleView2
-	   glColor3f(faceColor[i][0]*shade, faceColor[i][1]*shade, faceColor[i][2]*shade);
+	   //glColor3f(faceColor[i][0]*shade, faceColor[i][1]*shade, faceColor[i][2]*shade);
 	   glBegin(GL_POLYGON);
-	   glVertex3fv(vertex[face[i][0]]);
-	   glVertex3fv(vertex[face[i][1]]);
-	   glVertex3fv(vertex[face[i][2]]);
-	   glVertex3fv(vertex[face[i][3]]);
+		glVertex3fv(vertex[face[i][0]]);
+		glVertex3fv(vertex[face[i][1]]);
+		glVertex3fv(vertex[face[i][2]]);
+		glVertex3fv(vertex[face[i][3]]);
 	   glEnd();
 	  break;
 		

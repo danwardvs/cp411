@@ -151,35 +151,36 @@ void Generation::blockGenerator(int level, int difficulty, bool randomLevel) {
 	}
     pattern = COLUMN; //for testing each shape ONLY- remove when eveything looks good.
 
+	glDisable(GL_CULL_FACE);
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_LIGHTING);
+	glDisable(GL_LIGHT0);
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_NORMALIZE);
+
     //assign the number of blocks based on level + pattern
 	switch(level) {
 		case 1:
 			renderMode=WIRE;
 
 			cullMode = NONE;
-			glDisable(GL_CULL_FACE);
-			glDisable(GL_DEPTH_TEST);
-			glDisable(GL_LIGHTING);
-			glDisable(GL_LIGHT0);
-			glDisable(GL_DEPTH_TEST);
-			glDisable(GL_NORMALIZE);
-
+		
 			//set the number of blocks based on the pattern
 			if (pattern == NORMAL) totalBlocks = 21;
 			else if (pattern == SPACED) totalBlocks = 8;
 			else totalBlocks = 8;
 			break;
 		case 2:
-			renderMode=SMOOTH;
-			glEnable(GL_LIGHTING);
-			glEnable(GL_LIGHT0);
-			glEnable(GL_DEPTH_TEST);
-			glEnable(GL_NORMALIZE);
+			renderMode = CONSTANT;
+			// glEnable(GL_LIGHTING);
+			// glEnable(GL_LIGHT0);
+			// glEnable(GL_DEPTH_TEST);
+			// glEnable(GL_NORMALIZE);
 			
-			cullMode = GLCULL;
-			glCullFace(GL_BACK);
-			glEnable(GL_CULL_FACE);
-			glEnable(GL_DEPTH_TEST);
+			// cullMode = GLCULL;
+			// glCullFace(GL_BACK);
+			// glEnable(GL_CULL_FACE);
+			// glEnable(GL_DEPTH_TEST);
 
 			//set the number of blocks based on the pattern
 			if (pattern == NORMAL) totalBlocks = 28;
@@ -187,19 +188,21 @@ void Generation::blockGenerator(int level, int difficulty, bool randomLevel) {
 			else totalBlocks = 16;
 			break;
 		case 3:
-
+			renderMode = FLAT;
 			//set the number of blocks based on the pattern
 			if (pattern == NORMAL) totalBlocks = 35;
 			else if (pattern == SPACED) totalBlocks = 16;
 			else totalBlocks = 24;
 			break;
 		case 4:
+			renderMode = SMOOTH;
 			//set the number of blocks based on the pattern
 			if (pattern == NORMAL) totalBlocks = 42;
 			else if (pattern == SPACED) totalBlocks = 20;
 			else totalBlocks = 32;
 			break;
 		case 5:
+			renderMode = TEXTURE;
 			//set the number of blocks based on the pattern
 			if (pattern == NORMAL) totalBlocks = 49;
 			else if (pattern == SPACED) totalBlocks = 24;
