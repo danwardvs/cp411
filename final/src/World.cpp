@@ -4,16 +4,16 @@
 #include "Paddle.hpp"
 #include "level/Generation.hpp"
 #include "Hud.hpp"
-
-#include <stdio.h>
-#include <stdlib.h>
-
-using namespace std;
+#include <string>
+#include <sstream>
 
 extern GLint winWidth , winHeight;
 extern Generation myGeneration;
 extern Hud myHud;
 extern bool ballCanMove;
+extern int ballLives;
+
+using namespace std;
 
 World::World() {
 	Shape *obj = NULL;
@@ -64,7 +64,23 @@ void World::draw() {
 	  (*it)->draw();
     }
 
-	myHud.drawHud();
+	//create string for hud (lives)
+	string livesText = "Lives:";
+	ostringstream stream;
+	stream << ballLives;
+	livesText.append(stream.str());
+
+	//print hub element
+	myHud.drawHud(livesText, 0);
+
+	//create string for hud (level)
+	string levelText = "Level:";
+	ostringstream stream2;
+	stream2 << myGeneration.currentLevel;
+	levelText.append(stream2.str());
+
+	//print hub element
+	myHud.drawHud(levelText, 1);
 }
 
 void World::reset(){
@@ -77,6 +93,8 @@ void World::reset(){
 	for (int i = 5; i < 1000; i++) {
 		deleteById(i);
 	}
+
+	ballLives = 3; // reset number of lives
 }
 
 Shape* World::searchById(GLint i) {

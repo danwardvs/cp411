@@ -18,8 +18,7 @@
 
 GLint winWidth = 800, winHeight = 800;
 GLint isInMove = 0,    /* flag for mouse motion */
-	  xbegin = 0,      /* hold mouse down xMouse */
-	  transType = 4;  /* depends on csType  */
+	  xbegin = 0;      /* hold mouse down xMouse */
 
 CullMode cullMode = NONE;          /* culling option */
 RenderMode renderMode = WIRE;  /* shade option  */
@@ -34,7 +33,6 @@ Camera myCamera;
 void init(void) {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 }
-
 
 void display(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

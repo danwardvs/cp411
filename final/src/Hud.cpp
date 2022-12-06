@@ -2,10 +2,25 @@
 
 extern int ballLives;
 
-void Hud::drawHud() {
-    // glColor3f(rgb.r, rgb.g, rgb.b); 
-    // glRasterPos2f(x, y);
+using namespace std;
 
-    glutBitmapCharacter
-    //glutBitmapString(font, string);
+float x , y , z;
+
+void Hud::drawHud(string text, int corner) { drawString(text, corner); }
+
+void Hud::drawString(string text, int corner) {
+    int stringLength = text.length();
+
+    //top left corner
+    if (corner == 0) x = -5.3, y = 0, z = 5;
+    //top right corner
+    else x = 3, y = 0, z = 5;
+
+    //draw string
+    glColor3f(1, 0, 0); 
+    for (int i= 0; i < stringLength; i++) {
+        glRasterPos3f(x, y, z);
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, text.at(i));
+        x += 0.25;
+    }
 }

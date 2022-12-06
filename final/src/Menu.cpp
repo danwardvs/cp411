@@ -11,7 +11,7 @@
 
 extern GLint csType;
 extern Shape* selectObj;
-extern GLint transType, xbegin;
+extern GLint xbegin;
 extern World myWorld;
 extern Generation myGeneration;
 extern Camera myCamera;
