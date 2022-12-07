@@ -43,7 +43,7 @@ void Generation::layoutGeneration() {
 					blockId++;
 
 					//move the block to the required position (x= column spacing, z= row spacing)
-					obj->translate(-4.5 + (columnTranslate * 1.5), 0, 5 - (rowTranslate * 1));
+					obj->translate(-4.5 + (columnTranslate * 1.5), 0, 4 - (rowTranslate * 1.2));
 					columnTranslate++;	// next block need to be moved to the right
 					
 					myWorld.objlist.push_back(obj);	// add block to objlist
@@ -68,7 +68,7 @@ void Generation::layoutGeneration() {
 					blockId++;
 
                     //move the block to the required position (x= column spacing, z= row spacing)
-                    obj->translate(-4.5 + (columnTranslate * 3), 0, 5 - (rowTranslate * 1.2));
+                    obj->translate(-4.5 + (columnTranslate * 3), 0, 4 - (rowTranslate * 1.4));
                     columnTranslate++; // next block need to be moved to the right
                     
                     myWorld.objlist.push_back(obj); // add block to objlist
@@ -146,7 +146,6 @@ void Generation::blockGenerator(int level, int difficulty, bool randomLevel) {
 		// randomly pick pattern from the 3 options [NORMAL, SPACED, COLUMN]
 		pattern = static_cast<BlockPattern>(patternSelect);
 	}
-    pattern = COLUMN; //for testing each shape ONLY- remove when eveything looks good.
 
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_DEPTH_TEST);
