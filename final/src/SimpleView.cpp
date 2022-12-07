@@ -9,7 +9,6 @@
 #include "Paddle.hpp"
 #include "World.hpp"
 #include "level/Generation.hpp"
-#include "pixmap/RGBpixmap.h"
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include <math.h>
@@ -23,12 +22,15 @@ RenderMode renderMode = WIRE; /* shade option  */
 bool ballCanMove = false;
 int ballLives = 3;
 int paused = 0;
+GLfloat paddle_width = 2;
+GLfloat worldSize = 5.3;
 
-RGBpixmap pix[3];	/* pixmaps for 6 textures */
+
 World myWorld;
+Camera myCamera;
 Generation myGeneration;
 Hud myHud;
-Camera myCamera;
+
 
 GLfloat myAbs(GLfloat num) {
 	if(num<0)
@@ -92,6 +94,29 @@ GLboolean checkCollision(Shape *block, Shape *ball) {
   return destroy;
 }
 
+int updateItem(Shape *item) {
+	GLfloat speed = 0.04;
+	Shape *paddle = myWorld.searchById(0);
+  GLfloat paddle_x = paddle->getMC().mat[0][3] + 0.3;
+	
+	GLfloat x = item->getMC().mat[0][3];
+  GLfloat z = item->getMC().mat[2][3];
+
+  item->translate2d(0, -speed);
+
+
+ if (z < -worldSize + 0.7f) {
+    if (x > paddle_x - paddle_width && x < paddle_x + paddle_width) {
+			return 0;
+  }
+}
+ if (z < -worldSize) {
+  return 2;
+}
+return 1;
+}
+
+
 void updateBall(Shape *ball) {
   std::list<Shape *>::iterator it;
 
@@ -113,7 +138,6 @@ void updateBall(Shape *ball) {
   GLfloat x = ball->getMC().mat[0][3];
   GLfloat z = ball->getMC().mat[2][3];
 
-  GLfloat worldSize = 5.3;
 
   if (x > worldSize) {
     ball->setDirection(-direction);
@@ -126,7 +150,6 @@ void updateBall(Shape *ball) {
   if (z > worldSize) {
     ball->setDirection(3.1415 - direction);
   }
-  GLfloat paddle_width = 2;
 
   if (z < -worldSize + 0.7f) {
     if (x > paddle_x - paddle_width && x < paddle_x + paddle_width) {
@@ -158,16 +181,33 @@ void update() {
     std::list<Shape *>::iterator it;
     printf("Object list: \n");
 
-    for (it = myWorld.objlist.begin(); it != myWorld.objlist.end(); ++it)
-      printf("id: %4d - x: %5.2f y: %.2f z: %.2f \n", (*it)->getId(),
+    for (it = myWorld.objlist.begin(); it != myWorld.objlist.end(); ++it){
+   
+			printf("id: %4d - x: %5.2f y: %.2f z: %.2f \n", (*it)->getId(),
              (*it)->getMC().mat[0][3], (*it)->getMC().mat[1][3],
              (*it)->getMC().mat[2][3]);
+		}
+
+
+  for (it = myWorld.objlist.begin(); it != myWorld.objlist.end(); ++it) {
+    if ((*it)->getId() >=2000 ){
+			int update = updateItem((*it));
+      if (update==0) {
+        it = myWorld.objlist.erase(it);
+      }
+			if (update==2) {
+        it = myWorld.objlist.erase(it);
+      }
+		}
+  }
 
     printf("End List\n\n\n\n\n\n\n");
 
     // update ball if it's allowed to move
     if (ballCanMove)
       updateBall(myWorld.searchById(1000));
+
+		
 
     // load the next level if all blocks are destroyed (and haven't reached the
     // max level)

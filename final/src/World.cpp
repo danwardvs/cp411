@@ -3,6 +3,7 @@
 #include "Cube.hpp"
 #include "Hud.hpp"
 #include "Paddle.hpp"
+#include "Item.hpp"
 #include "level/Generation.hpp"
 #include <sstream>
 #include <string>
@@ -26,6 +27,11 @@ World::World() {
 
   obj = new Ball();
   obj->setId(1000);
+  obj->translate(0, 0, 0);
+  objlist.push_back(obj);
+
+	 obj = new Item();
+  obj->setId(2000);
   obj->translate(0, 0, 0);
   objlist.push_back(obj);
 
