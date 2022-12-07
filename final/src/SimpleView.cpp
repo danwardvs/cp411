@@ -32,6 +32,12 @@ Camera myCamera;
 
 int paused = 0;
 
+GLfloat myAbs(GLfloat num){
+	if(num<0)
+		return num * -1;
+	return num;
+}
+
 void init(void) {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 
