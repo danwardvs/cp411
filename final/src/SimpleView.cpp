@@ -173,6 +173,14 @@ void updateBall(Shape* ball){
 }
 
 void update() {
+			std::list<Shape*>::iterator it;
+		printf("Object list: \n");
+
+		for (it = myWorld.objlist.begin(); it !=  myWorld.objlist.end(); ++it) 
+	  	printf("id: %4d - x: %5.2f y: %.2f z: %.2f \n",(*it)->getId(),(*it)->getMC().mat[0][3], (*it)->getMC().mat[1][3],(*it)->getMC().mat[2][3]);
+		
+		printf("End List\n\n\n\n\n\n\n");
+
 	//update ball if it's allowed to move
 	if (ballCanMove) updateBall(myWorld.searchById(1000));
 
