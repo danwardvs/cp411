@@ -29,6 +29,7 @@ void menu() {
 	glutAddMenuEntry("My constant shading", 2);
 	glutAddMenuEntry("OpenGL flat shading", 3);
 	glutAddMenuEntry("OpenGL smooth shading", 4);
+	glutAddMenuEntry("Texture", 5);
 
 	GLint Level_Menu = glutCreateMenu(levelMenu);
 	glutAddMenuEntry("Level 1", 1);
@@ -86,19 +87,28 @@ void cullMenu(GLint option) {
 }
 
 void shadeMenu(GLint option) {
-	switch (option){
-	  case 1:
-		renderMode = WIRE;
-		break;
-	  case 2:
-		renderMode = CONSTANT;
-		break;
-	  case 3:
-		renderMode = FLAT;
-		break;
-	  case 4:
-		renderMode = SMOOTH;
-		break;
+	glDisable(GL_TEXTURE_2D);
+	glDisable(GL_LIGHTING);
+	glDisable(GL_LIGHT0);
+	glDisable( GL_NORMALIZE);
+	glDisable(GL_COLOR_MATERIAL);
+	
+	switch (option) {
+		case 1:
+			renderMode = WIRE;
+			break;
+		case 2:
+			renderMode = CONSTANT;
+			break;
+		case 3:
+			renderMode = FLAT;
+			break;
+		case 4:
+			renderMode = SMOOTH;
+			break;
+		case 5:
+			renderMode = TEXTURE;
+			break;
 	}
 	glutPostRedisplay();
 }
