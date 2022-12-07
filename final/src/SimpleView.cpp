@@ -202,6 +202,12 @@ void keyPress(unsigned char key, int x, int y) {
 		else
 		 paused=1;
 	}
+	if(key==114){
+				myWorld.reset();
+			
+			//generate selected level
+			myGeneration.blockGenerator(myGeneration.currentLevel, myGeneration.currentDifficulty, false);
+	}
 	printf("%d\n",key);
 }
 
