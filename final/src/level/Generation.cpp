@@ -141,13 +141,13 @@ void Generation::blockGenerator(int level, int difficulty, bool randomLevel) {
     currentDifficulty = difficulty;
 	shouldRandomize = randomLevel;
 
-	srand (time(NULL)); // initialize random seed
-	int patternSelect = rand() % 3; //pick random int between 0 and 2
-
 	//only randomize block pattern if previous level was beat (if reset do not change)
   	if (shouldRandomize == true) {
-		//randomly pick pattern from the 3 options [NORMAL, SPACED, COLUMN]
-		// pattern = static_cast<BlockPattern>(patternSelect);
+		srand (time(NULL)); // initialize random seed
+		int patternSelect = rand() % 3; //pick random int between 0 and 2
+
+		// randomly pick pattern from the 3 options [NORMAL, SPACED, COLUMN]
+		pattern = static_cast<BlockPattern>(patternSelect);
 	}
     pattern = COLUMN; //for testing each shape ONLY- remove when eveything looks good.
 
