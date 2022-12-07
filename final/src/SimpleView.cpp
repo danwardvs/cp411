@@ -36,19 +36,7 @@ GLfloat myAbs(GLfloat num) {
 	return num;
 }
 
-void init(void) {
-	glClearColor(0.0, 0.0, 0.0, 1.0);
-
-	// pix[0].readBMPFile("texture/mandrill.bmp");
-	// pix[0].setTexture(0);
-
-	// pix[1].readBMPFile("texture/sun.bmp");
-	// pix[1].setTexture(1);
-
-	pix[2].readBMPFile("texture/cube.bmp");
-	pix[2].setTexture(2);
-
-}
+void init(void) { glClearColor(0.0, 0.0, 0.0, 1.0); }
 
 void display(void) {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
