@@ -40,11 +40,11 @@ void Ball::draw()
             float z = this->getMC().mat[2][3];
             GLfloat position[] = { 0,-3.5, 0, 1 };
 
-            glLightfv (GL_LIGHT0, GL_POSITION, position);
-            glDisable(GL_LIGHTING);
+            // glLightfv (GL_LIGHT0, GL_POSITION, position);
+            // glDisable(GL_LIGHTING);
 
-            glutSolidSphere(0.2, 8, 8);
-            glEnable(GL_LIGHTING);
+            // glutSolidSphere(0.2, 8, 8);
+            // glEnable(GL_LIGHTING);
             break;
     }
 
