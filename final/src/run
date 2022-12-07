@@ -1,1 +1,1 @@
-g++ Camera.cpp Cube.cpp Ball.cpp Light.cpp Matrix.cpp Menu.cpp Point.cpp Shape.cpp SimpleView.cpp Vector.cpp World.cpp Paddle.cpp "level/Generation.cpp" Hud.cpp -g  -o app -lGL -lGLU -lglut -lGLEW && ./app
+g++ Camera.cpp Cube.cpp Ball.cpp Light.cpp Matrix.cpp Menu.cpp Point.cpp Shape.cpp SimpleView.cpp Vector.cpp World.cpp Paddle.cpp Hud.cpp "level\Generation.cpp" "pixmap\RGBpixmap.cpp" -g  -o app -lGL -lGLU -lglut -lGLEW && ./app
