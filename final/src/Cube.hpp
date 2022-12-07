@@ -11,7 +11,6 @@
 #include "Vector.hpp"
 
 #include "Camera.hpp"
-#include "Light.hpp"
 
 class Cube: public Shape {
 
@@ -32,11 +31,6 @@ public:
 	Cube();
 	void draw();
 	void drawFace(int);
-
-	/* SimpleView2 properties */
-	bool isFrontface(int faceindex, Camera camera);
-	GLfloat getFaceShade(int faceindex, Light light);
-	GLfloat getVertexShade(int vertexindex, Light light);
 
 };
 

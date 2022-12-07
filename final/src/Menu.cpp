@@ -6,7 +6,6 @@
 #include "Menu.hpp"
 #include "World.hpp"
 #include "Camera.hpp"
-#include "Light.hpp"
 #include "level/Generation.hpp"
 
 extern GLint csType;
@@ -23,7 +22,6 @@ extern int paused;
 void menu() {
 	GLint Cull_Menu = glutCreateMenu(cullMenu);
 	glutAddMenuEntry("No culling", 1);
-	glutAddMenuEntry("My back-face", 2);
 	glutAddMenuEntry("OpenGL back-face & depth buffer", 3);
 
 	GLint Shading_Menu = glutCreateMenu(shadeMenu);
@@ -74,11 +72,6 @@ void cullMenu(GLint option) {
 	switch (option){
 	  case 1:
 		cullMode = NONE;
-		glDisable(GL_CULL_FACE);
-		glDisable(GL_DEPTH_TEST);
-		break;
-	  case 2:
-		cullMode = BACKFACE;
 		glDisable(GL_CULL_FACE);
 		glDisable(GL_DEPTH_TEST);
 		break;

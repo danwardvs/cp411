@@ -19,7 +19,6 @@ using namespace std;
  */
 enum CullMode {
   NONE = 0,
-  BACKFACE,
   GLCULL,
   GLDEPTHBUFFER,
   GLCULLDEPTHBUFFER
