@@ -109,3 +109,7 @@ GLfloat Shape::getDirection() { return direction; }
 
 void Shape::setCondition(GLint newCondition) { condition = newCondition; }
 GLint Shape::getCondition() { return condition; }
+
+void Shape::setType(GLint newType) { type = newType; }
+GLint Shape::getType() { return type; }
+

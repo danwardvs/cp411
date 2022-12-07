@@ -10,6 +10,7 @@
 extern Camera myCamera;
 extern CullMode cullMode;
 extern RenderMode renderMode;
+extern GLint bigPaddleTime;
 
 Paddle::Paddle() {
   vertex[0][0] = -1;
@@ -208,7 +209,12 @@ void Paddle::drawFace(int i) {
 void Paddle::draw() {
   glPushMatrix();
   this->ctmMultiply();
-  glScalef(s, s, s);
+	if(bigPaddleTime>0)
+  	glScalef(2, s, s);
+	else
+		glScalef(s, s, s);
+
+	
 
   for (int i = 0; i < 6; i++) {
     drawFace(i);

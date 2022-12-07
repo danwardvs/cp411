@@ -6,13 +6,14 @@
 #include "Camera.hpp"
 #include "Menu.hpp"
 #include "Paddle.hpp"
+#include "UI/Hud.hpp"
 #include "World.hpp"
 #include "level/Generation.hpp"
-#include "ui/Hud.hpp"
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 
 GLint winWidth = 800, winHeight = 800;
 
@@ -21,16 +22,19 @@ RenderMode renderMode = WIRE; /* shade option  */
 bool ballCanMove = false;
 int ballLives = 3;
 int paused = 0;
+int bigPaddleTime = 0;
 GLfloat paddle_width = 2;
 GLfloat worldSize = 5.3;
-
 
 World myWorld;
 Camera myCamera;
 Generation myGeneration;
 Hud myHud;
 
-void init(void) { glClearColor(0.0, 0.0, 0.0, 1.0); }
+void init(void) {
+  srand(time(NULL)); // initialize random seed
+  glClearColor(0.0, 0.0, 0.0, 1.0);
+}
 
 void display(void) {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -87,27 +91,25 @@ GLboolean checkCollision(Shape *block, Shape *ball) {
 }
 
 int updateItem(Shape *item) {
-	GLfloat speed = 0.04;
-	Shape *paddle = myWorld.searchById(0);
+  GLfloat speed = 0.04;
+  Shape *paddle = myWorld.searchById(0);
   GLfloat paddle_x = paddle->getMC().mat[0][3] + 0.3;
-	
-	GLfloat x = item->getMC().mat[0][3];
+
+  GLfloat x = item->getMC().mat[0][3];
   GLfloat z = item->getMC().mat[2][3];
 
   item->translate2d(0, -speed);
 
-
- if (z < -worldSize + 0.7f) {
+  if (z < -worldSize + 0.7f) {
     if (x > paddle_x - paddle_width && x < paddle_x + paddle_width) {
-			return 0;
+      return 0;
+    }
   }
+  if (z < -worldSize) {
+    return 2;
+  }
+  return 1;
 }
- if (z < -worldSize) {
-  return 2;
-}
-return 1;
-}
-
 
 void updateBall(Shape *ball) {
   std::list<Shape *>::iterator it;
@@ -115,6 +117,13 @@ void updateBall(Shape *ball) {
   for (it = myWorld.objlist.begin(); it != myWorld.objlist.end(); ++it) {
     if ((*it)->getId() < 1000 && (*it)->getId() > 0)
       if (checkCollision((*it), ball)) {
+				if(rand()%1==0){
+					  GLfloat x = (*it)->getMC().mat[0][3];
+  					GLfloat z = (*it)->getMC().mat[2][3];
+
+						myWorld.createItem(x,z);
+				}
+
         it = myWorld.objlist.erase(it);
         myGeneration.blocksRemaining--; // update remaining block counter
       }
@@ -129,7 +138,6 @@ void updateBall(Shape *ball) {
   ball->translate2d(sin(direction) * speed, cos(direction) * speed);
   GLfloat x = ball->getMC().mat[0][3];
   GLfloat z = ball->getMC().mat[2][3];
-
 
   if (x > worldSize) {
     ball->setDirection(-direction);
@@ -168,61 +176,71 @@ void updateBall(Shape *ball) {
 }
 
 void update() {
-  //if the game is paused then update nothing
+	printf("%d\n",bigPaddleTime);
+  // if the game is paused then update nothing
   if (!paused) {
+		if(bigPaddleTime>0){
+			bigPaddleTime--;
+		}
+    // printf("Object list: \n");
+
+    // // debug
+    // for (it = myWorld.objlist.begin(); it != myWorld.objlist.end(); ++it) {
+    //   printf("id: %4d - x: %5.2f y: %.2f z: %.2f \n", (*it)->getId(),
+    //          (*it)->getMC().mat[0][3], (*it)->getMC().mat[1][3],
+    //          (*it)->getMC().mat[2][3]);
+    // }
+		
+    // printf("End List\n\n\n\n\n\n\n");
+
     std::list<Shape *>::iterator it;
-    printf("Object list: \n");
-
-    //debug
-    for (it = myWorld.objlist.begin(); it != myWorld.objlist.end(); ++it){
-			printf("id: %4d - x: %5.2f y: %.2f z: %.2f \n", (*it)->getId(),
-             (*it)->getMC().mat[0][3], (*it)->getMC().mat[1][3],
-             (*it)->getMC().mat[2][3]);
-		}
-
-  //what does this do (looks like for powers)?
-  for (it = myWorld.objlist.begin(); it != myWorld.objlist.end(); ++it) {
-    if ((*it)->getId() >=2000 ){
-			int update = updateItem((*it));
-      if (update==0) {
-        it = myWorld.objlist.erase(it);
+    for (it = myWorld.objlist.begin(); it != myWorld.objlist.end(); ++it) {
+      if ((*it)->getId() >= 2000) {
+        int update = updateItem((*it));
+        if (update == 0) {
+					GLint type = (*it)->getType();
+					if(type==0)
+						bigPaddleTime+=500;
+          it = myWorld.objlist.erase(it);
+        }
+        if (update == 2) {
+				
+          it = myWorld.objlist.erase(it);
+        }
       }
-			if (update==2) {
-        it = myWorld.objlist.erase(it);
-      }
-		}
-  }
+    }
 
-    printf("End List\n\n\n\n\n\n\n");
 
     // update ball if it's allowed to move
     if (ballCanMove)
       updateBall(myWorld.searchById(1000));
 
-		
-    // load the next level if all blocks are destroyed (and haven't reached the max level)
+    // load the next level if all blocks are destroyed (and haven't reached the
+    // max level)
     if (myGeneration.blocksRemaining == 0 && myGeneration.currentLevel < 5) {
       myWorld.reset();
-      myGeneration.blockGenerator(myGeneration.currentLevel + 1, myGeneration.currentLevel + 1, true);
+      myGeneration.blockGenerator(myGeneration.currentLevel + 1,
+                                  myGeneration.currentLevel + 1, true);
     }
   }
 
   glutPostRedisplay();
 }
 void keyPress(unsigned char key, int x, int y) {
-  //pause key (p or escape)
+  // pause key (p or escape)
   if (key == 112 || key == 27) {
     if (paused)
       paused = 0;
     else
       paused = 1;
   }
-  //restart key (r)
+  // restart key (r)
   if (key == 114) {
     myWorld.reset();
 
     // generate selected level
-    myGeneration.blockGenerator(myGeneration.currentLevel, myGeneration.currentDifficulty, false);
+    myGeneration.blockGenerator(myGeneration.currentLevel,
+                                myGeneration.currentDifficulty, false);
   }
 }
 

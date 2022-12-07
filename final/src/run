@@ -1,1 +1,1 @@
-g++ Camera.cpp Cube.cpp Ball.cpp Light.cpp Matrix.cpp Menu.cpp Point.cpp Shape.cpp SimpleView.cpp Vector.cpp World.cpp Paddle.cpp Item.cpp "ui\Hud.cpp" "level\Generation.cpp" -g  -o app -lGL -lGLU -lglut -lGLEW && ./app
+g++ Camera.cpp Cube.cpp Ball.cpp Matrix.cpp Menu.cpp Point.cpp Shape.cpp SimpleView.cpp Vector.cpp World.cpp Paddle.cpp Item.cpp UI/Hud.cpp level/Generation.cpp   -o app -lGL -lGLU -lglut -lGLEW && ./app

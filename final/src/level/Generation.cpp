@@ -24,7 +24,7 @@ void Generation::layoutGeneration() {
 	int rowTranslate = 0;		// how much the block should translate on the horizontal level
 	int columnTranslate = 0;	// how much the block should translate on the vertical level
 	int blocksPerRow = 0;		// how many blocks to place in the row
-    int numColumns = 0;	// how many blocks can be placed in
+  int numColumns = 0;	// how many blocks can be placed in
 
 	//place blocks based on pattern
 	switch(pattern) {
@@ -140,7 +140,6 @@ void Generation::blockGenerator(int level, int difficulty, bool randomLevel) {
 
 	//only randomize block pattern if previous level was beat (if reset do not change)
   	if (shouldRandomize == true) {
-		srand (time(NULL)); // initialize random seed
 		int patternSelect = rand() % 3; //pick random int between 0 and 2
 
 		// randomly pick pattern from the 3 options [NORMAL, SPACED, COLUMN]

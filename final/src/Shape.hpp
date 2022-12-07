@@ -48,6 +48,7 @@ protected:
 	GLint id;    /* used to identify object */
 	GLfloat direction;
 	GLint condition;
+	GLint type;
  
 
 public:
@@ -76,6 +77,9 @@ public:
 
 	GLint getCondition();
 	void setCondition(GLint newCondition);
+
+	GLint getType();
+	void setType(GLint newType);
 };
 
 #endif

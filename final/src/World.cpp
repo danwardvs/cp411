@@ -4,7 +4,7 @@
 #include "Paddle.hpp"
 #include "Item.hpp"
 #include "level/Generation.hpp"
-#include "ui/Hud.hpp"
+#include "UI/Hud.hpp"
 #include <sstream>
 #include <string>
 
@@ -30,10 +30,10 @@ World::World() {
   obj->translate(0, 0, 0);
   objlist.push_back(obj);
 
-	obj = new Item();
-  obj->setId(2000);
-  obj->translate(0, 0, 0);
-  objlist.push_back(obj);
+	// obj = new Item();
+  // obj->setId(2000);
+  // obj->translate(0, 0, 0);
+  // objlist.push_back(obj);
 
   // obj = new Ball();
   // obj->setId(1001);
@@ -103,6 +103,24 @@ void World::reset() {
 
   ballLives = 3; // reset number of lives
 }
+
+
+void World::createItem(GLfloat x, GLfloat z){
+	Shape *obj = NULL;
+	std::list<Shape *>::iterator it;
+	int highest_item = 2000;
+  for (it = objlist.begin(); it != objlist.end(); ++it) {
+    if ((*it)->getId() >highest_item)
+      highest_item = (*it)->getId();
+  }
+
+	obj = new Item();
+  obj->setId(highest_item);
+  obj->translate(x, 0, z);
+	obj->setType(0);
+  objlist.push_back(obj);
+}
+
 
 Shape *World::searchById(GLint i) {
   std::list<Shape *>::iterator it;

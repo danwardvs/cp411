@@ -21,6 +21,7 @@ public:
 	void reset();  /* resets all objects */
 	Shape *searchById(GLint i);
 	void *deleteById(GLint i); 
+	void createItem(GLfloat x, GLfloat z);
 };
 
 #endif
