@@ -12,7 +12,7 @@ void Hud::drawHudElement(string text, int corner) {
     //top left corner
     if (corner == 0) x = -5.3, y = 0, z = 5;
     //top right corner
-    else x = 3, y = 0, z = 5;
+    else if (corner == 0)x = 3, y = 0, z = 5;
 
     //draw string
     glColor3f(1, 0, 0); 

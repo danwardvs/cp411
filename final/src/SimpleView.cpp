@@ -4,11 +4,11 @@
  *  Version: 2022-10-06 (update)
  */
 #include "Camera.hpp"
-#include "Hud.hpp"
 #include "Menu.hpp"
 #include "Paddle.hpp"
 #include "World.hpp"
 #include "level/Generation.hpp"
+#include "ui/Hud.hpp"
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include <math.h>

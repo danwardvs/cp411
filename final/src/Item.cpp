@@ -1,9 +1,3 @@
-/*
- *  SimpleView : reference design
- *  Author: HBF
- *  Version: 2022-10-06
- */
-
 #include "Item.hpp"
 #include <GL/gl.h>
 #include <stdio.h>

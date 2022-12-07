@@ -1,10 +1,10 @@
 #include "World.hpp"
 #include "Ball.hpp"
 #include "Cube.hpp"
-#include "Hud.hpp"
 #include "Paddle.hpp"
 #include "Item.hpp"
 #include "level/Generation.hpp"
+#include "ui/Hud.hpp"
 #include <sstream>
 #include <string>
 
@@ -30,7 +30,7 @@ World::World() {
   obj->translate(0, 0, 0);
   objlist.push_back(obj);
 
-	 obj = new Item();
+	obj = new Item();
   obj->setId(2000);
   obj->translate(0, 0, 0);
   objlist.push_back(obj);
@@ -94,8 +94,7 @@ void World::reset() {
   ballCanMove = false; // stop ball
 
   searchById(0)->setTranslation(0, 0, -5); // reset paddle
-  searchById(1000)->setTranslation(0, 0,
-                                   0); // reset ball position (need to adjust)
+  searchById(1000)->setTranslation(0, 0, 0); // reset ball position (need to adjust)
 
   // delete all remaining blocks
   for (int i = 5; i < 1000; i++) {
