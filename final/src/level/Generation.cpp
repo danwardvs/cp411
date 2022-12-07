@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-BlockPattern pattern = NORMAL;
+BlockPattern pattern = NORMAL; /* pattern for level generation */
 
 extern World myWorld;
 extern CullMode cullMode;       /* culling option */

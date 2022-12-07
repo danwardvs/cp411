@@ -14,6 +14,8 @@ extern Generation myGeneration;
 extern Hud myHud;
 extern bool ballCanMove;
 extern int ballLives;
+extern bool winGame;
+extern int paused;
 
 using namespace std;
 
@@ -46,7 +48,7 @@ World::World() {
   // objlist.push_back(obj);
 
   // start block generation for first level
-  myGeneration.blockGenerator(1, 1, true);
+  myGeneration.blockGenerator(1, 0, true);
 }
 
 World::~World() {
@@ -88,6 +90,24 @@ void World::draw() {
 
   // print level string for the hud
   myHud.drawHudElement(levelText, 1);
+
+  if (paused == 1) {
+    string pausedText = "Paused: Press p or Esc to continue";
+    myHud.drawHudElement(pausedText, 2);
+  }
+
+  // indicate game over
+  if (ballLives <= 0) {
+    // create string for hud (level)
+    string gameOverText = "Game Over: Press R to restart the level";
+    myHud.drawHudElement(gameOverText, 3);
+  }
+  // indicates game won
+  else if (winGame == true) {
+    // create string for hud (level)
+    string WinText = "Congrats, you won!";
+    myHud.drawHudElement(WinText, 4);
+  }
 }
 
 void World::reset() {
@@ -102,6 +122,7 @@ void World::reset() {
   }
 
   ballLives = 3; // reset number of lives
+  winGame = false; //reset win status
 }
 
 Shape *World::searchById(GLint i) {

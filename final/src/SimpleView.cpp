@@ -21,6 +21,7 @@ RenderMode renderMode = WIRE; /* shade option  */
 bool ballCanMove = false;
 int ballLives = 3;
 int paused = 0;
+bool winGame = false;
 GLfloat paddle_width = 2;
 GLfloat worldSize = 5.3;
 
@@ -205,6 +206,9 @@ void update() {
       myWorld.reset();
       myGeneration.blockGenerator(myGeneration.currentLevel + 1, myGeneration.currentLevel + 1, true);
     }
+    else if (myGeneration.blocksRemaining == 0 && myGeneration.currentLevel == 5) {
+      winGame = true;
+    }
   }
 
   glutPostRedisplay();
@@ -224,6 +228,12 @@ void keyPress(unsigned char key, int x, int y) {
     // generate selected level
     myGeneration.blockGenerator(myGeneration.currentLevel, myGeneration.currentDifficulty, false);
   }
+
+  //debug win
+  // if (key == )
+
+  //delete before submit
+  printf("%d\n", key);
 }
 
 int main(int argc, char **argv) {

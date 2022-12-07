@@ -8,7 +8,7 @@ float x , y , z;
 
 /* Draws a string on the screen at a specific position
 * text = string
-* position = position (0 = left corner, 1 = right corner, 2 = middle of the screen)
+* position = position (0 = left corner, 1 = right corner, 2 = paused, 3 = Game Over, 4 = Win!)
 */
 void Hud::drawHudElement(string text, int position) {
     int stringLength = text.length();
@@ -18,7 +18,8 @@ void Hud::drawHudElement(string text, int position) {
     //top right corner
     else if (position == 1)x = 3, y = 0, z = 5;
     //middle of the screen
-    else x = 0, y = 0, z = 0;
+    else if (position == 2) x = -4.9, y = 0, z = 0;
+    else x = -3.5, y = 0, z = 0;
 
     //draw the string
     glColor3f(1, 0, 0); 
