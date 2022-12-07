@@ -196,7 +196,7 @@ void update() {
 	glutPostRedisplay();
 }
 void keyPress(unsigned char key, int x, int y) {
-	if(key==112){
+	if(key==112 || key==27){
 		if(paused)
 			paused=0;
 		else
