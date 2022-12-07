@@ -21,10 +21,10 @@ void Generation::layoutGeneration() {
 	int blocksToPlace = totalBlocks; //keeps track of how many blocks can still be placed
     int blockId = 5;	//id's of the blocks in the objlist
 
-	int rowTranslate;		// how much the block should translate on the horizontal level
-	int columnTranslate;	// how much the block should translate on the vertical level
-	int blocksPerRow;		// how many blocks to place in the row
-    int numColumns;	// how many blocks can be placed in
+	int rowTranslate = 0;		// how much the block should translate on the horizontal level
+	int columnTranslate = 0;	// how much the block should translate on the vertical level
+	int blocksPerRow = 0;		// how many blocks to place in the row
+    int numColumns = 0;	// how many blocks can be placed in
 
 	//place blocks based on pattern
 	switch(pattern) {
