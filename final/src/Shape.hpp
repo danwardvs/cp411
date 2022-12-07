@@ -46,7 +46,7 @@ protected:
 	Matrix *pmc; /* parent mc pointer if any */
 	GLfloat s;   /* scale factor */
 	GLint id;    /* used to identify object */
-		GLfloat direction;
+	GLfloat direction;
 	GLint condition;
  
 
