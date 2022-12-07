@@ -30,6 +30,8 @@ Generation myGeneration;
 Hud myHud;
 Camera myCamera;
 
+int paused = 0;
+
 void init(void) {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 }
@@ -51,17 +53,15 @@ void winReshapeFcn(GLint newWidth, GLint newHeight) {
 }
 
 void mouseActionFcn( int xMouse, int yMouse) {
+	if(!paused){
 		Shape *paddle = myWorld.searchById(0);
 
-			GLfloat x = xMouse;
-			paddle->setX( (x/75) - 5.5);
+		GLfloat x = xMouse;
+		paddle->setX( (x/75) - 5.5);
 		glutPostRedisplay();
+	}
 }
 
-void mouseMotionFcn(GLint xMouse, GLint yMouse) {
-		printf("mouse down\n");
-	
-}
 
 void handleDeath(){
 	printf("you lost\n");
@@ -173,6 +173,8 @@ void updateBall(Shape* ball){
 }
 
 void update() {
+
+		if(!paused){
 			std::list<Shape*>::iterator it;
 		printf("Object list: \n");
 
@@ -189,8 +191,18 @@ void update() {
 		myWorld.reset();
 		myGeneration.blockGenerator(myGeneration.currentLevel + 1, myGeneration.currentLevel + 1, true);
 	}
+	}
 	
 	glutPostRedisplay();
+}
+void keyPress(unsigned char key, int x, int y) {
+	if(key==112){
+		if(paused)
+			paused=0;
+		else
+		 paused=1;
+	}
+	printf("%d\n",key);
 }
 
 int main(int argc, char** argv) {
@@ -202,9 +214,9 @@ int main(int argc, char** argv) {
 	init();
 	menu();
 	glutDisplayFunc(display);
-	glutMotionFunc(mouseMotionFcn);
 	glutPassiveMotionFunc(mouseActionFcn);
 	glutIdleFunc(update);
+	glutKeyboardFunc(keyPress);
 
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 	

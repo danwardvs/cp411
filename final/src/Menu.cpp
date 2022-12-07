@@ -17,6 +17,7 @@ extern Generation myGeneration;
 extern Camera myCamera;
 extern CullMode cullMode;
 extern RenderMode renderMode;
+extern int paused;
 
 
 void menu() {
@@ -40,6 +41,7 @@ void menu() {
 
 	glutCreateMenu(mainMenu);
 	glutAddMenuEntry("Reset", 1);
+	glutAddMenuEntry("Pause/Unpause", 3);
 	glutAddSubMenu("Level Select", Level_Menu);
 	glutAddSubMenu("Culling", Cull_Menu);
 	glutAddSubMenu("Shading", Shading_Menu);
@@ -57,6 +59,12 @@ void mainMenu(GLint option) {
 			break;
 		case 2:
 			exit(0);
+			break;
+		case 3:
+			if(paused)
+				paused=0;
+			else
+		 		paused=1;
 			break;
 	}
 	glutPostRedisplay();
