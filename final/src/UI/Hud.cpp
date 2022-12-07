@@ -13,14 +13,24 @@ float x , y , z;
 void Hud::drawHudElement(string text, int position) {
     int stringLength = text.length();
 
-    //top left corner
-    if (position == 0) x = -5.3, y = 0, z = 5;
-    //top right corner
-    else if (position == 1)x = 3, y = 0, z = 5;
-    //middle of the screen
-    else if (position == 2) x = -4.9, y = 0, z = 0;
-    else x = -3.5, y = 0, z = 0;
-
+    switch (position) {
+        case 0: // top left corner (lives)
+            x = -5.3, y = 0, z = 5;
+            break;
+        case 1: // top right corner (level)
+            x = 3, y = 0, z = 5;
+            break;
+        case 2: // middle of the screen (pause)
+            x = -4.5, y = 0, z = 0;
+            break;
+        case 3: // middle of the screen (game over)
+            x = -4.9, y = 0, z = 0;
+            break;
+        case 4: // middle of the screen (win)
+            x = -2.5, y = 0, z = 0;
+            break;
+    }
+   
     //draw the string
     glColor3f(1, 0, 0); 
     for (int i= 0; i < stringLength; i++) {

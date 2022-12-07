@@ -176,7 +176,7 @@ void Generation::blockGenerator(int level, int difficulty, bool randomLevel) {
 			//set the number of blocks based on the pattern
 			if (pattern == NORMAL) totalBlocks = 28;
 			else if (pattern == SPACED) totalBlocks = 12;
-			else totalBlocks = 15;
+			else totalBlocks = 18;
 			break;
 		case 3:
 			renderMode = CONSTANT;

@@ -73,24 +73,25 @@ void World::draw() {
     (*it)->draw();
   }
 
-  // create string for hud (lives)
+  // create string for lives
   string livesText = "Lives:";
   ostringstream stream;
   stream << ballLives;
   livesText.append(stream.str());
 
-  // print lives string for for hud
+  // print lives on screen
   myHud.drawHudElement(livesText, 0);
 
-  // create string for hud (level)
+  // create string for level
   string levelText = "Level:";
   ostringstream stream2;
   stream2 << myGeneration.currentLevel;
   levelText.append(stream2.str());
 
-  // print level string for the hud
+  // print level on screen
   myHud.drawHudElement(levelText, 1);
 
+  // indicate game is paused
   if (paused == 1) {
     string pausedText = "Paused: Press p or Esc to continue";
     myHud.drawHudElement(pausedText, 2);
@@ -123,6 +124,7 @@ void World::reset() {
 
   ballLives = 3; // reset number of lives
   winGame = false; //reset win status
+  paused = false; // resume game
 }
 
 Shape *World::searchById(GLint i) {
