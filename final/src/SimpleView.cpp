@@ -30,8 +30,6 @@ Generation myGeneration;
 Hud myHud;
 Camera myCamera;
 
-int paused = 0;
-
 GLfloat myAbs(GLfloat num) {
 	if(num<0)
 		return num * -1;
@@ -51,20 +49,6 @@ void init(void) {
 	pix[2].setTexture(2);
 
 }
-
-void init(void) {
-	glClearColor(0.0, 0.0, 0.0, 1.0);
-
-	// pix[0].readBMPFile("texture/mandrill.bmp");
-	// pix[0].setTexture(0);
-
-	// pix[1].readBMPFile("texture/sun.bmp");
-	// pix[1].setTexture(1);
-
-	pix[2].readBMPFile("texture/cube.bmp");
-	pix[2].setTexture(2);
-}
-
 
 void display(void) {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -162,10 +146,10 @@ void updateBall(Shape *ball) {
       GLfloat newDirection = 0;
       if (x > paddle_x) {
 
-        newDirection = ((abs(paddle_x - x) / paddle_width) * 2) + 0.5;
+        newDirection = ((myAbs(paddle_x - x) / paddle_width) * 2) + 0.5;
 
       } else {
-        newDirection = -((abs(paddle_x - x) / paddle_width) * 2) + 0.5;
+        newDirection = -((myAbs(paddle_x - x) / paddle_width) * 2) + 0.5;
       }
 
       ball->setDirection(newDirection);
