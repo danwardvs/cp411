@@ -11,7 +11,6 @@
 #include "ui/Hud.hpp"
 #include <GL/gl.h>
 #include <GL/glut.h>
-#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -30,13 +29,6 @@ World myWorld;
 Camera myCamera;
 Generation myGeneration;
 Hud myHud;
-
-
-GLfloat myAbs(GLfloat num) {
-	if(num<0)
-		return num * -1;
-	return num;
-}
 
 void init(void) { glClearColor(0.0, 0.0, 0.0, 1.0); }
 
@@ -157,10 +149,10 @@ void updateBall(Shape *ball) {
       GLfloat newDirection = 0;
       if (x > paddle_x) {
 
-        newDirection = ((myAbs(paddle_x - x) / paddle_width) * 2) + 0.5;
+        newDirection = ((abs(paddle_x - x) / paddle_width) * 2) + 0.5;
 
       } else {
-        newDirection = -((myAbs(paddle_x - x) / paddle_width) * 2) + 0.5;
+        newDirection = -((abs(paddle_x - x) / paddle_width) * 2) + 0.5;
       }
 
       ball->setDirection(newDirection);
@@ -176,19 +168,19 @@ void updateBall(Shape *ball) {
 }
 
 void update() {
-
+  //if the game is paused then update nothing
   if (!paused) {
     std::list<Shape *>::iterator it;
     printf("Object list: \n");
 
+    //debug
     for (it = myWorld.objlist.begin(); it != myWorld.objlist.end(); ++it){
-   
 			printf("id: %4d - x: %5.2f y: %.2f z: %.2f \n", (*it)->getId(),
              (*it)->getMC().mat[0][3], (*it)->getMC().mat[1][3],
              (*it)->getMC().mat[2][3]);
 		}
 
-
+  //what does this do (looks like for powers)?
   for (it = myWorld.objlist.begin(); it != myWorld.objlist.end(); ++it) {
     if ((*it)->getId() >=2000 ){
 			int update = updateItem((*it));
@@ -208,33 +200,30 @@ void update() {
       updateBall(myWorld.searchById(1000));
 
 		
-
-    // load the next level if all blocks are destroyed (and haven't reached the
-    // max level)
+    // load the next level if all blocks are destroyed (and haven't reached the max level)
     if (myGeneration.blocksRemaining == 0 && myGeneration.currentLevel < 5) {
       myWorld.reset();
-      myGeneration.blockGenerator(myGeneration.currentLevel + 1,
-                                  myGeneration.currentLevel + 1, true);
+      myGeneration.blockGenerator(myGeneration.currentLevel + 1, myGeneration.currentLevel + 1, true);
     }
   }
 
   glutPostRedisplay();
 }
 void keyPress(unsigned char key, int x, int y) {
+  //pause key (p or escape)
   if (key == 112 || key == 27) {
     if (paused)
       paused = 0;
     else
       paused = 1;
   }
+  //restart key (r)
   if (key == 114) {
     myWorld.reset();
 
     // generate selected level
-    myGeneration.blockGenerator(myGeneration.currentLevel,
-                                myGeneration.currentDifficulty, false);
+    myGeneration.blockGenerator(myGeneration.currentLevel, myGeneration.currentDifficulty, false);
   }
-  printf("%d\n", key);
 }
 
 int main(int argc, char **argv) {

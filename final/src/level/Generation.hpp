@@ -12,7 +12,6 @@ protected:
 	int totalBlocks;			// how many blocks will be placed in level
 	bool shouldRandomize;
 	void layoutGeneration();	// generates the level by placing blocks in the world
-	void cleanupLevel();		// cleans up the level by reseting the world
 };
 
 enum BlockPattern {

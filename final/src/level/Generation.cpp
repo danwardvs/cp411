@@ -13,7 +13,7 @@ extern CullMode cullMode;       /* culling option */
 extern RenderMode renderMode;  /* shade option  */
 extern bool ballCanMove;
 
-//generates the blocks based on the pattern and number of blocks
+//generates the blocks for the level
 void Generation::layoutGeneration() {
 	Shape *obj = NULL;
 	blocksRemaining = totalBlocks; //update to indicate new level
@@ -30,14 +30,13 @@ void Generation::layoutGeneration() {
 	switch(pattern) {
 		case NORMAL:
 			while (blocksToPlace > 0) {
-				//set the number of blocks to be placed per row
+				//determine how many blocks can be put in the row
 				if (blocksToPlace - 7 >= 0) blocksPerRow = 7;
 				else blocksPerRow = blocksToPlace;
 				columnTranslate = 0;
 
 				//place all blocks for that row
 				while (blocksPerRow > 0) {
-					// printf("perRow= %d\n", blocksPerRow);
 					obj = new Cube(); //create new block (aka cube)
 					obj->setId(blockId);
 					obj->setCondition(currentDifficulty); //set the condition for the block (durability)
@@ -51,32 +50,31 @@ void Generation::layoutGeneration() {
 					blocksToPlace--;
 					blocksPerRow--;
 				}
-				// printf("Done row %d \n", rowTranslate);
 				rowTranslate++; // next row
 			}
 			break;
 		case SPACED:
 			while (blocksToPlace > 0) {
+				//determine how many blocks can be put in the row
                 if (blocksToPlace - 4 >= 0) blocksPerRow = 4;
                 else blocksPerRow = blocksToPlace;
                 columnTranslate = 0;
-
+				
+				//place all blocks for that row
                 while (blocksPerRow > 0) {
-                    // printf("perRow= %d\n", blocksPerRow);
                     obj = new Cube();
                     obj->setId(blockId);
-                    obj->setCondition(currentDifficulty);
+                    obj->setCondition(currentDifficulty); //set the condition for the block (durability)
 					blockId++;
 
-                    //x= column spacing, z= row spacing
+                    //move the block to the required position (x= column spacing, z= row spacing)
                     obj->translate(-4.5 + (columnTranslate * 3), 0, 5 - (rowTranslate * 1.2));
-                    columnTranslate++;
+                    columnTranslate++; // next block need to be moved to the right
                     
-                    myWorld.objlist.push_back(obj);
+                    myWorld.objlist.push_back(obj); // add block to objlist
                     blocksToPlace--;
                     blocksPerRow--;
                 }
-                // printf("Done row %d \n", rowTranslate);
                 rowTranslate++;
 			}
 			break;
@@ -95,21 +93,21 @@ void Generation::layoutGeneration() {
 				numColumns = 2;
 			}
 
-            // printf("blocksPerColumn= %d \n", blocksPerColumn);
-
 			while (blocksToPlace > 0) {
+				//determine how many blocks can be put in the row
 				if (blocksToPlace - numColumns >= 0) blocksPerRow = numColumns;
 				else blocksPerRow = blocksToPlace;
 				columnTranslate = 0;
 
+				//place all blocks for that row
 				while (blocksPerRow > 0) {
-                    // printf("perRow= %d\n", blocksPerRow);
 					obj = new Cube();
 					obj->setId(blockId);
 					obj->setCondition(currentDifficulty);
 					blockId++;
 
-                    //x= column spacing, z= row spacing
+                    //move the block to the required position (based on how many columns there are) 
+					//(x= column spacing, z= row spacing)
                     switch (numColumns) {
                     case 4: //4 block columns
                         obj->translate(-3.5 + (columnTranslate * 2.5), 0, 5 - (rowTranslate * 0.8));
@@ -121,13 +119,12 @@ void Generation::layoutGeneration() {
                         obj->translate(-2.5 + (columnTranslate * 3.5), 0, 5 - (rowTranslate * 1.5));
                         break;
                     }
-					columnTranslate++;
+					columnTranslate++; // next block need to be moved to the right
 					
-					myWorld.objlist.push_back(obj);
+					myWorld.objlist.push_back(obj); // add block to objlist
 					blocksToPlace--;
 					blocksPerRow--;
 				}
-				// printf("Done row %d \n", rowTranslate);
 				rowTranslate++;
 			}
 			break;
@@ -179,7 +176,7 @@ void Generation::blockGenerator(int level, int difficulty, bool randomLevel) {
 			//set the number of blocks based on the pattern
 			if (pattern == NORMAL) totalBlocks = 28;
 			else if (pattern == SPACED) totalBlocks = 12;
-			else totalBlocks = 16;
+			else totalBlocks = 15;
 			break;
 		case 3:
 			renderMode = CONSTANT;
@@ -193,7 +190,7 @@ void Generation::blockGenerator(int level, int difficulty, bool randomLevel) {
 			else totalBlocks = 24;
 			break;
 		case 4:
-			renderMode = FLAT;
+			renderMode = FLAT; //change
 			cullMode = GLCULL;
 			glCullFace(GL_BACK);
 			glEnable(GL_CULL_FACE);
@@ -204,7 +201,7 @@ void Generation::blockGenerator(int level, int difficulty, bool randomLevel) {
 			else totalBlocks = 32;
 			break;
 		case 5:
-			renderMode = TEXTURE; //having issues
+			renderMode = TEXTURE; //change
 			cullMode = GLCULL;
 			glCullFace(GL_BACK);
 			glEnable(GL_CULL_FACE);
@@ -218,8 +215,4 @@ void Generation::blockGenerator(int level, int difficulty, bool randomLevel) {
 
 	//fill the world with blocks
 	layoutGeneration();
-}
-
-void Generation::cleanupLevel() {
-	myWorld.reset();
 }

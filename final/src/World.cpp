@@ -45,7 +45,7 @@ World::World() {
   // obj->translate(-2, 0, 1);
   // objlist.push_back(obj);
 
-  // initial block generation for first level
+  // start block generation for first level
   myGeneration.blockGenerator(1, 1, true);
 }
 
@@ -77,7 +77,7 @@ void World::draw() {
   stream << ballLives;
   livesText.append(stream.str());
 
-  // print hub element for lives
+  // print lives string for for hud
   myHud.drawHudElement(livesText, 0);
 
   // create string for hud (level)
@@ -86,7 +86,7 @@ void World::draw() {
   stream2 << myGeneration.currentLevel;
   levelText.append(stream2.str());
 
-  // print hub element for level
+  // print level string for the hud
   myHud.drawHudElement(levelText, 1);
 }
 

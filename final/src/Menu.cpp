@@ -49,17 +49,17 @@ void menu() {
 
 void mainMenu(GLint option) {
 	switch (option){
-		case 1:
+		case 1: //reset
 			//reset the world
 			myWorld.reset();
 			
 			//generate selected level
 			myGeneration.blockGenerator(myGeneration.currentLevel, myGeneration.currentDifficulty, false);
 			break;
-		case 2:
+		case 2: //quit
 			exit(0);
 			break;
-		case 3:
+		case 3: //pause
 			if(paused)
 				paused=0;
 			else
