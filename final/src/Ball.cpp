@@ -35,10 +35,11 @@ void Ball::draw()
             glutSolidSphere(0.2, 8, 8);
             break;
         default:
-            float x = this->getMC().mat[0][3];
-            float y = this->getMC().mat[1][3] + 20;
-            float z = this->getMC().mat[2][3];
-            GLfloat position[] = { 0,-3.5, 0, 1 };
+            glutSolidSphere(0.2, 8, 8);
+            // float x = this->getMC().mat[0][3];
+            // float y = this->getMC().mat[1][3] + 20;
+            // float z = this->getMC().mat[2][3];
+            // GLfloat position[] = { 0,-3.5, 0, 1 };
 
             // glLightfv (GL_LIGHT0, GL_POSITION, position);
             // glDisable(GL_LIGHTING);

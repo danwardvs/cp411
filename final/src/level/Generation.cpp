@@ -82,7 +82,7 @@ void Generation::layoutGeneration() {
 			break;
 		case COLUMN:
             //determine how many blocks can be in each column
-            if (blocksToPlace / 8 == 5) {
+            if (blocksToPlace / 8 >= 4) {
 				blocksPerRow = 4;
 				numColumns = 4;
 			}
@@ -157,15 +157,15 @@ void Generation::blockGenerator(int level, int difficulty, bool randomLevel) {
 	glDisable(GL_LIGHT0);
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_NORMALIZE);
+	glDisable(GL_BACK);
 
     //assign the number of blocks based on level + pattern
 	switch(level) {
 		case 1:
-			renderMode=WIRE;
-
-			cullMode = NONE;
-
-			glDisable(GL_CULL_FACE);
+			renderMode = SMOOTH;
+			cullMode = GLCULL;
+			glCullFace(GL_BACK);
+			glEnable(GL_CULL_FACE);
 		
 			//set the number of blocks based on the pattern
 			if (pattern == NORMAL) totalBlocks = 21;
@@ -173,15 +173,8 @@ void Generation::blockGenerator(int level, int difficulty, bool randomLevel) {
 			else totalBlocks = 8;
 			break;
 		case 2:
-			renderMode = CONSTANT;
-			// glEnable(GL_LIGHTING);
-			// glEnable(GL_LIGHT0);
-			// glEnable(GL_DEPTH_TEST);
-			// glEnable(GL_NORMALIZE);
-			
-			cullMode = GLCULL;
-			glCullFace(GL_BACK);
-			glEnable(GL_CULL_FACE);
+			renderMode=WIRE;
+			cullMode = NONE;
 
 			//set the number of blocks based on the pattern
 			if (pattern == NORMAL) totalBlocks = 28;
@@ -189,34 +182,33 @@ void Generation::blockGenerator(int level, int difficulty, bool randomLevel) {
 			else totalBlocks = 16;
 			break;
 		case 3:
-			renderMode = FLAT;
-
+			renderMode = CONSTANT;
 			cullMode = GLCULL;
 			glCullFace(GL_BACK);
 			glEnable(GL_CULL_FACE);
-
+			
 			//set the number of blocks based on the pattern
 			if (pattern == NORMAL) totalBlocks = 35;
 			else if (pattern == SPACED) totalBlocks = 16;
 			else totalBlocks = 24;
 			break;
 		case 4:
+			renderMode = FLAT;
 			cullMode = GLCULL;
 			glCullFace(GL_BACK);
 			glEnable(GL_CULL_FACE);
 
-			renderMode = SMOOTH;
 			//set the number of blocks based on the pattern
 			if (pattern == NORMAL) totalBlocks = 42;
 			else if (pattern == SPACED) totalBlocks = 20;
 			else totalBlocks = 32;
 			break;
 		case 5:
-
+			renderMode = TEXTURE; //having issues
 			cullMode = GLCULL;
 			glCullFace(GL_BACK);
 			glEnable(GL_CULL_FACE);
-			renderMode = TEXTURE;
+			
 			//set the number of blocks based on the pattern
 			if (pattern == NORMAL) totalBlocks = 49;
 			else if (pattern == SPACED) totalBlocks = 24;
