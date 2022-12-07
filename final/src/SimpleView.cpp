@@ -23,6 +23,7 @@ bool ballCanMove = false;
 int ballLives = 3;
 int paused = 0;
 int bigPaddleTime = 0;
+bool winGame = false;
 GLfloat paddle_width = 2;
 GLfloat worldSize = 5.3;
 
@@ -212,15 +213,17 @@ void update() {
 
 
     // update ball if it's allowed to move
-    if (ballCanMove)
-      updateBall(myWorld.searchById(1000));
+    if (ballCanMove == true) updateBall(myWorld.searchById(1000));
 
-    // load the next level if all blocks are destroyed (and haven't reached the
-    // max level)
+    // load the next level if all blocks are destroyed (and haven't reached the max level)
     if (myGeneration.blocksRemaining == 0 && myGeneration.currentLevel < 5) {
       myWorld.reset();
       myGeneration.blockGenerator(myGeneration.currentLevel + 1,
                                   myGeneration.currentLevel + 1, true);
+    }
+    else if (myGeneration.blocksRemaining == 0 && myGeneration.currentLevel == 5) {
+      ballCanMove = false;
+      winGame = true;
     }
   }
 
@@ -242,6 +245,12 @@ void keyPress(unsigned char key, int x, int y) {
     myGeneration.blockGenerator(myGeneration.currentLevel,
                                 myGeneration.currentDifficulty, false);
   }
+
+  //debug win
+  // if (key == )
+
+  //delete before submit
+  printf("%d\n", key);
 }
 
 int main(int argc, char **argv) {

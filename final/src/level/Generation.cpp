@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-BlockPattern pattern = NORMAL;
+BlockPattern pattern = NORMAL; /* pattern for level generation */
 
 extern World myWorld;
 extern CullMode cullMode;       /* culling option */
@@ -43,7 +43,7 @@ void Generation::layoutGeneration() {
 					blockId++;
 
 					//move the block to the required position (x= column spacing, z= row spacing)
-					obj->translate(-4.5 + (columnTranslate * 1.5), 0, 5 - (rowTranslate * 1));
+					obj->translate(-4.5 + (columnTranslate * 1.5), 0, 4 - (rowTranslate * 1.2));
 					columnTranslate++;	// next block need to be moved to the right
 					
 					myWorld.objlist.push_back(obj);	// add block to objlist
@@ -68,7 +68,7 @@ void Generation::layoutGeneration() {
 					blockId++;
 
                     //move the block to the required position (x= column spacing, z= row spacing)
-                    obj->translate(-4.5 + (columnTranslate * 3), 0, 5 - (rowTranslate * 1.2));
+                    obj->translate(-4.5 + (columnTranslate * 3), 0, 4 - (rowTranslate * 1.4));
                     columnTranslate++; // next block need to be moved to the right
                     
                     myWorld.objlist.push_back(obj); // add block to objlist
@@ -145,7 +145,6 @@ void Generation::blockGenerator(int level, int difficulty, bool randomLevel) {
 		// randomly pick pattern from the 3 options [NORMAL, SPACED, COLUMN]
 		pattern = static_cast<BlockPattern>(patternSelect);
 	}
-    pattern = COLUMN; //for testing each shape ONLY- remove when eveything looks good.
 
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_DEPTH_TEST);
@@ -175,7 +174,7 @@ void Generation::blockGenerator(int level, int difficulty, bool randomLevel) {
 			//set the number of blocks based on the pattern
 			if (pattern == NORMAL) totalBlocks = 28;
 			else if (pattern == SPACED) totalBlocks = 12;
-			else totalBlocks = 15;
+			else totalBlocks = 18;
 			break;
 		case 3:
 			renderMode = CONSTANT;
@@ -189,10 +188,8 @@ void Generation::blockGenerator(int level, int difficulty, bool randomLevel) {
 			else totalBlocks = 24;
 			break;
 		case 4:
-			renderMode = FLAT; //change
-			cullMode = GLCULL;
-			glCullFace(GL_BACK);
-			glEnable(GL_CULL_FACE);
+			renderMode=WIRE;
+			cullMode = NONE;
 
 			//set the number of blocks based on the pattern
 			if (pattern == NORMAL) totalBlocks = 42;
@@ -200,7 +197,7 @@ void Generation::blockGenerator(int level, int difficulty, bool randomLevel) {
 			else totalBlocks = 32;
 			break;
 		case 5:
-			renderMode = TEXTURE; //change
+			renderMode = CONSTANT;
 			cullMode = GLCULL;
 			glCullFace(GL_BACK);
 			glEnable(GL_CULL_FACE);
