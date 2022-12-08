@@ -117,7 +117,7 @@ int updateBall(Shape *ball) {
   for (it = myWorld.objlist.begin(); it != myWorld.objlist.end(); ++it) {
     if ((*it)->getId() < 1000 && (*it)->getId() > 0)
       if (checkCollision((*it), ball)) {
-        if (rand() % 1 == 0) {
+        if (rand() % 10 == 0) {
           GLfloat x = (*it)->getMC().mat[0][3];
           GLfloat z = (*it)->getMC().mat[2][3];
 

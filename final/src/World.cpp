@@ -166,7 +166,7 @@ void World::createItem(GLfloat x, GLfloat z) {
       highest_item = (*it)->getId();
   }
 
-  obj = new Item(1);
+  obj = new Item(rand()%2);
   obj->setId(highest_item);
   obj->translate(x, 0, z);
   objlist.push_back(obj);
