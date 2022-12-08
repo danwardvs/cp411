@@ -129,18 +129,14 @@ void World::reset() {
 }
 void World::createBall(GLfloat x, GLfloat z) {
   int id = 1000;
+
+	// Get ball data
   Shape *ball1 = searchById(1000);
   Shape *ball2 = searchById(1001);
   Shape *ball3 = searchById(1002);
-  if (ball1)
-    printf("ball1\n");
-  if (ball2)
-    printf("ball2\n");
-  if (ball3)
-    printf("ball3\n");
-
+ 
+	// Assign ball if not all three balls are out in play
   if (ball1 && ball2 && ball3) {
-    printf("full\n");
     return;
   }
   if (!ball1)
@@ -150,7 +146,7 @@ void World::createBall(GLfloat x, GLfloat z) {
   else
     id = 1002;
 
-  printf("new ball: %d\n", id);
+	// Create new ball based on given id
   Shape *obj;
   obj = new Ball(false);
   obj->setId(id);
@@ -159,6 +155,8 @@ void World::createBall(GLfloat x, GLfloat z) {
 }
 
 void World::createItem(GLfloat x, GLfloat z) {
+
+	// Get highest item id and use that for item 
   Shape *obj = NULL;
   std::list<Shape *>::iterator it;
   int highest_item = 2000;
@@ -166,9 +164,9 @@ void World::createItem(GLfloat x, GLfloat z) {
     if ((*it)->getId() > highest_item)
       highest_item = (*it)->getId();
   }
-
+	// Create item with random type
   obj = new Item(rand()%2);
-  obj->setId(highest_item);
+  obj->setId(highest_item+1);
   obj->translate(x, 0, z);
   objlist.push_back(obj);
 }

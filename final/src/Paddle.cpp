@@ -209,12 +209,10 @@ void Paddle::drawFace(int i) {
 void Paddle::draw() {
   glPushMatrix();
   this->ctmMultiply();
-	if(bigPaddleTime>0)
-  	glScalef(2*s, s, s);
-	else
-		glScalef(s, s, s);
-
-	
+  if (bigPaddleTime > 0)
+    glScalef(2 * s, s, s);
+  else
+    glScalef(s, s, s);
 
   for (int i = 0; i < 6; i++) {
     drawFace(i);
