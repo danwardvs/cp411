@@ -7,6 +7,7 @@
 #include "level/Generation.hpp"
 #include <sstream>
 #include <string>
+#include <stdio.h>
 
 extern GLint winWidth, winHeight;
 extern Generation myGeneration;

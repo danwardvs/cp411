@@ -13,6 +13,7 @@
 #include <GL/glut.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 GLint winWidth = 800, winHeight = 800;
 
