@@ -11,8 +11,9 @@
 extern RenderMode renderMode;
 
 
-Ball::Ball()
+Ball::Ball(int newItem)
 {
+    item = newItem;
  direction = 0.5f;
 }
 
@@ -25,7 +26,10 @@ void Ball::draw()
      
     glPushMatrix();
     this->ctmMultiply();
-    glColor3f(0.1, 0.2, 0.8);
+    if(item)
+        glColor3f(0.8, 0.2, 0.1);
+     else
+        glColor3f(0.1, 0.2, 0.8);
 
     switch (renderMode) {
         case WIRE:

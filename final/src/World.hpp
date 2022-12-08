@@ -22,6 +22,8 @@ public:
 	Shape *searchById(GLint i);
 	void *deleteById(GLint i); 
 	void createItem(GLfloat x, GLfloat z);
+	void createBall(GLfloat x, GLfloat z);
+
 };
 
 #endif

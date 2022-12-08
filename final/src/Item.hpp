@@ -17,7 +17,9 @@ protected:
 
 public:
 	~Item();
-	Item();
+	Item(GLint type);
+
+	Shape *item;
 
 	void draw();
 };

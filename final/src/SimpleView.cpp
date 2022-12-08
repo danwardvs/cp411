@@ -14,7 +14,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 GLint winWidth = 800, winHeight = 800;
 
 CullMode cullMode = NONE;     /* culling option */
@@ -112,18 +111,18 @@ int updateItem(Shape *item) {
   return 1;
 }
 
-void updateBall(Shape *ball) {
+int updateBall(Shape *ball) {
   std::list<Shape *>::iterator it;
 
   for (it = myWorld.objlist.begin(); it != myWorld.objlist.end(); ++it) {
     if ((*it)->getId() < 1000 && (*it)->getId() > 0)
       if (checkCollision((*it), ball)) {
-				if(rand()%1==0){
-					  GLfloat x = (*it)->getMC().mat[0][3];
-  					GLfloat z = (*it)->getMC().mat[2][3];
+        if (rand() % 1 == 0) {
+          GLfloat x = (*it)->getMC().mat[0][3];
+          GLfloat z = (*it)->getMC().mat[2][3];
 
-						myWorld.createItem(x,z);
-				}
+          myWorld.createItem(x, z);
+        }
 
         it = myWorld.objlist.erase(it);
         myGeneration.blocksRemaining--; // update remaining block counter
@@ -166,23 +165,36 @@ void updateBall(Shape *ball) {
 
       ball->setDirection(newDirection);
     } else {
-      ball->setTranslation(0, 0, 0);
+      int balls = 0;
+      if (myWorld.searchById(1000))
+        balls++;
+      if (myWorld.searchById(1001))
+        balls++;
+      if (myWorld.searchById(1002))
+        balls++;
+      if (balls == 1){
+        ballLives--;
+				ball->setTranslation(0, 0, 0);
 
-      ballLives--;
+			}else{
+				return true;
+			}
+
       if (ballLives <= 0) {
         ballCanMove = false;
       }
     }
   }
+	return false;
 }
 
 void update() {
-	printf("%d\n",bigPaddleTime);
+  // printf("%d\n", bigPaddleTime);
   // if the game is paused then update nothing
   if (!paused) {
-		if(bigPaddleTime>0){
-			bigPaddleTime--;
-		}
+    if (bigPaddleTime > 0) {
+      bigPaddleTime--;
+    }
     // printf("Object list: \n");
 
     // // debug
@@ -191,7 +203,7 @@ void update() {
     //          (*it)->getMC().mat[0][3], (*it)->getMC().mat[1][3],
     //          (*it)->getMC().mat[2][3]);
     // }
-		
+
     // printf("End List\n\n\n\n\n\n\n");
 
     std::list<Shape *>::iterator it;
@@ -199,29 +211,38 @@ void update() {
       if ((*it)->getId() >= 2000) {
         int update = updateItem((*it));
         if (update == 0) {
-					GLint type = (*it)->getType();
-					if(type==0)
-						bigPaddleTime+=500;
+          GLint type = (*it)->getType();
+          if (type == 0)
+            bigPaddleTime += 500;
+          if (type == 1) {
+            myWorld.createBall(0, 0);
+            myWorld.createBall(0, 1);
+          }
           it = myWorld.objlist.erase(it);
         }
         if (update == 2) {
-				
           it = myWorld.objlist.erase(it);
         }
       }
     }
 
-
     // update ball if it's allowed to move
-    if (ballCanMove == true) updateBall(myWorld.searchById(1000));
+    if (ballCanMove == true) {
+			for(int i =1000; i<1003; i++)
+      if (myWorld.searchById(i)){
+        if(updateBall(myWorld.searchById(i)))
+					myWorld.deleteById(i);
+			}
+    }
 
-    // load the next level if all blocks are destroyed (and haven't reached the max level)
+    // load the next level if all blocks are destroyed (and haven't reached the
+    // max level)
     if (myGeneration.blocksRemaining == 0 && myGeneration.currentLevel < 5) {
       myWorld.reset();
       myGeneration.blockGenerator(myGeneration.currentLevel + 1,
                                   myGeneration.currentLevel + 1, true);
-    }
-    else if (myGeneration.blocksRemaining == 0 && myGeneration.currentLevel == 5) {
+    } else if (myGeneration.blocksRemaining == 0 &&
+               myGeneration.currentLevel == 5) {
       ballCanMove = false;
       winGame = true;
     }
@@ -246,10 +267,10 @@ void keyPress(unsigned char key, int x, int y) {
                                 myGeneration.currentDifficulty, false);
   }
 
-  //debug win
+  // debug win
   // if (key == )
 
-  //delete before submit
+  // delete before submit
   printf("%d\n", key);
 }
 

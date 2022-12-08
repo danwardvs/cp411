@@ -210,7 +210,7 @@ void Paddle::draw() {
   glPushMatrix();
   this->ctmMultiply();
 	if(bigPaddleTime>0)
-  	glScalef(2, s, s);
+  	glScalef(2*s, s, s);
 	else
 		glScalef(s, s, s);
 

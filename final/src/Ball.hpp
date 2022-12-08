@@ -17,7 +17,8 @@ protected:
 
 public:
 	~Ball();
-	Ball();
+	Ball(int item);
+	int item;
 
 	void draw();
 };
